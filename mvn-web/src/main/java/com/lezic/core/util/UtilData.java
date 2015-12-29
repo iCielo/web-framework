@@ -1,4 +1,4 @@
-package com.leizic.core.util;
+package com.lezic.core.util;
 
 public class UtilData {
 
