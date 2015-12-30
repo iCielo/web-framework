@@ -4,11 +4,13 @@
 	version="3.0">
 	<display-name>mvn-web</display-name>
 
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
+	<!-- 默认控制器。主要映射静态资源 -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping>
 
-	<!-- 核心控制器 -->
+	<!-- 核心控制器。主要映射动态资源 -->
 	<servlet>
 		<servlet-name>DispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -23,7 +25,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-
 	<!-- Load Spring Context -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -33,5 +34,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-
+	<welcome-file-list>
+		<welcome-file>jsp/index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

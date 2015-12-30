@@ -11,10 +11,17 @@
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.lezic.app.*" />
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		    <mvc:mapping path="/**/*"/>
+			<bean class="com.lezic.core.web.interceptor.RequestLogInterceptor"/>
+		</mvc:interceptor>
+    </mvc:interceptors>
 
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/" />
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
