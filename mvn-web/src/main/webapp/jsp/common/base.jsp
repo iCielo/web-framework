@@ -16,17 +16,13 @@
 <!--引入css-->
 <link rel="stylesheet" type="text/css" href="${CP}/static/css/base.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/sb-admin/css/sb-admin.css">
 
 <!--引入js-->
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
-
-<!-- Bootstrap -->
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
-<!-- font-awesome -->
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
-
 
 <script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
@@ -34,8 +30,8 @@
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="${CP}/static/js/lib/html5/html5shiv.js"></script>
+    <script src="${CP}/static/js/lib/html5/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
 <!--meta-->

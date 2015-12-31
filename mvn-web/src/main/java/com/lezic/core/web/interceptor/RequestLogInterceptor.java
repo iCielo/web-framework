@@ -31,8 +31,6 @@ public class RequestLogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String reqString = request.getRequestURL() + "?"
-				+ (request.getQueryString() == null ? "" : request.getQueryString());
 		Map<?, ?> map = request.getParameterMap();
 		Iterator<?> it = map.entrySet().iterator();
 		logger.info("******");

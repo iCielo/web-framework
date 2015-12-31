@@ -35,7 +35,7 @@ public class UtilClientIp {
 		String xForwardedFor = request.getHeader("X-Forwarded-For");
 
 		if (remoteAddr != null && !"".equals(remoteAddr) && !"127.0.0.1".equals(remoteAddr)) {
-			logger.debug("remoteAddr：" + remoteAddr);
+//			logger.debug("remoteAddr：" + remoteAddr);
 			return remoteAddr;
 		} else if (xRealIp != null && !"".equals(xRealIp) && !"127.0.0.1".equals(xRealIp)) {
 			logger.debug("X-Real-IP:" + xRealIp);
