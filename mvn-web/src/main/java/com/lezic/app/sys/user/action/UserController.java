@@ -1,15 +1,18 @@
 package com.lezic.app.sys.user.action;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lezic.core.web.action.BaseController;
+import com.lezic.core.web.constant.Status;
 
 @Controller
 @RequestMapping("/sys")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
 	/**
 	 * 新增
@@ -37,10 +40,11 @@ public class UserController extends BaseController{
 
 	/**
 	 * 查找单个实例
+	 * @throws IOException 
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public void getEntity() {
-
+	public void getEntity() throws IOException {
+		this.outMsg(Status.TIMEOUT, "恭喜您，成功了！");
 	}
 
 	/**
@@ -56,13 +60,10 @@ public class UserController extends BaseController{
 	 * 
 	 * @param name
 	 */
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/users/search", method = RequestMethod.GET)
 	public void searchEntity(@RequestParam(value = "name", required = false) String name) {
 
 	}
-	
-	
-	
 
 	/**
 	 * 获取一个新用户。初始化默认值

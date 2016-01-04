@@ -6,12 +6,16 @@ package com.lezic.core.web.action;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.lezic.core.web.constant.Status;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -36,20 +40,37 @@ public abstract class BaseController {
 		this.response = response;
 		this.session = request.getSession();
 	}
-	
+
 	/**
 	 * 将指定对象转为ajax字符串写入response
+	 * 
 	 * @param object
 	 * @throws IOException
 	 */
-    public void write(Object object) throws IOException {
-        response.setContentType("text/xml;charset=UTF-8");
-        if (object instanceof Collection) {
-            JSONArray jsonArray = JSONArray.fromObject(object);
-            response.getWriter().write(jsonArray.toString());
-        } else {
-            JSONObject jsonObject = JSONObject.fromObject(object);
-            response.getWriter().write(jsonObject.toString());
-        }
-    }
+	public void write(Object object) throws IOException {
+		response.setContentType("text/xml;charset=UTF-8");
+		if (object instanceof Collection) {
+			JSONArray jsonArray = JSONArray.fromObject(object);
+			response.getWriter().write(jsonArray.toString());
+		} else {
+			JSONObject jsonObject = JSONObject.fromObject(object);
+			response.getWriter().write(jsonObject.toString());
+		}
+	}
+
+	/**
+	 * 输出ajax的返回值
+	 * 
+	 * @param status
+	 * @param msg
+	 * @throws IOException
+	 * @author cielo
+	 */
+	public void outMsg(Status status, String msg) throws IOException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("msg", msg);
+		this.write(map);
+	}
+
 }
