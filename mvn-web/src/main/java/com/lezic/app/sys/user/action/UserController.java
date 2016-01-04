@@ -2,17 +2,24 @@ package com.lezic.app.sys.user.action;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lezic.app.sys.user.entity.User;
+import com.lezic.app.sys.user.service.UserService;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
 
 @Controller
 @RequestMapping("/sys")
 public class UserController extends BaseController {
+
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 新增
@@ -40,11 +47,13 @@ public class UserController extends BaseController {
 
 	/**
 	 * 查找单个实例
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public void getEntity() throws IOException {
-		this.outMsg(Status.TIMEOUT, "恭喜您，成功了！");
+	public void getEntity(@PathVariable String userId) throws IOException {
+		User user = userService.getEntity(userId);
+		this.outData(Status.SUCCESS, user);
 	}
 
 	/**
