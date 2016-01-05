@@ -72,5 +72,20 @@ public abstract class BaseController {
 		map.put("msg", msg);
 		this.write(map);
 	}
+	
+	/**
+	 * 输出ajax的返回值
+	 * 
+	 * @param status
+	 * @param data
+	 * @throws IOException
+	 * @author cielo
+	 */
+	public void outData(Status status, Object data) throws IOException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("status", status);
+		map.put("data", data);
+		this.write(map);
+	}
 
 }

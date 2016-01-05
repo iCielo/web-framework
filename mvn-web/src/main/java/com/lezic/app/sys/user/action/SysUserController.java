@@ -1,18 +1,31 @@
+/**
+ * <p>Author		:	cielo</p>
+ * <p>Date 			: 	2016 下午3:56:51</p>
+ */
 package com.lezic.app.sys.user.action;
 
 import java.io.IOException;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lezic.app.sys.user.entity.SysUser;
+import com.lezic.app.sys.user.service.SysUserService;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
 
-@Controller
+/**
+ * @author cielo
+ *
+ */
 @RequestMapping("/sys")
-public class UserController extends BaseController {
+public class SysUserController extends BaseController {
+
+	@Autowired
+	private SysUserService sysUserService;
 
 	/**
 	 * 新增
@@ -40,11 +53,13 @@ public class UserController extends BaseController {
 
 	/**
 	 * 查找单个实例
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public void getEntity() throws IOException {
-		this.outMsg(Status.TIMEOUT, "恭喜您，成功了！");
+	public void getEntity(@PathVariable String userId) throws IOException {
+		SysUser sysUser = sysUserService.getH(userId);
+		this.outData(Status.SUCCESS, sysUser);
 	}
 
 	/**
