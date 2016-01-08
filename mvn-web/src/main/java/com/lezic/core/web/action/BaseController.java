@@ -72,7 +72,7 @@ public abstract class BaseController {
 		map.put("msg", msg);
 		this.write(map);
 	}
-	
+
 	/**
 	 * 输出ajax的返回值
 	 * 

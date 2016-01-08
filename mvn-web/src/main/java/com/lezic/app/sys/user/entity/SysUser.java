@@ -33,7 +33,8 @@ public class SysUser implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-
+//	@GeneratedValue(generator = "uuidGenerator")
+//	@GenericGenerator(name = "uuidGenerator", strategy = "uuid")
 	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;

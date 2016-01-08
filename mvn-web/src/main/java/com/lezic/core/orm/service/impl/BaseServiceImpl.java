@@ -6,10 +6,12 @@ package com.lezic.core.orm.service.impl;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lezic.core.orm.dao.IBaseDAO;
 import com.lezic.core.orm.service.IBaseService;
+import com.lezic.core.util.UtilReflection;
 
 /**
  * 基础服务实现类
@@ -17,36 +19,42 @@ import com.lezic.core.orm.service.IBaseService;
  * @author cielo
  *
  */
-public class BaseServiceImpl<T> implements IBaseService<T> {
+public class BaseServiceImpl<T> implements IBaseService<T>, InitializingBean {
 
-	IBaseDAO baseDAOImpl;
+	@Autowired
+	IBaseDAO baseDAO;
 
 	protected Class<T> entityClass;
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		entityClass = UtilReflection.getSuperClassGenricType(getClass());
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getH(Serializable id) {
-		return (T) baseDAOImpl.getH(entityClass, id);
+		return (T) baseDAO.getH(entityClass, id);
 	}
 
 	@Override
 	public Serializable saveH(T entity) {
-		return baseDAOImpl.saveH(entity);
+		return baseDAO.saveH(entity);
 	}
 
 	@Override
 	public void updH(T entity) {
-		baseDAOImpl.updH(entity);
+		baseDAO.updH(entity);
 	}
 
 	@Override
 	public void delH(T entity) {
-		baseDAOImpl.delH(entity);
+		baseDAO.delH(entity);
 	}
 
 	@Override
 	public void saveOrUpdH(T entity) {
-		baseDAOImpl.saveOrUpdH(entity);
+		baseDAO.saveOrUpdH(entity);
 	}
 
 }

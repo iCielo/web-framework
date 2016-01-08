@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.app.sys.user.service.SysUserService;
@@ -21,6 +22,7 @@ import com.lezic.core.web.constant.Status;
  * @author cielo
  *
  */
+@RestController
 @RequestMapping("/sys")
 public class SysUserController extends BaseController {
 
@@ -47,7 +49,7 @@ public class SysUserController extends BaseController {
 	 * 删除
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
-	public void delEntity() {
+	public void delEntity(@PathVariable String userId) {
 
 	}
 
@@ -58,7 +60,8 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
 	public void getEntity(@PathVariable String userId) throws IOException {
-		SysUser sysUser = sysUserService.getH(userId);
+		Integer id = Integer.parseInt(userId);
+		SysUser sysUser = sysUserService.getH(id);
 		this.outData(Status.SUCCESS, sysUser);
 	}
 
@@ -98,13 +101,5 @@ public class SysUserController extends BaseController {
 
 	}
 
-	/**
-	 * 查找指定用户下的所有菜单资源
-	 * 
-	 * @param userName
-	 */
-	@RequestMapping(value = "/user/${userId}/menus", method = RequestMethod.GET)
-	public void getUserMenus() {
-
-	}
+	
 }
