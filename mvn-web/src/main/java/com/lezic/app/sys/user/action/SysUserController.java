@@ -60,8 +60,7 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
 	public void getEntity(@PathVariable String userId) throws IOException {
-		Integer id = Integer.parseInt(userId);
-		SysUser sysUser = sysUserService.getH(id);
+		SysUser sysUser = sysUserService.getH(userId);
 		this.outData(Status.SUCCESS, sysUser);
 	}
 
