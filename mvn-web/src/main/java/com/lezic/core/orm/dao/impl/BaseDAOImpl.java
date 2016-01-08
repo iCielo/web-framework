@@ -22,7 +22,7 @@ import com.lezic.core.orm.dao.IBaseDAO;
  * @author cielo
  *
  */
-@Repository
+@Repository("baseDAO")
 public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 
 	@Autowired
