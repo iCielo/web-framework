@@ -1,5 +1,5 @@
 package com.lezic.app.sys.user.entity;
-// Generated 2016-1-10 16:56:08 by Hibernate Tools 4.3.1.Final
+// Generated 2016-1-10 17:56:04 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -16,8 +16,11 @@ import javax.persistence.TemporalType;
 @Table(name = "sys_user", catalog = "lezic")
 public class SysUser implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	private String uuid;
+	private String id;
 	private String account;
 	private String password;
 	private String name;
@@ -28,17 +31,19 @@ public class SysUser implements java.io.Serializable {
 	private String remark;
 	private String opUserId;
 	private Date opTime;
+	private String uuid;
 
 	public SysUser() {
 	}
 
-	public SysUser(String uuid) {
+	public SysUser(String id, String uuid) {
+		this.id = id;
 		this.uuid = uuid;
 	}
 
-	public SysUser(String uuid, String account, String password, String name, String sex, Integer age, String phone,
-			String email, String remark, String opUserId, Date opTime) {
-		this.uuid = uuid;
+	public SysUser(String id, String account, String password, String name, String sex, Integer age, String phone,
+			String email, String remark, String opUserId, Date opTime, String uuid) {
+		this.id = id;
 		this.account = account;
 		this.password = password;
 		this.name = name;
@@ -49,17 +54,18 @@ public class SysUser implements java.io.Serializable {
 		this.remark = remark;
 		this.opUserId = opUserId;
 		this.opTime = opTime;
+		this.uuid = uuid;
 	}
 
 	@Id
 
-	@Column(name = "uuid", unique = true, nullable = false, length = 36)
-	public String getUuid() {
-		return this.uuid;
+	@Column(name = "id", unique = true, nullable = false, length = 36)
+	public String getId() {
+		return this.id;
 	}
 
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	@Column(name = "account", length = 200)
@@ -151,6 +157,15 @@ public class SysUser implements java.io.Serializable {
 
 	public void setOpTime(Date opTime) {
 		this.opTime = opTime;
+	}
+
+	@Column(name = "uuid", nullable = false, length = 36)
+	public String getUuid() {
+		return this.uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 }
