@@ -1,6 +1,6 @@
 drop table `sys_user`;
 CREATE TABLE `sys_user` (
-  `uuid` varchar(36) NOT NULL COMMENT 'uuid主键',
+  `id` varchar(36) NOT NULL COMMENT 'uuid主键',
   `account` varchar(200) DEFAULT NULL COMMENT '账号',
   `password` varchar(200) DEFAULT NULL COMMENT '密码',
   `name` varchar(100) DEFAULT NULL COMMENT '姓名',
