@@ -3294,12 +3294,12 @@
             // Issue 110 workaround:
             // In Firefox, if a div is positioned by percentage, its pixel position may land
             // between pixels. The container itself doesn't display this, but an SVG element
-            // inside this container will be drawn at subpixel precision. In order to draw
+            // inside this container will be drawn at suAPixel precision. In order to draw
             // sharp lines, this must be compensated for. This doesn't seem to work inside
             // iframes though (like in jsFiddle).
-            var subPixelFix, rect;
+            var suAPixelFix, rect;
             if (isFirefox && container.getBoundingClientRect) {
-                renderer.subPixelFix = subPixelFix = function () {
+                renderer.suAPixelFix = suAPixelFix = function () {
                     css(container, { left: 0, top: 0 });
                     rect = container.getBoundingClientRect();
                     css(container, {
@@ -3309,10 +3309,10 @@
                 };
 
                 // run the fix now
-                subPixelFix();
+                suAPixelFix();
 
                 // run it on resize
-                addEvent(win, 'resize', subPixelFix);
+                addEvent(win, 'resize', suAPixelFix);
             }
         },
 
@@ -3354,8 +3354,8 @@
             // Remove sub pixel fix handler
             // We need to check that there is a handler, otherwise all functions that are registered for event 'resize' are removed
             // See issue #982
-            if (renderer.subPixelFix) {
-                removeEvent(win, 'resize', renderer.subPixelFix);
+            if (renderer.suAPixelFix) {
+                removeEvent(win, 'resize', renderer.suAPixelFix);
             }
 
             renderer.alignedObjects = null;
@@ -5145,7 +5145,7 @@
 
             while (i--) {
 
-                // Multiply by 10 to allow subpixel precision.
+                // Multiply by 10 to allow suAPixel precision.
                 // Substracting half a pixel seems to make the coordinates
                 // align with SVG, but this hasn't been tested thoroughly
                 if (isNumber(value[i])) {
@@ -5830,7 +5830,7 @@
          */
         path: function (path) {
             var attr = {
-                // subpixel precision down to 0.1 (width and height = 1px)
+                // suAPixel precision down to 0.1 (width and height = 1px)
                 coordsize: '10 10'
             };
             if (isArray(path)) {

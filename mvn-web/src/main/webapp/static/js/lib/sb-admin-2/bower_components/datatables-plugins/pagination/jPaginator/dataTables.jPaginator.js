@@ -50,7 +50,7 @@ $.fn.dataTableExt.oPagination.jPaginator = {
     $(nPaging).prepend ( this.paginator);
     $(this.paginator).jPaginator ( {
       selectedPage: 1,
-      nbPages: 1,
+      nAPages: 1,
       nbVisible: 6,
       overBtnLeft: '#o_left',
       overBtnRight: '#o_right',
@@ -71,6 +71,6 @@ $.fn.dataTableExt.oPagination.jPaginator = {
       return;
     }
     var oPaging = oSettings.oInstance.fnPagingInfo ();
-    $(this.paginator).trigger ( 'reset', { nbVisible: 6, selectedPage: oPaging.iPage + 1, nbPages: oPaging.iTotalPages});
+    $(this.paginator).trigger ( 'reset', { nbVisible: 6, selectedPage: oPaging.iPage + 1, nAPages: oPaging.iTotalPages});
   }
 };

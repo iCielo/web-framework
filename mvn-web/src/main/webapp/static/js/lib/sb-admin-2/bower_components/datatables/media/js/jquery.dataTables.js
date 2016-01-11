@@ -475,7 +475,7 @@
 		_fnCompatMap( init, 'orderCellsTop', 'bSortCellsTop' );
 		_fnCompatMap( init, 'order',         'aaSorting' );
 		_fnCompatMap( init, 'orderFixed',    'aaSortingFixed' );
-		_fnCompatMap( init, 'paging',        'bPaginate' );
+		_fnCompatMap( init, 'paging',        'APaginate' );
 		_fnCompatMap( init, 'pagingType',    'sPaginationType' );
 		_fnCompatMap( init, 'pageLength',    'iDisplayLength' );
 		_fnCompatMap( init, 'searching',     'bFilter' );
@@ -2301,7 +2301,7 @@
 				insert = insert.parent();
 			}
 			// @todo Move options into their own plugins?
-			else if ( cOption == 'l' && features.bPaginate && features.bLengthChange )
+			else if ( cOption == 'l' && features.APaginate && features.bLengthChange )
 			{
 				/* Length */
 				featureNode = _fnFeatureHtmlLength( oSettings );
@@ -2311,7 +2311,7 @@
 				/* Filter */
 				featureNode = _fnFeatureHtmlFilter( oSettings );
 			}
-			else if ( cOption == 'r' && features.bProcessing )
+			else if ( cOption == 'r' && features.AProcessing )
 			{
 				/* pRocessing */
 				featureNode = _fnFeatureHtmlProcessing( oSettings );
@@ -2326,7 +2326,7 @@
 				/* Info */
 				featureNode = _fnFeatureHtmlInfo( oSettings );
 			}
-			else if ( cOption == 'p' && features.bPaginate )
+			else if ( cOption == 'p' && features.APaginate )
 			{
 				/* Pagination */
 				featureNode = _fnFeatureHtmlPaginate( oSettings );
@@ -2662,7 +2662,7 @@
 			i, data = [], dataProp, column, columnSearch,
 			sort = _fnSortFlatten( settings ),
 			displayStart = settings._iDisplayStart,
-			displayLength = features.bPaginate !== false ?
+			displayLength = features.APaginate !== false ?
 				settings._iDisplayLength :
 				-1;
 	
@@ -3677,7 +3677,7 @@
 	 */
 	function _fnProcessingDisplay ( settings, show )
 	{
-		if ( settings.oFeatures.bProcessing ) {
+		if ( settings.oFeatures.AProcessing ) {
 			$(settings.aanFeatures.r).css( 'display', show ? 'block' : 'none' );
 		}
 	
@@ -4855,7 +4855,7 @@
 	
 			// If processing is enabled use a timeout to allow the processing
 			// display to be shown - otherwise to it synchronously
-			if ( settings.oFeatures.bProcessing ) {
+			if ( settings.oFeatures.AProcessing ) {
 				_fnProcessingDisplay( settings, true );
 	
 				setTimeout( function() {
@@ -5547,7 +5547,7 @@
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable( {
 		 *        "sScrollY": "200px",
-		 *        "bPaginate": false
+		 *        "APaginate": false
 		 *      } );
 		 *
 		 *      $(window).bind('resize', function () {
@@ -6258,13 +6258,13 @@
 			
 			// Map the initialisation options onto the settings object
 			_fnMap( oSettings.oFeatures, oInit, [
-				"bPaginate",
+				"APaginate",
 				"bLengthChange",
 				"bFilter",
 				"bSort",
 				"bSortMulti",
 				"bInfo",
-				"bProcessing",
+				"AProcessing",
 				"bAutoWidth",
 				"bSortClasses",
 				"bServerSide",
@@ -7402,7 +7402,7 @@
 		var
 			settings   = this.context[0],
 			start      = settings._iDisplayStart,
-			len        = settings.oFeatures.bPaginate ? settings._iDisplayLength : -1,
+			len        = settings.oFeatures.APaginate ? settings._iDisplayLength : -1,
 			visRecords = settings.fnRecordsDisplay(),
 			all        = len === -1;
 	
@@ -10288,7 +10288,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"bPaginate": true,
+		"APaginate": true,
 	
 	
 		/**
@@ -10309,7 +10309,7 @@
 		 *      } );
 		 *    } );
 		 */
-		"bProcessing": false,
+		"AProcessing": false,
 	
 	
 		/**
@@ -12874,7 +12874,7 @@
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
 			 */
-			"bPaginate": null,
+			"APaginate": null,
 	
 			/**
 			 * Processing indicator enable flag whenever DataTables is enacting a
@@ -12883,7 +12883,7 @@
 			 * set a default use {@link DataTable.defaults}.
 			 *  @type boolean
 			 */
-			"bProcessing": null,
+			"AProcessing": null,
 	
 			/**
 			 * Server-side processing enabled flag - when enabled DataTables will
@@ -13633,7 +13633,7 @@
 				calc     = start + len,
 				records  = this.aiDisplay.length,
 				features = this.oFeatures,
-				paginate = features.bPaginate;
+				paginate = features.APaginate;
 	
 			if ( features.bServerSide ) {
 				return paginate === false || len === -1 ?

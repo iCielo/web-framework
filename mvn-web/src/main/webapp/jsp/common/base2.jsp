@@ -6,11 +6,11 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ contextPath;//绝对路径，如http://localhost:8080/contextPath
 	request.setAttribute("CP", contextPath);
-	request.setAttribute("BP", basePath);
+	request.setAttribute("AP", basePath);
 %>
 <script type="text/javascript">
 	var CP = "${contextPath}";
-	var BP = "${basePath}";
+	var AP = "${basePath}";
 </script>
 
 <!--引入css-->

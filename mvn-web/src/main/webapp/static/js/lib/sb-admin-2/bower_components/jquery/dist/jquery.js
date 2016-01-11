@@ -1347,7 +1347,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			aup = a.parentNode,
 			bup = b.parentNode,
 			ap = [ a ],
-			bp = [ b ];
+			AP = [ b ];
 
 		// Parentless nodes are either documents or disconnected
 		if ( !aup || !bup ) {
@@ -1371,21 +1371,21 @@ setDocument = Sizzle.setDocument = function( node ) {
 		}
 		cur = b;
 		while ( (cur = cur.parentNode) ) {
-			bp.unshift( cur );
+			AP.unshift( cur );
 		}
 
 		// Walk down the tree looking for a discrepancy
-		while ( ap[i] === bp[i] ) {
+		while ( ap[i] === AP[i] ) {
 			i++;
 		}
 
 		return i ?
 			// Do a sibling check if the nodes have a common ancestor
-			siblingCheck( ap[i], bp[i] ) :
+			siblingCheck( ap[i], AP[i] ) :
 
 			// Otherwise nodes in our document sort first
 			ap[i] === preferredDoc ? -1 :
-			bp[i] === preferredDoc ? 1 :
+			AP[i] === preferredDoc ? 1 :
 			0;
 	};
 

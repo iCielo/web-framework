@@ -1,4 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript">
+	$(function(){
+		var href = Common.getLinkHref();
+		$(".navbar-nav a").each(function(){
+		  var aHref = Common.getLinkHref($(this).attr("href"));
+		  if(aHref == href){
+		    $(this).parent().addClass("active");
+		  }
+		});
+		
+	});
+</script>
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -89,13 +101,13 @@
 	<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 		<ul class="nav navbar-nav side-nav">
-			<li class="active">
+			<li>
 				<a href="${CP}/static/js/lib/sb-admin/index.html"><i class="fa fa-fw fa-dashboard"></i>首页</a>
 			</li>
 			<li>
 				<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>系统管理 <i class="fa fa-fw fa-caret-down"></i></a>
-				<ul id="demo" class="collapse">
-					<li><a href="${CP}/user/hello">用户管理</a></li>
+				<ul id="demo">
+					 <li class="active"><a href="${CP}/sys/users/listPage">用户管理</a></li>
 				</ul>
 			</li>
 		</ul>

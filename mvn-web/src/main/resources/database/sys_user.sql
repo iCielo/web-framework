@@ -11,5 +11,5 @@ CREATE TABLE `sys_user` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `op_user_id` varchar(36) DEFAULT NULL COMMENT '操作用户ID',
   `op_time` datetime DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`uuid`)
+  PRIMARY KEY (`id`)
 )

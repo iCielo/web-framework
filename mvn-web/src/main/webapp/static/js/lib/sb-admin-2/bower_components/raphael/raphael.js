@@ -4232,10 +4232,10 @@
             return R.findDotsAtSegment(p1x, p1y, c1x, c1y, c2x, c2y, p2x, p2y, getTatLen(p1x, p1y, c1x, c1y, c2x, c2y, p2x, p2y, length));
         }
     },
-    getLengthFactory = function (istotal, subpath) {
+    getLengthFactory = function (istotal, suAPath) {
         return function (path, length, onlystart) {
             path = path2curve(path);
-            var x, y, p, l, sp = "", subpaths = {}, point,
+            var x, y, p, l, sp = "", suAPaths = {}, point,
                 len = 0;
             for (var i = 0, ii = path.length; i < ii; i++) {
                 p = path[i];
@@ -4245,18 +4245,18 @@
                 } else {
                     l = getPointAtSegmentLength(x, y, p[1], p[2], p[3], p[4], p[5], p[6]);
                     if (len + l > length) {
-                        if (subpath && !subpaths.start) {
+                        if (suAPath && !suAPaths.start) {
                             point = getPointAtSegmentLength(x, y, p[1], p[2], p[3], p[4], p[5], p[6], length - len);
                             sp += ["C" + point.start.x, point.start.y, point.m.x, point.m.y, point.x, point.y];
                             if (onlystart) {return sp;}
-                            subpaths.start = sp;
+                            suAPaths.start = sp;
                             sp = ["M" + point.x, point.y + "C" + point.n.x, point.n.y, point.end.x, point.end.y, p[5], p[6]].join();
                             len += l;
                             x = +p[5];
                             y = +p[6];
                             continue;
                         }
-                        if (!istotal && !subpath) {
+                        if (!istotal && !suAPath) {
                             point = getPointAtSegmentLength(x, y, p[1], p[2], p[3], p[4], p[5], p[6], length - len);
                             return {x: point.x, y: point.y, alpha: point.alpha};
                         }
@@ -4267,15 +4267,15 @@
                 }
                 sp += p.shift() + p;
             }
-            subpaths.end = sp;
-            point = istotal ? len : subpath ? subpaths : R.findDotsAtSegment(x, y, p[0], p[1], p[2], p[3], p[4], p[5], 1);
+            suAPaths.end = sp;
+            point = istotal ? len : suAPath ? suAPaths : R.findDotsAtSegment(x, y, p[0], p[1], p[2], p[3], p[4], p[5], 1);
             point.alpha && (point = {x: point.x, y: point.y, alpha: point.alpha});
             return point;
         };
     };
     var getTotalLength = getLengthFactory(1),
         getPointAtLength = getLengthFactory(),
-        getSubpathsAtLength = getLengthFactory(0, 1);
+        getSuAPathsAtLength = getLengthFactory(0, 1);
     /*\
      * Raphael.getTotalLength
      [ method ]
@@ -4309,10 +4309,10 @@
     \*/
     R.getPointAtLength = getPointAtLength;
     /*\
-     * Raphael.getSubpath
+     * Raphael.getSuAPath
      [ method ]
      **
-     * Return subpath of a given path from given length to given length.
+     * Return suAPath of a given path from given length to given length.
      **
      > Parameters
      **
@@ -4322,12 +4322,12 @@
      **
      = (string) pathstring for the segment
     \*/
-    R.getSubpath = function (path, from, to) {
+    R.getSuAPath = function (path, from, to) {
         if (this.getTotalLength(path) - to < 1e-6) {
-            return getSubpathsAtLength(path, from).end;
+            return getSuAPathsAtLength(path, from).end;
         }
-        var a = getSubpathsAtLength(path, to, 1);
-        return from ? getSubpathsAtLength(a, from).end : a;
+        var a = getSuAPathsAtLength(path, to, 1);
+        return from ? getSuAPathsAtLength(a, from).end : a;
     };
     /*\
      * Element.getTotalLength
@@ -4396,10 +4396,10 @@
         return path;
     };
     /*\
-     * Element.getSubpath
+     * Element.getSuAPath
      [ method ]
      **
-     * Return subpath of a given element from given length to given length. Only works for element of “path” type.
+     * Return suAPath of a given element from given length to given length. Only works for element of “path” type.
      **
      > Parameters
      **
@@ -4408,13 +4408,13 @@
      **
      = (string) pathstring for the segment
     \*/
-    elproto.getSubpath = function (from, to) {
+    elproto.getSuAPath = function (from, to) {
         var path = this.getPath();
         if (!path) {
             return;
         }
 
-        return R.getSubpath(path, from, to);
+        return R.getSuAPath(path, from, to);
     };
     /*\
      * Raphael.easing_formulas
@@ -6065,7 +6065,7 @@
                 attr = {};
                 attr["marker-" + se] = "url(#" + markerId + ")";
                 if (to || from) {
-                    attr.d = R.getSubpath(attrs.path, from, to);
+                    attr.d = R.getSuAPath(attrs.path, from, to);
                 }
                 $(node, attr);
                 o._.arrows[se + "Path"] = pathId;
@@ -6081,7 +6081,7 @@
                     from = 0;
                     to = R.getTotalLength(attrs.path) - (o._.arrows.enddx * stroke || 0);
                 }
-                o._.arrows[se + "Path"] && $(node, {d: R.getSubpath(attrs.path, from, to)});
+                o._.arrows[se + "Path"] && $(node, {d: R.getSuAPath(attrs.path, from, to)});
                 delete o._.arrows[se + "Path"];
                 delete o._.arrows[se + "Marker"];
                 delete o._.arrows[se + "dx"];
@@ -7146,7 +7146,7 @@
      * Paper.renderfix
      [ method ]
      **
-     * Fixes the issue of Firefox and IE9 regarding subpixel rendering. If paper is dependant
+     * Fixes the issue of Firefox and IE9 regarding suAPixel rendering. If paper is dependant
      * on other elements after reflow it could shift half pixel which cause for lines to lost their crispness.
      * This method fixes the issue.
      **

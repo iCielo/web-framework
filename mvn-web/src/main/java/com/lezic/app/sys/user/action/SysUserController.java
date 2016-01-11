@@ -27,32 +27,45 @@ import com.lezic.core.web.constant.Status;
 @Controller
 @RequestMapping("/sys")
 public class SysUserController extends BaseController {
-
+	
 	@Autowired
 	private SysUserService sysUserService;
 
 	/**
-	 * 新增页面
+	 * 列表页面
+	 * @param model
+	 * @return
+	 * @author cielo
 	 */
-	@RequestMapping(value = "/user/add", method = RequestMethod.GET)
-	public String add(Model model) {
+	@RequestMapping(value = "/users/listPage", method = RequestMethod.GET)
+	public String listPage(Model model) {
 		model.addAttribute("test", "test");
-		return "/user/add";
+		return "/sys/user/listPage";
 	}
 
 	/**
-	 * 新增
+	 * 新增页面
 	 */
-	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public void addEntity() {
-
+	@RequestMapping(value = "/user/addPage", method = RequestMethod.GET)
+	public String addPage(Model model) {
+		model.addAttribute("test", "test");
+		return "/sys/user/addPage";
 	}
 
 	/**
 	 * 修改页面
 	 */
-	@RequestMapping(value = "/user/upd/{userId}", method = RequestMethod.GET)
-	public void upd() {
+	@RequestMapping(value = "/user/updPage/{userId}", method = RequestMethod.GET)
+	public String updPage(Model model) {
+		model.addAttribute("test", "test");
+		return "/sys/user/updPage";
+	}
+	
+	/**
+	 * 新增
+	 */
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
+	public void addEntity() {
 
 	}
 
@@ -69,45 +82,6 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
 	public void delEntity(@PathVariable String userId) {
-
-	}
-
-	/**
-	 * 查找单个实例
-	 * 
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-	public void getEntity(@PathVariable String userId) throws IOException {
-		SysUser sysUser = sysUserService.getH(userId);
-		this.outData(Status.SUCCESS, sysUser);
-	}
-
-	/**
-	 * 获取所有实例
-	 */
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public void getAllEntity() {
-
-	}
-
-	/**
-	 * 条件查找
-	 * 
-	 * @param name
-	 */
-	@RequestMapping(value = "/users/search", method = RequestMethod.GET)
-	public void searchEntity(@RequestParam(value = "name", required = false) String name) {
-
-	}
-
-	/**
-	 * 根据角色名查找所有该角色的用户
-	 * 
-	 * @param userName
-	 */
-	@RequestMapping(value = "/users/searchByRoles", method = RequestMethod.GET)
-	public void searchByRoles(@RequestParam(value = "name", required = false) String name) {
 
 	}
 

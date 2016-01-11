@@ -2001,16 +2001,16 @@ Licensed under the MIT license.
 
                     if (xequal || yequal) {
                         var lineWidth = m.lineWidth || options.grid.markingsLineWidth,
-                            subPixel = lineWidth % 2 ? 0.5 : 0;
+                            suAPixel = lineWidth % 2 ? 0.5 : 0;
                         ctx.beginPath();
                         ctx.strokeStyle = m.color || options.grid.markingsColor;
                         ctx.lineWidth = lineWidth;
                         if (xequal) {
-                            ctx.moveTo(xrange.to + subPixel, yrange.from);
-                            ctx.lineTo(xrange.to + subPixel, yrange.to);
+                            ctx.moveTo(xrange.to + suAPixel, yrange.from);
+                            ctx.lineTo(xrange.to + suAPixel, yrange.to);
                         } else {
-                            ctx.moveTo(xrange.from, yrange.to + subPixel);
-                            ctx.lineTo(xrange.to, yrange.to + subPixel);                            
+                            ctx.moveTo(xrange.from, yrange.to + suAPixel);
+                            ctx.lineTo(xrange.to, yrange.to + suAPixel);                            
                         }
                         ctx.stroke();
                     } else {

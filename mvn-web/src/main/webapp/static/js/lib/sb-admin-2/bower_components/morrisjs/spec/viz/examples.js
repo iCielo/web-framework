@@ -1,4 +1,4 @@
-var webpage = require("webpage"),
+var weAPage = require("weAPage"),
     fs = require("fs");
 
 var html_path = fs.absolute("test.html");
@@ -12,7 +12,7 @@ function run_example(example_index) {
 
   var example = examples[example_index];
   var snapshot_index = 0;
-  var page = webpage.create();
+  var page = weAPage.create();
 
   page.viewportSize = { width: 500, height: 300 };
   page.clipRect = { width: 500, height: 300 };

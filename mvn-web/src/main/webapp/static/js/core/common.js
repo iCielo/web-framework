@@ -1,23 +1,32 @@
 /**
  * 基本公共类
  */
-function Common() {
+(function() {
+	if (typeof (Common) == "undefined") {
+		Common = function() {
+		};
+	}
 
-};
+	/**
+	 * 获取链接的相对路径
+	 * 
+	 * @returns
+	 */
+	Common.getLinkHref = function(href) {
+		if(!href){
+			href =  window.location.href;
+		}
+		if(href.startWith(AP)){
+			return href.replace(AP, "");
+		}else if(href.startWith(CP)){
+			return href.replace(CP, "");	
+		}
+	}
 
-/**
- * 打开新窗口
- * 
- * @param url
- * @param options
- */
-Common.openWindow = function(url, options) {
-	window.open(url);
-};
+	/**
+	 * app扩展方法
+	 */
+	Common.app = function() {
 
-/**
- * 实例方法
- */
-Common.prototype.method = function() {
-
-};
+	}
+}());

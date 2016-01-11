@@ -3,14 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String contextPath = request.getContextPath();//工程名
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	String absolutePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ contextPath;//绝对路径，如http://localhost:8080/contextPath
 	request.setAttribute("CP", contextPath);
-	request.setAttribute("BP", basePath);
+	request.setAttribute("AP", absolutePath);
 %>
 <script type="text/javascript">
-	var CP = "${contextPath}";
-	var BP = "${basePath}";
+	var CP = "${CP}";
+	var AP = "${AP}";
 </script>
 
 <!--引入css-->
@@ -24,6 +24,7 @@
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="${CP}/static/js/core/lang/string.js"></script>
 <script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
 

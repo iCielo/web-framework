@@ -4600,7 +4600,7 @@ sortOrder = docElem.compareDocumentPosition ?
 
 		var al, bl,
 			ap = [],
-			bp = [],
+			AP = [],
 			aup = a.parentNode,
 			bup = b.parentNode,
 			cur = aup;
@@ -4627,23 +4627,23 @@ sortOrder = docElem.compareDocumentPosition ?
 		cur = bup;
 
 		while ( cur ) {
-			bp.unshift( cur );
+			AP.unshift( cur );
 			cur = cur.parentNode;
 		}
 
 		al = ap.length;
-		bl = bp.length;
+		bl = AP.length;
 
 		// Start walking down the tree looking for a discrepancy
 		for ( var i = 0; i < al && i < bl; i++ ) {
-			if ( ap[i] !== bp[i] ) {
-				return siblingCheck( ap[i], bp[i] );
+			if ( ap[i] !== AP[i] ) {
+				return siblingCheck( ap[i], AP[i] );
 			}
 		}
 
 		// We ended someplace up the tree so do a sibling check
 		return i === al ?
-			siblingCheck( a, bp[i], -1 ) :
+			siblingCheck( a, AP[i], -1 ) :
 			siblingCheck( ap[i], b, 1 );
 	};
 

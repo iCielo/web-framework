@@ -2,7 +2,7 @@
  * 基本公共类
  */
 (function() {
-	if (!Common) {
+	if (typeof(Common)=="undefined") {
 		Common = function() {
 		};
 	}

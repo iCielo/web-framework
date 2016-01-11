@@ -11,7 +11,7 @@
 var requirejs, require, define;
 (function (global) {
     var req, s, head, baseElement, dataMain, src,
-        interactiveScript, currentlyAddingScript, mainScript, subPath,
+        interactiveScript, currentlyAddingScript, mainScript, suAPath,
         version = '2.1.8',
         commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg,
         cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,
@@ -1941,9 +1941,9 @@ var requirejs, require, define;
                     //baseUrl.
                     src = mainScript.split('/');
                     mainScript = src.pop();
-                    subPath = src.length ? src.join('/')  + '/' : './';
+                    suAPath = src.length ? src.join('/')  + '/' : './';
 
-                    cfg.baseUrl = subPath;
+                    cfg.baseUrl = suAPath;
                 }
 
                 //Strip off any trailing .js since mainScript is now
