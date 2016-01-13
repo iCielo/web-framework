@@ -13,28 +13,6 @@
 	var AP = "${AP}";
 </script>
 
-<!--引入css-->
-<link rel="stylesheet" type="text/css" href="${CP}/static/css/base.css" />
-<link rel="stylesheet" type="text/css" href="${CP}/static/css/style.css" />
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/sb-admin/css/sb-admin.css">
-
-<!--引入js-->
-<script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="${CP}/static/js/core/lang/string.js"></script>
-<script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
-<script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-    <script src="${CP}/static/js/lib/html5/html5shiv.js"></script>
-    <script src="${CP}/static/js/lib/html5/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
-
 <!--meta-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
@@ -42,3 +20,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+
+<!--引入css-->
+<link rel="stylesheet" type="text/css" href="${CP}/static/css/base.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
+
+<!--right slidebar-->
+<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/slidebars.css" />
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/style-responsive.css" />
+<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/bootstrap-reset.css" />
+
+<!--引入js-->
+<script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="${CP}/static/js/lib/html5/html5shiv.js"></script>
+    <script src="${CP}/static/js/lib/html5/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script class="include" type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+<script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.scrollTo.min.js"></script>
+<script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.nicescroll.js"></script>
+<!--right slidebar-->
+<script src="${CP }/static/js/lib/flatlab/js/slidebars.min.js"></script>
+
+<!-- custom script -->
+<script type="text/javascript" src="${CP}/static/js/core/lang/string.js"></script>
+<script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
+<script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
+<script type="text/javascript" src="${CP}/static/js/app/base.js"></script>

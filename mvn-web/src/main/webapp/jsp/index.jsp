@@ -9,34 +9,20 @@
 </script>
 </head>
 <body>
-	<div id="wrapper">
-
-		<%@ include file="./head.jsp"%>
-
-		<div id="page-wrapper">
-
-			<div class="container-fluid">
-
-				<!-- Page Heading -->
-				<div class="row">
-					<div class="col-lg-12">
-						<h1 class="page-header">
-							Dashboard <small>Statistics Overview</small>
-						</h1>
-						<ol class="breadcrumb">
-							<li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
-						</ol>
-					</div>
-				</div>
-				<!-- /.row -->
-
-			</div>
-			<!-- /.container-fluid -->
-
-		</div>
-		<!-- /#page-wrapper -->
-
-	</div>
-	<!-- /#wrapper -->
+	<section id="container">
+		<!--header-->
+		<jsp:include page="head.jsp"/>
+		<!--sidebar start-->
+		<jsp:include page="sidebar.jsp"/>
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper"></section>
+		</section>
+		<!--main content end-->
+		<!-- Right Slidebar -->
+		<jsp:include page="rightSlidebar.jsp"/>
+		<!--footer start-->
+		<jsp:include page="footer.jsp"/>
+	</section>
 </body>
 </html>
