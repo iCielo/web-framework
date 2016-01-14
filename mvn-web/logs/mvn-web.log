@@ -1,8 +1,0 @@
-2015-12-30 15:54:15.755 TRACE [main][Hello.java:21] - entry
-2015-12-30 15:54:15.757 ERROR [main][Hello.java:22] - Did it again!
-2015-12-30 15:54:15.757 INFO [main][Hello.java:23] - 我是info信息
-2015-12-30 15:54:15.757 DEBUG [main][Hello.java:24] - 我是debug信息
-2015-12-30 15:54:15.757 WARN [main][Hello.java:25] - 我是warn信息
-2015-12-30 15:54:15.757 FATAL [main][Hello.java:26] - 我是fatal信息
-2015-12-30 15:54:15.757 DEBUG [main][Hello.java:27] - 我是debug信息
-2015-12-30 15:54:15.757 TRACE [main][Hello.java:28] - exit

@@ -59,7 +59,7 @@
 								Dynamic Table 
 							</header>
 							<div class="panel-body">
-								<table id="dataTable"></table>
+								<table id="dataTable" data-side-pagination="server" data-pagination="false" data-height="500"></table>
 							</div>
 						</section>
 					</div>
