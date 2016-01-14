@@ -6,39 +6,8 @@
 <title>首页</title>
 <script type="text/javascript">
 	$(function() {
-		$('#dataTable').bootstrapTable({
-			height : 520,
-			toolbar : "",
-			singleSelect : true,
-			clickToSelect : true,
-			pagination : "true",
-			toolbarAlign : "right",
-			idField : "id",
-			sidePagination : "server",
-			method : "post",
-			contentType : "application/x-www-form-urlencoded",
-			url : "${CP}/static/js/lib/bootstrap-table/data.json",
-			columns : [ [ {
-				checkbox : true,
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '',
-				field : 'id',
-				align : 'center',
-				valign : 'middle',
-				visible : false
-			}, {
-				title : '名称',
-				field : 'name',
-				align : 'center',
-				valign : 'middle'
-			}, {
-				title : '金额',
-				field : 'price',
-				align : 'center',
-				valign : 'middle'
-			} ] ]
+		$('#dataTable').myBootstrapTable({
+			url : "${CP}/static/js/lib/bootstrap-table/data.json"
 		});
 	});
 </script>
@@ -55,11 +24,34 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<section class="panel">
-							<header class="panel-heading">
-								Dynamic Table 
-							</header>
+							<header class="panel-heading"> Dynamic Table </header>
 							<div class="panel-body">
-								<table id="dataTable"></table>
+								<div id="toolbar">
+									<button class="btn btn-primary ">
+										<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
+									</button>
+									<button class="btn btn-primary">
+										<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
+									</button>
+									<button class="btn btn-primary ">
+										<i class="glyphicon glyphicon-ok-circle"></i>启用
+									</button>
+									<button class="btn btn-primary ">
+										<i class="glyphicon glyphicon-ban-circle"></i>禁用
+									</button>
+									<button class="btn btn-danger ">
+										<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
+									</button>
+								</div>
+								<table id="dataTable">
+									<thead>
+										<tr>
+											<th data-checkbox="true"></th>
+											<th data-field="id" data-halign="center" data-align="center" data-visible="false"></th>
+											<th data-field="name" data-halign="center" data-align="center">名称</th>
+											<th data-field="price" data-halign="center" data-align="center">金额</th>
+										</tr>
+								</table>
 							</div>
 						</section>
 					</div>

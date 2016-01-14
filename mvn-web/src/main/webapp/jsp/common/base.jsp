@@ -40,6 +40,7 @@
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/bootstrap-table.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/my-bootstrap-table.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
