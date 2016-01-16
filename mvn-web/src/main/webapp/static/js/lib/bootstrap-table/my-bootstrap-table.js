@@ -19,6 +19,7 @@
 			method : "post",
 			showRefresh : true,
 			cache : false,
+			pageList : [10, 25, 50, 100],
 			/**
 			 * 单击行时，改为单选。选择复选框，为多选
 			 */

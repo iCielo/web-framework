@@ -5,10 +5,12 @@
 package com.lezic.core.orm.service.impl;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lezic.core.orm.Page;
 import com.lezic.core.orm.dao.IBaseDAO;
 import com.lezic.core.orm.service.IBaseService;
 import com.lezic.core.util.UtilReflection;
@@ -55,6 +57,17 @@ public class BaseServiceImpl<T> implements IBaseService<T>, InitializingBean {
 	@Override
 	public void saveOrUpdH(T entity) {
 		baseDAO.saveOrUpdH(entity);
+	}
+
+	@Override
+	public void pageH(Page<T> page, String hql, Object... values) {
+		baseDAO.pageH(page, hql, values);
+
+	}
+
+	@Override
+	public void pageH(Page<T> page, String hql, Map<String, Object> params) {
+		baseDAO.pageH(page, hql, params);
 	}
 
 }

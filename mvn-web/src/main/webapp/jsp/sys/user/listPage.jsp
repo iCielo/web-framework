@@ -7,7 +7,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
-			url : "${CP}/static/js/lib/bootstrap-table/data.json"
+			url : "${CP}/sys/users"
 		});
 	});
 </script>

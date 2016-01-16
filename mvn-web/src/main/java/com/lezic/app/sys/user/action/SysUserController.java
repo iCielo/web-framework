@@ -5,6 +5,8 @@
 package com.lezic.app.sys.user.action;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.app.sys.user.service.SysUserService;
+import com.lezic.core.lang.ParamMap;
+import com.lezic.core.orm.Page;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
 
@@ -27,19 +29,19 @@ import com.lezic.core.web.constant.Status;
 @Controller
 @RequestMapping("/sys")
 public class SysUserController extends BaseController {
-	
+
 	@Autowired
 	private SysUserService sysUserService;
 
 	/**
 	 * 列表页面
+	 * 
 	 * @param model
 	 * @return
 	 * @author cielo
 	 */
 	@RequestMapping(value = "/users/listPage", method = RequestMethod.GET)
 	public String listPage(Model model) {
-		model.addAttribute("test", "test");
 		return "/sys/user/listPage";
 	}
 
@@ -60,7 +62,24 @@ public class SysUserController extends BaseController {
 		model.addAttribute("test", "test");
 		return "/sys/user/updPage";
 	}
-	
+
+	/**
+	 * 列表页面
+	 * 
+	 * @param model
+	 * @return
+	 * @author cielo
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/users", method = RequestMethod.POST)
+	public void loadData() throws IOException {
+		Page<SysUser> page = new Page<SysUser>();
+		String hql = "from SysUser";
+		ParamMap params = new ParamMap();
+		sysUserService.pageH(page, hql, params);
+		this.outData(Status.SUCCESS, page);
+	}
+
 	/**
 	 * 新增
 	 */
