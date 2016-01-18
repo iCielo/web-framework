@@ -1,3 +1,19 @@
+$(function() {
+
+	$("html").niceScroll({
+		styler : "fb",
+		cursorcolor : "#e8403f",
+		cursorwidth : '6',
+		cursorborderradius : '10px',
+		background : '#404040',
+		spacebarenabled : false,
+		cursorborder : '',
+		autohidemode : false,
+		zindex : '1000'
+	});
+	
+});
+
 /*---LEFT BAR ACCORDION----*/
 $(function() {
 	$('#nav-accordion').dcAccordion({
@@ -15,19 +31,9 @@ $(function() {
 
 // right slidebar
 $(function() {
-	
+
 	$.slidebars();
-	
-	var href = Common.getLinkHref();
-	$("#sidebar li").each(function(){
-	  var aHref = Common.getLinkHref($(this).find("a").attr("href"));
-			if (aHref == href) {
-				$(this).addClass("active");
-				$(this).parent().show();
-				$(this).parent().siblings("a").addClass("active");
-			}
-	});	
-	
+
 	jQuery('#sidebar .sub-menu > a').click(function() {
 		var o = ($(this).offset());
 		diff = 250 - o.top;
@@ -36,7 +42,7 @@ $(function() {
 		else
 			$("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
 	});
-	
+
 	$('.fa-bars').click(function() {
 		if ($('#sidebar > ul').is(":visible") === true) {
 			$('#main-content').css({
@@ -58,7 +64,7 @@ $(function() {
 			$("#container").removeClass("sidebar-closed");
 		}
 	});
-	
+
 	function responsiveView() {
 		var wSize = $(window).width();
 		if (wSize <= 768) {
@@ -73,10 +79,20 @@ $(function() {
 	}
 	$(window).on('load', responsiveView);
 	$(window).on('resize', responsiveView);
-	
-	$('.tooltips').tooltip();
-	
-	$("#sidebar").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '3', cursorborderradius: '10px', background: '#404040', spacebarenabled:false, cursorborder: ''});
 
-    $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+	$('.tooltips').tooltip();
+
+	$("#sidebar").niceScroll({
+		styler : "fb",
+		cursorcolor : "#e8403f",
+		cursorwidth : '3',
+		cursorborderradius : '10px',
+		background : '#404040',
+		spacebarenabled : false,
+		cursorborder : ''
+	});
+
+	// $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth:
+	// '6', cursorborderradius: '10px', background: '#404040',
+	// spacebarenabled:false, cursorborder: '', zindex: '1000'});
 });

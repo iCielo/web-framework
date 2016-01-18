@@ -5,8 +5,6 @@
 package com.lezic.app.sys.user.action;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,6 @@ import com.lezic.app.sys.user.service.SysUserService;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.web.action.BaseController;
-import com.lezic.core.web.constant.Status;
 
 /**
  * @author cielo
@@ -77,7 +74,7 @@ public class SysUserController extends BaseController {
 		String hql = "from SysUser";
 		ParamMap params = new ParamMap();
 		sysUserService.pageH(page, hql, params);
-		this.outData(Status.SUCCESS, page);
+		this.outBootstrapTable(page);
 	}
 
 	/**
