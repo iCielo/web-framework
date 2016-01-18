@@ -32,7 +32,7 @@ public class Page<T> {
 	/**
 	 * 总条数
 	 */
-	private long totalCount = -1;
+	private long total = -1;
 
 	/**
 	 * 总页数
@@ -42,7 +42,7 @@ public class Page<T> {
 	/**
 	 * 结果集
 	 */
-	private List<T> result = null;
+	private List<T> rows = null;
 
 	/**
 	 * 从第几条记录开始
@@ -67,9 +67,9 @@ public class Page<T> {
 	 */
 	public long getTotalPages() {
 		if (totalPages == -1) {
-			if (totalCount != -1) {
-				totalPages = (int) (totalCount / pageSize);
-				if (totalCount % pageSize > 0) {
+			if (total != -1) {
+				totalPages = (int) (total / pageSize);
+				if (total % pageSize > 0) {
 					totalPages++;
 				}
 			}
@@ -85,8 +85,12 @@ public class Page<T> {
 	 * @param totalCount
 	 *            the totalCount to set
 	 */
-	public void setTotalCount(long totalCount) {
-		this.totalCount = totalCount;
+	public void setTotal(long totalCount) {
+		this.total = totalCount;
+	}
+
+	public long getTotal() {
+		return total;
 	}
 
 	/**
@@ -139,26 +143,12 @@ public class Page<T> {
 		this.pageSize = pageSize;
 	}
 
-	/**
-	 * @return the totalCount
-	 */
-	public long getTotalCount() {
-		return totalCount;
+	public List<T> getRows() {
+		return rows;
 	}
 
-	/**
-	 * @return the result
-	 */
-	public List<T> getResult() {
-		return result;
-	}
-
-	/**
-	 * @param result
-	 *            the result to set
-	 */
-	public void setResult(List<T> result) {
-		this.result = result;
+	public void setRows(List<T> rows) {
+		this.rows = rows;
 	}
 
 }

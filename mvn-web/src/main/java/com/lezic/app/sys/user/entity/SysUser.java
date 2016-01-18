@@ -31,18 +31,13 @@ public class SysUser implements java.io.Serializable {
 	private String remark;
 	private String opUserId;
 	private Date opTime;
-	private String uuid;
 
 	public SysUser() {
 	}
 
-	public SysUser(String id, String uuid) {
-		this.id = id;
-		this.uuid = uuid;
-	}
 
 	public SysUser(String id, String account, String password, String name, String sex, Integer age, String phone,
-			String email, String remark, String opUserId, Date opTime, String uuid) {
+			String email, String remark, String opUserId, Date opTime) {
 		this.id = id;
 		this.account = account;
 		this.password = password;
@@ -54,7 +49,6 @@ public class SysUser implements java.io.Serializable {
 		this.remark = remark;
 		this.opUserId = opUserId;
 		this.opTime = opTime;
-		this.uuid = uuid;
 	}
 
 	@Id
@@ -157,15 +151,6 @@ public class SysUser implements java.io.Serializable {
 
 	public void setOpTime(Date opTime) {
 		this.opTime = opTime;
-	}
-
-	@Column(name = "uuid", nullable = false, length = 36)
-	public String getUuid() {
-		return this.uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 
 }

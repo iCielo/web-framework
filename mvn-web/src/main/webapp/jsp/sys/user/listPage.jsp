@@ -48,8 +48,14 @@
 										<tr>
 											<th data-checkbox="true"></th>
 											<th data-field="id" data-halign="center" data-align="center" data-visible="false"></th>
-											<th data-field="name" data-halign="center" data-align="center">名称</th>
-											<th data-field="price" data-halign="center" data-align="center">金额</th>
+											<th data-field="account" data-halign="center" data-align="center">账号</th>
+											<th data-field="name" data-halign="center" data-align="center">姓名</th>
+											<th data-field="sex" data-halign="center" data-align="center">性别</th>
+											<th data-field="age" data-halign="center" data-align="center">年龄</th>
+											<th data-field="phone" data-halign="center" data-align="center">联系电话</th>
+											<th data-field="email" data-halign="center" data-align="center">邮箱</th>
+											<th data-field="remark" data-halign="center" data-align="center">备注</th>
+											<th data-field="opTime" data-halign="center" data-align="center">操作时间</th>
 										</tr>
 								</table>
 							</div>

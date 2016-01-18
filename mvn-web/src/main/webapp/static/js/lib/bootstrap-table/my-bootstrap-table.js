@@ -12,22 +12,26 @@
 			toolbar : "#toolbar",
 			toolbarAlign : "left",
 			height : 520,
-			clickToSelect : true,
+			clickToSelect : false,
 			pagination : "true",
 			idField : "id",
 			sidePagination : "server",
 			method : "post",
 			showRefresh : true,
 			cache : false,
-			pageList : [10, 25, 50, 100],
+			pageList : [ 10, 25, 50, 100 ],
 			/**
-			 * 单击行时，改为单选。选择复选框，为多选
+			 * 修改默认的行单击事件，单击行为单选，单击复选框为多选。需将clickToSelect设置为false，若设置为true则启用默认的行单击事件
 			 */
 			onClickRow : function(row, $element) {
-				var checked = $element.find(".bs-checkbox :checkbox").prop("checked");
-				myBootstrapTable.bootstrapTable.bootstrapTable("uncheckAll");
-				if (!checked) {
-					$element[0].click();
+				if (myBootstrapTable.option.clickToSelect == false) {
+					var dataIndex = parseInt($element.prop("data-index") || $element.attr("data-index"));
+					var checked = $element.find(".bs-checkbox :checkbox").prop("checked");
+					$dataTable = myBootstrapTable.bootstrapTable;
+					$dataTable.bootstrapTable("uncheckAll");
+					if (!checked) {
+						$dataTable.bootstrapTable("check", dataIndex);
+					}
 				}
 				return false;
 			}

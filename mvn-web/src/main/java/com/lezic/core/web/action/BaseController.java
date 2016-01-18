@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.lezic.core.orm.Page;
 import com.lezic.core.web.constant.Status;
 
 import net.sf.json.JSONArray;
@@ -85,6 +86,20 @@ public abstract class BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", status);
 		map.put("data", data);
+		this.write(map);
+	}
+
+	/**
+	 * 输出bootstrap table的数据
+	 * 
+	 * @param page
+	 * @throws IOException
+	 * @author cielo
+	 */
+	public void outBootstrapTable(Page<?> page) throws IOException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rows", page.getRows());
+		map.put("total", page.getTotal());
 		this.write(map);
 	}
 

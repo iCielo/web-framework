@@ -110,18 +110,22 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 		Query countQuery = getSession().createQuery(hql);
 		UtilQuery.setValues(countQuery, values);
 		List<?> list = countQuery.list();
-		long totalCount = 0;
+		long total = 0;
 		if (list != null && list.size() > 0) {
-			totalCount = Long.parseLong(list.get(0).toString());
+			total = Long.parseLong(list.get(0).toString());
 		}
-		page.setTotalCount(totalCount);
-		if (totalCount > 0) {
+		page.setTotal(total);
+		if (total > 0) {
 			Query query = getSession().createQuery(hql);
 			UtilQuery.setValues(query, values);
 			query.setFirstResult(page.getOffset());
 			query.setMaxResults(page.getPageSize());
-			page.setResult(query.list());
+			page.setRows(query.list());
+			logger.debug("总记录数：" + total + "，当前页：" + page.getPageNumber() + "，本页条数：" + page.getRows().size());
+		} else {
+			logger.debug("没有找到匹配的记录");
 		}
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -131,19 +135,21 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 		Query countQuery = getSession().createQuery(UtilQuery.getCountQuery(hql));
 		UtilQuery.setValues(countQuery, params);
 		List<?> list = countQuery.list();
-		long totalCount = 0;
+		long total = 0;
 		if (list != null && list.size() > 0) {
-			totalCount = Long.parseLong(list.get(0).toString());
+			total = Long.parseLong(list.get(0).toString());
 		}
-		page.setTotalCount(totalCount);
-		if (totalCount > 0) {
+		page.setTotal(total);
+		if (total > 0) {
 			Query query = getSession().createQuery(hql);
 			UtilQuery.setValues(query, params);
 			query.setFirstResult(page.getOffset());
 			query.setMaxResults(page.getPageSize());
-			page.setResult(query.list());
+			page.setRows(query.list());
+			logger.debug("总记录数：" + total + "，当前页：" + page.getPageNumber() + "，本页条数：" + page.getRows().size());
+		} else {
+			logger.debug("没有找到匹配的记录");
 		}
-		logger.debug("总记录数：" + totalCount + "，当前页：" + page.getPageNumber() + "，本页条数：" + page.getResult().size());
 	}
 
 }
