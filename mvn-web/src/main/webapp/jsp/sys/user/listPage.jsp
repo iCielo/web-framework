@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../../common/base.jsp"%>
+<%@ include file="../../common/list.jsp"%>
 <title>首页</title>
 <script type="text/javascript">
 	$(function() {
@@ -13,7 +13,8 @@
 			Common.showDialog({
 				title : "新增用户",
 				data : {
-					url : "${CP}/sys/user/addPage"
+					url : "${CP}/sys/user/addPage",
+					width:"800px"
 				}
 			});
 		});

@@ -5,11 +5,30 @@
 <%@ include file="./common/base.jsp"%>
 <title>首页</title>
 
-<style type="text/css">
-</style>
+<!--right slidebar-->
+<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/slidebars.css" />
+
+<script class="include" type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
+<!--right slidebar-->
+<script src="${CP }/static/js/lib/flatlab/js/slidebars.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
+
+		$('#nav-accordion').dcAccordion({
+			eventType : 'click',
+			autoClose : true,
+			saveState : true,
+			disableLink : true,
+			speed : 'slow',
+			showCount : false,
+			autoExpand : true,
+			// cookie: 'dcjq-accordion-1',
+			classExpand : 'dcjq-current-parent'
+		});
+
+		$.slidebars();
+
 		$("#div_main").height($(window).height() - $(".header").height() - $("footer").height() - 51);
 		$("[real-href]").click(function() {
 			$("li,a").removeClass("active");
@@ -20,7 +39,7 @@
 	});
 </script>
 </head>
-<body style="overflow: hidden;">
+<body>
 	<section id="container">
 		<!--header-->
 		<jsp:include page="head.jsp" />
@@ -30,7 +49,8 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<div id="div_main">
-					<iframe id="ifr_main" name="ifr_main" style="width: 100%; height: 100%; border: none;" src="${CP}/sys/users/listPage"></iframe>
+					<iframe id="ifr_main" name="ifr_main" style="width: 100%; height: 100%; border: none;"
+						src="${CP}/sys/users/listPage"></iframe>
 				</div>
 			</section>
 		</section>

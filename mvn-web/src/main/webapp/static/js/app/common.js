@@ -1,7 +1,7 @@
 /**
  * 基本公共类
  */
-(function() {
+(function(window) {
 	if (typeof (Common) == "undefined") {
 		Common = function() {
 		};
@@ -41,7 +41,8 @@
 		if (!p) {
 			p = top;
 		}
-		return p.BootstrapDialog.show(option);
+		p.dialog = p.BootstrapDialog.show(option);
+		return p.dialog;
 	}
 
 	/**
@@ -77,7 +78,8 @@
 		if (!p) {
 			p = top;
 		}
-		return p.BootstrapDialog.show(option);
+		p.dialog = p.BootstrapDialog.show(option);
+		return p.dialog;
 	}
 
 	/**
@@ -113,7 +115,8 @@
 		if (!p) {
 			p = top;
 		}
-		return p.BootstrapDialog.show(option);
+		p.dialog = p.BootstrapDialog.show(option);
+		return p.dialog;
 	}
 
 	/**
@@ -174,7 +177,8 @@
 		if (!p) {
 			p = top;
 		}
-		return p.BootstrapDialog.show(option);
+		p.dialog = p.BootstrapDialog.show(option);
+		return p.dialog;
 	}
 
 	/**
@@ -190,24 +194,50 @@
 		var defaultOption = {
 			type : BootstrapDialog.TYPE_PRIMARY,
 			size : BootstrapDialog.SIZE_NORMAL,
-			cssClass : "modal-dialog-center",
+			cssClass : "",
 			title : "消息标题",
 			message : function(dialog) {
-				var $message = $('<div></div>');
-				var pageToLoad = dialog.getData('url');
-				$message.load(pageToLoad);
+				var $message = $('<iframe src="' + dialog.getData('url') + '"></iframe>');
+				$message.css({
+					width : "100%",
+					height : dialog.getData('height'),
+					border : "none"
+				})
 				return $message;
 			},
 			closable : true,
 			draggable : true,
 			data : {
-				'url' : 'remote.html'
+				'url' : 'remote.html',
+				width : '600px',
+				height : '500px'
 			}
 		};
 		option = $.extend(true, {}, defaultOption, option);
 		if (!p) {
 			p = top;
 		}
-		return p.BootstrapDialog.show(option);
+		p.dialog = p.BootstrapDialog.show(option);
+//		setTimeout(function(){
+//			p.$(".modal-dialog").css({
+//				width : option.data.width
+//			});
+//		},5);
+		return p.dialog;
 	}
-}());
+
+	/**
+	 * 关闭当前对话框
+	 * 
+	 * @param p
+	 */
+	Common.closeDialog = function(p) {
+		if (!p) {
+			p = top;
+		}
+		if (p.dialog) {
+			p.dialog.close();
+			p.dialog = null;
+		}
+	}
+}(window));

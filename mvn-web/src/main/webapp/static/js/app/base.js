@@ -1,5 +1,6 @@
 $(function() {
 
+	//滚动条优化
 	$("html").niceScroll({
 		styler : "fb",
 		cursorcolor : "#e8403f",
@@ -12,30 +13,19 @@ $(function() {
 		zindex : '1000'
 	});
 
-	$("[data-toggle='switch']").wrap('<div class="switch" data-on-label="启用"  data-off-label="禁用"/>').parent()
-			.bootstrapSwitch();
+	
 
 });
 
 /*---LEFT BAR ACCORDION----*/
 $(function() {
-	$('#nav-accordion').dcAccordion({
-		eventType : 'click',
-		autoClose : true,
-		saveState : true,
-		disableLink : true,
-		speed : 'slow',
-		showCount : false,
-		autoExpand : true,
-		// cookie: 'dcjq-accordion-1',
-		classExpand : 'dcjq-current-parent'
-	});
+	
 });
 
 // right slidebar
 $(function() {
 
-	$.slidebars();
+	
 
 	jQuery('#sidebar .sub-menu > a').click(function() {
 		var o = ($(this).offset());
