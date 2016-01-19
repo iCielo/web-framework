@@ -11,7 +11,10 @@ $(function() {
 		autohidemode : false,
 		zindex : '1000'
 	});
-	
+
+	$("[data-toggle='switch']").wrap('<div class="switch" data-on-label="启用"  data-off-label="禁用"/>').parent()
+			.bootstrapSwitch();
+
 });
 
 /*---LEFT BAR ACCORDION----*/

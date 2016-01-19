@@ -53,6 +53,7 @@
 <script class="include" type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.dcjqaccordion.2.7.js"></script>
 <script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/bootstrap-switch.js"></script>
 <!--right slidebar-->
 <script src="${CP }/static/js/lib/flatlab/js/slidebars.min.js"></script>
 

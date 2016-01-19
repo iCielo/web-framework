@@ -188,7 +188,7 @@
 	 */
 	Common.showDialog = function(option, p) {
 		var defaultOption = {
-			type : BootstrapDialog.TYPE_DEFAULT,
+			type : BootstrapDialog.TYPE_PRIMARY,
 			size : BootstrapDialog.SIZE_NORMAL,
 			cssClass : "modal-dialog-center",
 			title : "消息标题",

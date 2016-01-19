@@ -6,9 +6,6 @@
 <title>首页</title>
 <script type="text/javascript">
 	$(function() {
-		$('#dataTable').myBootstrapTable({
-			url : "${CP}/sys/users1"
-		});
 	});
 </script>
 </head>
@@ -17,40 +14,61 @@
 		<div class="row-fluid">
 			<div class="col-sm-12">
 				<section class="panel">
-					<header class="panel-heading"> Dynamic Table </header>
 					<div class="panel-body">
-						<div id="toolbar">
-							<button class="btn btn-primary " id="btn_add">
-								<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
-							</button>
-							<button class="btn btn-primary" id="btn_edit">
-								<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
-							</button>
-							<button class="btn btn-primary " >
-								<i class="glyphicon glyphicon-ok-circle"></i>启用
-							</button>
-							<button class="btn btn-primary ">
-								<i class="glyphicon glyphicon-ban-circle"></i>禁用
-							</button>
-							<button class="btn btn-danger ">
-								<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
-							</button>
-						</div>
-						<table id="dataTable">
-							<thead>
-								<tr>
-									<th data-checkbox="true"></th>
-									<th data-field="id" data-halign="center" data-align="center" data-visible="false"></th>
-									<th data-field="account" data-halign="center" data-align="center">账号</th>
-									<th data-field="name" data-halign="center" data-align="center">姓名</th>
-									<th data-field="sex" data-halign="center" data-align="center">性别</th>
-									<th data-field="age" data-halign="center" data-align="center">年龄</th>
-									<th data-field="phone" data-halign="center" data-align="center">联系电话</th>
-									<th data-field="email" data-halign="center" data-align="center">邮箱</th>
-									<th data-field="remark" data-halign="center" data-align="center">备注</th>
-									<th data-field="opTime" data-halign="center" data-align="center">操作时间</th>
-								</tr>
-						</table>
+						<form class="form-horizontal tasi-form" method="get">
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">账号<span class="form-must">*</span></label>
+								<div class="col-sm-9">
+									<input class="form-control" placeholder="请输入账号" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">密码</label>
+								<div class="col-sm-9">
+									<input class="form-control" placeholder="请输入密码" type="password">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">姓名</label>
+								<div class="col-sm-9">
+									<input class="form-control" placeholder="请输入姓名" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">性别</label>
+								<div class="col-sm-9">
+									<select class="form-control input-sm m-bot15">
+										<option value="">--请选择--</option>
+										<option value="男">男</option>
+										<option value="女">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">联系电话</label>
+								<div class="col-sm-9">
+									<input class="form-control" placeholder="请输入联系电话" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">邮箱地址</label>
+								<div class="col-sm-9">
+									<input class="form-control" placeholder="请输入邮箱地址" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 col-sm-3 control-label">是否启用</label>
+								<div class="col-sm-9">
+									<input type="checkbox" checked="" data-toggle="switch" />
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-lg-offset-3 col-lg-11">
+									<button class="btn btn-primary" type="submit">确定</button>
+									<button class="btn btn-primary" type="submit">关闭</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</section>
 			</div>
