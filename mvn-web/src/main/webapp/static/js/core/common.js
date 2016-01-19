@@ -22,11 +22,4 @@
 			return href.replace(CP, "");	
 		}
 	}
-
-	/**
-	 * app扩展方法
-	 */
-	Common.app = function() {
-
-	}
 }());

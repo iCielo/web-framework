@@ -7,15 +7,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
-			url : "${CP}/sys/users"
-		});
-		$("#btn_add").click(function() {
-			Common.showDialog({
-				title : "新增用户",
-				data : {
-					url : "${CP}/sys/user/addPage"
-				}
-			});
+			url : "${CP}/sys/users1"
 		});
 	});
 </script>
@@ -34,7 +26,7 @@
 							<button class="btn btn-primary" id="btn_edit">
 								<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
 							</button>
-							<button class="btn btn-primary ">
+							<button class="btn btn-primary " >
 								<i class="glyphicon glyphicon-ok-circle"></i>启用
 							</button>
 							<button class="btn btn-primary ">
@@ -56,6 +48,7 @@
 									<th data-field="phone" data-halign="center" data-align="center">联系电话</th>
 									<th data-field="email" data-halign="center" data-align="center">邮箱</th>
 									<th data-field="remark" data-halign="center" data-align="center">备注</th>
+									<th data-field="opTime" data-halign="center" data-align="center">操作时间</th>
 								</tr>
 						</table>
 					</div>

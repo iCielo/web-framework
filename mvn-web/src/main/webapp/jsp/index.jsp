@@ -11,14 +11,13 @@
 <script type="text/javascript">
 	$(function() {
 		$("#div_main").height($(window).height() - $(".header").height() - $("footer").height() - 51);
-		$("[real-href]").click(function(){
+		$("[real-href]").click(function() {
 			$("li,a").removeClass("active");
 			$(this).parent().parent().siblings("a").addClass("active");
 			$(this).parent().addClass("active");
 			ifr_main.location.href = $(this).attr("real-href");
 		});
 	});
-
 </script>
 </head>
 <body style="overflow: hidden;">

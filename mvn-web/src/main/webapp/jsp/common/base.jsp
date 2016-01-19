@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="${CP}/static/css/style.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-table/bootstrap-table.css"/>
+<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap3-dialog/css/bootstrap-dialog.css"/>
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
 
 <!--right slidebar-->
@@ -42,6 +43,7 @@
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/bootstrap-table.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/my-bootstrap-table.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
