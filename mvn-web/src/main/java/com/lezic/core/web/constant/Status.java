@@ -6,11 +6,12 @@ package com.lezic.core.web.constant;
 
 /**
  * ajax返回状态
+ * 
  * @author cielo
  *
  */
 public enum Status {
-	
+
 	/**
 	 * 成功
 	 */
@@ -29,5 +30,9 @@ public enum Status {
 	/**
 	 * 超时
 	 */
-	TIMEOUT;
+	TIMEOUT,
+	/**
+	 * 禁止访问
+	 */
+	FORBID;
 }

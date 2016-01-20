@@ -218,11 +218,11 @@
 			p = top;
 		}
 		p.dialog = p.BootstrapDialog.show(option);
-//		setTimeout(function(){
-//			p.$(".modal-dialog").css({
-//				width : option.data.width
-//			});
-//		},5);
+		// setTimeout(function(){
+		// p.$(".modal-dialog").css({
+		// width : option.data.width
+		// });
+		// },5);
 		return p.dialog;
 	}
 
@@ -235,9 +235,64 @@
 		if (!p) {
 			p = top;
 		}
+		// 若有列表，则默认重新加载
+		if (p.$('iframe').length > 0) {
+			if (typeof (p[p.$('iframe')[0].name].query) == "function") {
+				p[p.$('iframe')[0].name].query();
+			}
+		} else if (typeof (p.query) == "function") {
+			p.query();
+		}
+
 		if (p.dialog) {
 			p.dialog.close();
 			p.dialog = null;
 		}
+	}
+
+	/**
+	 * ajax提交统一控制，自动添加ajax=true参数，检测超时、禁止访问等
+	 * 
+	 * @param data
+	 */
+	Common.ajax = function(option) {
+		var callback = option.success;
+		if (option.success) {
+			delete option.success;
+		}
+		if (option.url && option.url.indexOf("ajax=true")) {
+			option.url = option.url + "&ajax=true";
+		}
+		var defaultOption = {
+			url : "",
+			type : "post",
+			async : true,
+			dataType : "json",
+			data : {
+
+			},
+			/**
+			 * 成功回调方法：再原有的基础上包上一层检测超时、禁止访问等
+			 */
+			success : function(data) {
+				if (data && data.status) {
+					if (data.status == "SUCCESS") {
+						if (typeof (callback) == "function") {
+							callback(data);
+						}
+					} else if (data.status == "TIMEOUT") {
+						alert("登录超时！");
+					} else if (data.status == "FORBID") {
+						alert("禁止访问！");
+					} else if (data.status == "FAIL") {
+						alert("操作失败！");
+					} else if (data.status == "ERROR") {
+						alert("出现错误！");
+					}
+				}
+			}
+		};
+		option = $.extend(true, {}, defaultOption, option);
+		$.ajax(option);
 	}
 }(window));

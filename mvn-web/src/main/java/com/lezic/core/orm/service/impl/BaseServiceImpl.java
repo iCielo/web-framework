@@ -53,6 +53,11 @@ public class BaseServiceImpl<T> implements IBaseService<T>, InitializingBean {
 	public void delH(T entity) {
 		baseDAO.delH(entity);
 	}
+	
+	@Override
+	public int batchDelH(Class<?> cl, Serializable[] ids) {
+		return baseDAO.batchDelH(cl, ids);
+	}
 
 	@Override
 	public void saveOrUpdH(T entity) {
@@ -69,5 +74,7 @@ public class BaseServiceImpl<T> implements IBaseService<T>, InitializingBean {
 	public void pageH(Page<T> page, String hql, Map<String, Object> params) {
 		baseDAO.pageH(page, hql, params);
 	}
+
+
 
 }

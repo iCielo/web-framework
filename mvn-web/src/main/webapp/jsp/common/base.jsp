@@ -36,6 +36,8 @@
 
 <!--基础js-->
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.form.js"></script>
+
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
 <script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.scrollTo.min.js"></script>
@@ -44,6 +46,7 @@
 <script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/base.js"></script>
+<script type="text/javascript" src="${CP}/static/js/app/ajax.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

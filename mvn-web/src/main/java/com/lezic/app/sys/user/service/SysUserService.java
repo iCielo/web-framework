@@ -5,6 +5,7 @@
 package com.lezic.app.sys.user.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.core.orm.service.impl.BaseServiceImpl;
@@ -14,5 +15,6 @@ import com.lezic.core.orm.service.impl.BaseServiceImpl;
  *
  */
 @Service
+@Transactional
 public class SysUserService extends BaseServiceImpl<SysUser> {
 }

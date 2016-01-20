@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.lezic.core.orm.Page;
@@ -33,6 +34,7 @@ import com.lezic.core.orm.util.UtilQuery;
  *
  */
 @Repository("baseDAO")
+@Transactional(readOnly = false)
 public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 
 	/**
@@ -85,6 +87,14 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 	public void delH(Object entity) {
 		hibernateTemplate.delete(entity);
 		flushHiberate();
+	}
+
+	@Override
+	public int batchDelH(Class<?> cl, Serializable[] ids) {
+		String hql = "delete from " + cl.getSimpleName() + " where id in(:ids)";
+		Query query = getSession().createQuery(hql);
+		query.setParameterList("ids", ids);
+		return query.executeUpdate();
 	}
 
 	@Override

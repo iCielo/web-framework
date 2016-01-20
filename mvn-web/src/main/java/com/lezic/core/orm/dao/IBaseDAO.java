@@ -56,13 +56,23 @@ public interface IBaseDAO {
 	public void delH(Object entity);
 
 	/**
+	 * Hibernate：批量删除
+	 * 
+	 * @param cl
+	 * @param ids
+	 * @author cielo
+	 * @return 
+	 */
+	public int batchDelH(Class<?> cl, Serializable[] ids);
+
+	/**
 	 * Hibernate：新增或修改对象
 	 * 
 	 * @param entity
 	 * @author cielo
 	 */
 	public void saveOrUpdH(Object entity);
-	
+
 	/**
 	 * 查询分页
 	 * 

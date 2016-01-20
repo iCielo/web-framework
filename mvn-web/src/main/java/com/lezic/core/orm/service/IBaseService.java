@@ -52,6 +52,15 @@ public interface IBaseService<T> {
 	 * @author cielo
 	 */
 	public void delH(T entity);
+	
+	/**
+	 * Hibernate：批量删除
+	 * 
+	 * @param cl
+	 * @param ids
+	 * @author cielo
+	 */
+	public int batchDelH(Class<?> cl, Serializable[] ids);
 
 	/**
 	 * Hibernate：新增或修改对象

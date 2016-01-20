@@ -1,8 +1,18 @@
 .form-must {
-    padding: 3px;
-    color: #ff0000;
+	padding: 3px;
+	color: #ff0000;
 }
 
 .modal {
 	overflow: auto;
+}
+
+.msg-box {
+	z-index: 9999;
+}
+
+.form-horizontal.tasi-form .form-group {
+	border-bottom: none;
+	padding-bottom: 10px;
+	margin-bottom: 13px;
 }

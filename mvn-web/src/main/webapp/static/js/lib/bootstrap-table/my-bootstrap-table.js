@@ -16,7 +16,6 @@
 			pagination : "true",
 			idField : "id",
 			sidePagination : "server",
-			method : "post",
 			showRefresh : true,
 			cache : false,
 			pageList : [ 10, 25, 50, 100 ],

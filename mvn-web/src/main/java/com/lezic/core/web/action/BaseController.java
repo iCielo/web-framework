@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.lezic.core.orm.Page;
+import com.lezic.core.util.UtilData;
 import com.lezic.core.web.constant.Status;
 
 import net.sf.json.JSONArray;
@@ -40,6 +41,16 @@ public abstract class BaseController {
 		this.request = request;
 		this.response = response;
 		this.session = request.getSession();
+	}
+	
+	/**
+	 * 获取表单参数
+	 * @param name
+	 * @return
+	 * @author cielo
+	 */
+	public String getParam(String name){
+		return UtilData.trim(this.request.getParameter(name));
 	}
 
 	/**
