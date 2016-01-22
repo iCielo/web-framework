@@ -1,5 +1,5 @@
 package com.lezic.app.sys.user.entity;
-// Generated 2016-1-10 17:56:04 by Hibernate Tools 4.3.1.Final
+// Generated 2016-1-22 14:46:39 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -16,16 +16,12 @@ import javax.persistence.TemporalType;
 @Table(name = "sys_user", catalog = "lezic")
 public class SysUser implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String id;
 	private String account;
 	private String password;
 	private String name;
 	private String sex;
-	private Integer age;
+	private String status;
 	private String phone;
 	private String email;
 	private String remark;
@@ -35,15 +31,18 @@ public class SysUser implements java.io.Serializable {
 	public SysUser() {
 	}
 
+	public SysUser(String id) {
+		this.id = id;
+	}
 
-	public SysUser(String id, String account, String password, String name, String sex, Integer age, String phone,
+	public SysUser(String id, String account, String password, String name, String sex, String status, String phone,
 			String email, String remark, String opUserId, Date opTime) {
 		this.id = id;
 		this.account = account;
 		this.password = password;
 		this.name = name;
 		this.sex = sex;
-		this.age = age;
+		this.status = status;
 		this.phone = phone;
 		this.email = email;
 		this.remark = remark;
@@ -98,13 +97,13 @@ public class SysUser implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Column(name = "age")
-	public Integer getAge() {
-		return this.age;
+	@Column(name = "status", length = 20)
+	public String getStatus() {
+		return this.status;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Column(name = "phone", length = 100)

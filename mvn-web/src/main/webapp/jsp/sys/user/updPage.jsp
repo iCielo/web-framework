@@ -8,11 +8,11 @@
 	$(function() {
 		$("#form").validator({
 			fields : {
-				account : "required;username",
+				account : "required;username;remote(${CP}/sys/sysUser.do?method=isRepeat&id=${entity.id})",
 				password : "required;password",
 				name : "required;chinese",
 				sex : "required;",
-				phone : "tel",
+				phone : "phone",
 				email : "required;email"
 			}
 		});
@@ -40,19 +40,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">密码</label>
-					<div class="col-sm-6 col-xs-6">
-						<input class="form-control" placeholder="请输入密码" type="password" id="password" name="password" >
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-sm-3 col-xs-3 control-label">姓名</label>
-					<div class="col-sm-6 col-xs-6"><c:out value="${entity.name }"></c:out>
-						<input class="form-control" placeholder="请输入姓名" type="text" id="name" name="name" value="">
+					<div class="col-sm-6 col-xs-6">
+						<input class="form-control" placeholder="请输入姓名" type="text" id="name" name="name" value="<c:out value="${entity.name }"></c:out>">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">性别</label>
+					<label class="col-sm-3 col-xs-3 control-label">性别<span class="form-must">*</span></label>
 					<div class="col-sm-6 col-xs-6">
 						<select class="form-control input-sm" id="sex" name="sex" data-option-value="${entity.sex }">
 							<option value="">--请选择--</option>
@@ -68,7 +62,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">邮箱地址</label>
+					<label class="col-sm-3 col-xs-3 control-label">邮箱地址<span class="form-must">*</span></label>
 					<div class="col-sm-6 col-xs-6">
 						<input class="form-control" placeholder="请输入邮箱地址" type="text" id="email" name="email" value="${entity.email }">
 					</div>
@@ -81,8 +75,8 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-xs-offset-3">
-						<button class="btn btn-primary" type="submit">确定</button>
-						<button class="btn btn-primary" type="button" onclick="Common.closeDialog();">关闭</button>
+						<button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok"></i>&nbsp;确定</button>
+						<button class="btn btn-primary" type="button" onclick="Common.closeDialog();"><i class="glyphicon glyphicon-remove"></i>&nbsp;关闭</button>
 					</div>
 				</div>
 			</form>

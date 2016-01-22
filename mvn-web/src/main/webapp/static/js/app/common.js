@@ -151,7 +151,7 @@
 			buttons : [ {
 				id : 'btn-primary',
 				label : '确定',
-				icon : 'glyphicon glyphicon-check',
+				icon : 'glyphicon glyphicon-ok',
 				cssClass : 'btn-primary',
 				action : function(dialog) {
 					if (typeof (yes) == "function") {
@@ -161,7 +161,7 @@
 				}
 			}, {
 				id : 'btn-primary',
-				icon : 'glyphicon glyphicon-check',
+				icon : 'glyphicon glyphicon-remove',
 				label : '关闭',
 				cssClass : 'btn-primary',
 				action : function(dialog) {

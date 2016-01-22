@@ -60,7 +60,8 @@ public abstract class BaseController {
 	 * @throws IOException
 	 */
 	public void write(Object object) throws IOException {
-		response.setContentType("text/xml;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
+//		response.setContentType("text/xml;charset=UTF-8");
 		if (object instanceof Collection) {
 			JSONArray jsonArray = JSONArray.fromObject(object);
 			response.getWriter().write(jsonArray.toString());

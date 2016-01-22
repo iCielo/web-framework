@@ -75,6 +75,16 @@ public class BaseServiceImpl<T> implements IBaseService<T>, InitializingBean {
 		baseDAO.pageH(page, hql, params);
 	}
 
+	@Override
+	public boolean isRepeat(String hql, Object... values) {
+		return baseDAO.isRepeat(hql, values);
+	}
+
+	@Override
+	public Object findOneH(String hql, boolean ignoreErr, Object... values) {
+		return baseDAO.findOneH(hql, ignoreErr, values);
+	}
+
 
 
 }

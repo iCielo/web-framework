@@ -5,6 +5,8 @@
 package com.lezic.app.sys.user.action;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
@@ -105,10 +107,22 @@ public class SysUserController extends BaseController {
 
 	/**
 	 * 修改
+	 * 
+	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity() {
+	public void updEntity(@ModelAttribute SysUser entity) throws IOException {
+		if (entity != null) {
 
+			// SysUser item = sysUserService.getH(entity.getId());
+			// item.setAccount(entity.getAccount());
+			// item.setName(entity.getName());
+			// item.setSex(entity.getSex());
+			// item
+
+			sysUserService.updH(entity);
+		}
+		this.outMsg(Status.SUCCESS, null);
 	}
 
 	/**
@@ -121,6 +135,28 @@ public class SysUserController extends BaseController {
 		String[] ids = UtilData.split(this.getParam("ids"), ",");
 		sysUserService.batchDelH(SysUser.class, ids);
 		this.outMsg(Status.SUCCESS, null);
+	}
+
+	/**
+	 * 判断名称是否重复
+	 * 
+	 * @throws IOException
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=isRepeat")
+	public void isRepeat() throws IOException {
+		String id = this.getParam("id");
+		String account = this.getParam("account");
+		String hql = "from SysUser where  (id != ? or ? is null) and account = ?";
+		boolean isRepeat = sysUserService.isRepeat(hql, id, id, account);
+
+		Map<String, String> ret = new HashMap<String, String>();
+		if (isRepeat) {
+			ret.put("error", "对不起，已存在该账号！");
+		} else {
+			ret.put("ok", "该账号可用！");
+		}
+		this.write(ret);
 	}
 
 }

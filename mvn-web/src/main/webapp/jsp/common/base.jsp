@@ -1,5 +1,5 @@
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String contextPath = request.getContextPath();//工程名
@@ -46,7 +46,6 @@
 <script type="text/javascript" src="${CP}/static/js/core/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/common.js"></script>
 <script type="text/javascript" src="${CP}/static/js/app/base.js"></script>
-<script type="text/javascript" src="${CP}/static/js/app/ajax.js"></script>
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

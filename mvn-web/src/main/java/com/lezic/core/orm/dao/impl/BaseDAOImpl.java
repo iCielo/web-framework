@@ -26,6 +26,7 @@ import org.springframework.util.Assert;
 import com.lezic.core.orm.Page;
 import com.lezic.core.orm.dao.IBaseDAO;
 import com.lezic.core.orm.util.UtilQuery;
+import com.lezic.core.util.UtilData;
 
 /**
  * 基础DAO实现类
@@ -160,6 +161,28 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 		} else {
 			logger.debug("没有找到匹配的记录");
 		}
+	}
+
+	@Override
+	public boolean isRepeat(String hql, Object... values) {
+		return this.findOneH(hql, true, values) != null;
+	}
+
+	@Override
+	public Object findOneH(String hql, boolean ignoreErr, Object... values) {
+		Query query = getSession().createQuery(hql);
+		UtilQuery.setValues(query, values);
+		if (ignoreErr) {
+			query.setFirstResult(0);
+			query.setMaxResults(1);
+			List<?> list = query.list();
+			if (UtilData.isNotEmpty(list)) {
+				return list.get(0);
+			}
+		} else {
+			return query.uniqueResult();
+		}
+		return null;
 	}
 
 }

@@ -7,6 +7,43 @@
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
+			idField : "id",
+			columns : [ {
+				checkbox : true,
+				align : 'center',
+				valign : 'middle'
+			}, {
+				title : '账号',
+				field : 'account',
+				align : 'center'
+			}, {
+				title : '姓名',
+				field : 'name',
+				align : 'center'
+			}, {
+				title : '性别',
+				field : 'sex',
+				align : 'center'
+			}, {
+				title : '联系电话',
+				field : 'phone',
+				align : 'center'
+			}, {
+				title : '邮箱',
+				field : 'email',
+				align : 'center'
+			}, {
+				title : '状态',
+				field : 'status',
+				align : 'center',
+				formatter : function(value, row, index){
+					if(value=="on"){
+						return "<span class=\"glyphicon glyphicon-check\"></span>";
+					}else{
+						return "<span class=\"glyphicon glyphicon-unchecked\"></span>"; 
+					}
+				}
+			} ],
 			url : "${CP}/sys/sysUser.do?method=loadData",
 			queryParams : getQueryParams
 		});
@@ -18,7 +55,7 @@
 			title : "新增用户",
 			data : {
 				url : "${CP}/sys/sysUser.do?method=addPage",
-				height : "463px"
+				height : "464px"
 			}
 		});
 	}
@@ -29,12 +66,12 @@
 		if (rows.length != 1) {
 			Common.alert("只能选择一条记录修改！");
 			return;
-		}		
+		}
 		Common.showDialog({
 			title : "修改用户",
 			data : {
-				url : "${CP}/sys/sysUser.do?method=updPage&id="+rows[0].id,
-				height : "463px"
+				url : "${CP}/sys/sysUser.do?method=updPage&id=" + rows[0].id,
+				height : "407px"
 			}
 		});
 	}
@@ -50,15 +87,17 @@
 		for (var i = 0; i < rows.length; i++) {
 			ids.push(rows[i].id);
 		}
-		Common.ajax({
-			url : "${CP}/sys/sysUser.do?method=delEntity",
-			data : {
-				ids : ids.join(",")
-			},
-			success : function(data) {
-				query();
-			}
-		})
+		Common.confirm("是否删除", "确认是否删除？", function() {
+			Common.ajax({
+				url : "${CP}/sys/sysUser.do?method=delEntity",
+				data : {
+					ids : ids.join(",")
+				},
+				success : function(data) {
+					query();
+				}
+			})
+		});
 	}
 
 	/*查询*/
@@ -99,20 +138,7 @@
 								<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
 							</button>
 						</div>
-						<table id="dataTable">
-							<thead>
-								<tr>
-									<th data-checkbox="true"></th>
-									<th data-field="id" data-halign="center" data-align="center" data-visible="false"></th>
-									<th data-field="account" data-halign="center" data-align="center">账号</th>
-									<th data-field="name" data-halign="center" data-align="center">姓名</th>
-									<th data-field="sex" data-halign="center" data-align="center">性别</th>
-									<th data-field="age" data-halign="center" data-align="center">年龄</th>
-									<th data-field="phone" data-halign="center" data-align="center">联系电话</th>
-									<th data-field="email" data-halign="center" data-align="center">邮箱</th>
-									<th data-field="remark" data-halign="center" data-align="center">备注</th>
-								</tr>
-						</table>
+						<table id="dataTable"></table>
 					</div>
 				</section>
 			</div>

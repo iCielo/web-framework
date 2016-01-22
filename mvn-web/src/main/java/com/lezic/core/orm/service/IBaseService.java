@@ -89,4 +89,23 @@ public interface IBaseService<T> {
 	 * @param values
 	 */
 	public void pageH(Page<T> page, String hql, Map<String, Object> params);
+	
+	/**
+	 * 判断是否重复
+	 * @param hql = "from ClassName where (id != ? or ? is null) and name = ? and opUserid = ?";
+	 * @param values 共需输入4个参数，即4个？对应的参数
+	 * @return
+	 * @author cielo
+	 */
+	public boolean isRepeat(String hql, Object... values);
+	
+	/**
+	 * 查询获取一个对象
+	 * @param hql
+	 * @param ignoreErr 是否忽略错误。如存在多个的时候，false会报错，true不会保存
+	 * @param values
+	 * @return
+	 * @author cielo
+	 */
+	public Object findOneH(String hql,boolean ignoreErr, Object... values);
 }
