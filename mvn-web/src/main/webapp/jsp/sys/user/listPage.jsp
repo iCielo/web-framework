@@ -36,11 +36,11 @@
 				title : '状态',
 				field : 'status',
 				align : 'center',
-				formatter : function(value, row, index){
-					if(value=="on"){
-						return "<span class=\"glyphicon glyphicon-check\"></span>";
-					}else{
-						return "<span class=\"glyphicon glyphicon-unchecked\"></span>"; 
+				formatter : function(value, row, index) {
+					if (value == "on") {
+						return "<span title=\"启用\" class=\"glyphicon glyphicon-check\"></span>";
+					} else {
+						return "<span title=\"禁用\" class=\"glyphicon glyphicon-unchecked\"></span>";
 					}
 				}
 			} ],
@@ -115,34 +115,28 @@
 </script>
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="col-sm-12">
-				<section class="panel">
-					<header class="panel-heading"> Dynamic Table </header>
-					<div class="panel-body">
-						<div id="toolbar">
-							<button class="btn btn-primary " onclick="addEntity()">
-								<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
-							</button>
-							<button class="btn btn-primary" onclick="updEntity()">
-								<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
-							</button>
-							<button class="btn btn-primary ">
-								<i class="glyphicon glyphicon-ok-circle"></i>启用
-							</button>
-							<button class="btn btn-primary ">
-								<i class="glyphicon glyphicon-ban-circle"></i>禁用
-							</button>
-							<button class="btn btn-danger " onclick="delEntity()">
-								<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
-							</button>
-						</div>
-						<table id="dataTable"></table>
-					</div>
-				</section>
+	<section class="panel">
+		<header class="panel-heading"> Dynamic Table </header>
+		<div class="panel-body">
+			<div id="toolbar">
+				<button class="btn btn-primary " onclick="addEntity()">
+					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
+				</button>
+				<button class="btn btn-primary" onclick="updEntity()">
+					<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
+				</button>
+				<button class="btn btn-primary ">
+					<i class="glyphicon glyphicon-ok-circle"></i>启用
+				</button>
+				<button class="btn btn-primary ">
+					<i class="glyphicon glyphicon-ban-circle"></i>禁用
+				</button>
+				<button class="btn btn-danger " onclick="delEntity()">
+					<i class="glyphicon glyphicon-remove"></i>&nbsp;删&nbsp;除
+				</button>
 			</div>
+			<table id="dataTable"></table>
 		</div>
-	</div>
+	</section>
 </body>
 </html>

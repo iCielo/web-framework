@@ -1,7 +1,7 @@
 $(function() {
 
 	//滚动条优化
-	$("html").niceScroll({
+	/*$("html").niceScroll({
 		styler : "fb",
 		cursorcolor : "#e8403f",
 		cursorwidth : '6',
@@ -11,15 +11,10 @@ $(function() {
 		cursorborder : '',
 		autohidemode : false,
 		zindex : '1000'
-	});
+	});*/
 
 	
 
-});
-
-/*---LEFT BAR ACCORDION----*/
-$(function() {
-	
 });
 
 // right slidebar

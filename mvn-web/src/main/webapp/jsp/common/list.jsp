@@ -5,3 +5,11 @@
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/bootstrap-table.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/my-bootstrap-table.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$(window).resize(function(){
+			$("#dataTable").bootstrapTable('resetWidth');
+		});
+	});
+</script>
