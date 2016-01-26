@@ -28,26 +28,33 @@ public @interface WebField {
 	public String label() default "显示名";
 
 	/**
-	 * 注释
+	 * 提示输入信息
 	 * 
 	 * @return
 	 * @author cielo
 	 */
-	public String comment() default "注释";
+	public String placeholder() default "请输入";
 
 	/**
 	 * 是否唯一
 	 */
 	public boolean unique() default false;
-	
+
 	/**
 	 * 是否可为空
 	 */
-	public boolean nullable() default false;
+	public boolean nullable() default true;
 
 	/**
 	 * 最大字符数
 	 */
 	public int length();
-
+	
+	/**
+	 * 校验规则
+	 * @return
+	 * @author cielo
+	 */
+	public String rules();
+	
 }

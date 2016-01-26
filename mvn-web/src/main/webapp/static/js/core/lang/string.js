@@ -20,7 +20,7 @@ String.prototype.lengthOfByte = function() {
 String.prototype.substrOfByte = function(start, length) {
 	var num = 0;// 字节数
 	var realLength = 0;// 实际应截取的字符长度
-	for ( var i = start; i < this.length; i = i + 1) {
+	for (var i = start; i < this.length; i = i + 1) {
 		var c = this.charAt(i);
 		if (/[^\x00-\xff]/.test(c)) {// 若是双字节
 			num = num + 2;
@@ -63,8 +63,7 @@ String.prototype.replaceAll = function(s1, s2) {
  * @return
  */
 String.prototype.startWith = function(str) {
-	if (str == null || str == "" || this.length == 0
-			|| str.length > this.length)
+	if (str == null || str == "" || this.length == 0 || str.length > this.length)
 		return false;
 	if (this.substr(0, str.length) == str)
 		return true;
@@ -72,3 +71,21 @@ String.prototype.startWith = function(str) {
 		return false;
 	return true;
 };
+
+/**
+ * 首字母大写
+ * 
+ * @returns
+ */
+String.prototype.firstUpperCase = function() {
+	return this.substring(0, 1).toUpperCase() + this.substring(1);
+}
+
+/**
+ * 首字母小写
+ * 
+ * @returns
+ */
+String.prototype.firstLowerCase = function() {
+	return this.substring(0, 1).toLowerCase() + this.substring(1);
+}

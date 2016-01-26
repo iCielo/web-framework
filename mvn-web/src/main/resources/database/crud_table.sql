@@ -1,0 +1,21 @@
+CREATE TABLE `crud_table` (
+  `id` varchar(36) NOT NULL,
+  `TABLE_NAME` varchar(20) NOT NULL COMMENT '表名',
+  `MENU_NAME` varchar(50) NOT NULL COMMENT '菜单名',
+  `MODULE_NAME` varchar(50) NOT NULL COMMENT '模块名',
+  `MODULE_CODE` varchar(20) NOT NULL COMMENT '模块代码',
+  `ENTITY` varchar(255) NOT NULL COMMENT '实体类名',
+  `CONTROLLER_URL` varchar(255) NOT NULL COMMENT '控制器映射路径',
+  `CONTROLLER` varchar(255) NOT NULL COMMENT '控制器',
+  `SERVICE` varchar(255) NOT NULL COMMENT '服务层',
+  `LIST_URL` varchar(255) NOT NULL COMMENT '列表映射',
+  `LIST_JSP` varchar(255) NOT NULL COMMENT '列表JSP',
+  `ADD_URL` varchar(255) NOT NULL COMMENT '新增映射',
+  `ADD_JSP` varchar(255) NOT NULL COMMENT '新增JSP',
+  `UPD_URL` varchar(255) NOT NULL COMMENT '修改映射',
+  `UPD_JSP` varchar(255) NOT NULL COMMENT '修改JSP',
+  `OP_USER_ID` varchar(36) DEFAULT NULL COMMENT '操作用户',
+  `OP_TIME` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_crud_table_table_name` (`TABLE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8

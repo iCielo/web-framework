@@ -52,7 +52,7 @@
 		<!-- 注入数据源 -->
 		<property name="dataSource" ref="dataSource" />
 		<!-- 设置Spring取那个包中查找相应的实体类 -->
-		<property name="packagesToScan" value="com.lezic.app.sys.user.entity"/>
+		<property name="packagesToScan" value="com.lezic.app.*.*.entity"/>
 		<property name="hibernateProperties">
 			<!-- <value> hibernate.dialect=org.hibernate.dialect.HSQLDialect </value> -->
 			<props>
