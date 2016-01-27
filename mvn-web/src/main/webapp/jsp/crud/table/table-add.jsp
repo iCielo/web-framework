@@ -26,60 +26,63 @@
 		});
 		$('#form').on('valid.form', function(e) {
 			Common.ajax({
-				url : "${CP}/crud/crudTable.do?method=addEntity",
+				url : "${CP}/crud/table.do?method=addEntity",
 				data : $(this).serialize(),
 				success : function(data) {
 					Common.closeDialog();
 				}
 			})
 		});
-		$("#tableName").keyup(
-				function() {
-					var tableName = $(this).val().trim();
-					if (tableName != "") {
-						var array = tableName.toLowerCase().split("_");
-						var entityName = "";
-						if (array.length == 1) {
-							array = [ "common", array[0] ];
+		
+		$("#tableName").keyup(function() {
+			var tableName = $(this).val().trim();
+			var array = tableName.toLowerCase().split("_");
+			if (array.length > 1) {
+				var moduleCode = array[0];//模块代码
+				var subModule = "";//子模块代码
+				var entityName = "";//实体类名
+				for (var i = 0; i < array.length; i++) {
+					if (i > 0) {
+						if (i == 1) {
+							subModule += array[i].firstLowerCase();
+						} else {
+							subModule += array[i].firstUpperCase();
 						}
-						for (var i = 1; i < array.length; i++) {
-							entityName += array[i].firstUpperCase();
-						}
-						var controllerUrl = "/" + array[0] + "/" + entityName.firstLowerCase() + ".do";
-						var jsp = "/jsp/" + array[0] + "/" + entityName.firstLowerCase() + "/"
-								+ entityName.firstLowerCase();
-						var entity = "/" + array[0] + "/" + entityName.firstLowerCase() + "/entity/" + entityName
-								+ ".java";
-						var controller = "/" + array[0] + "/" + entityName.firstLowerCase() + "/action/"
-								+ entityName.firstUpperCase() + "Controller.java";
-						var service = "/" + array[0] + "/" + entityName.firstLowerCase() + "/service/"
-								+ entityName.firstUpperCase() + "Service.java";
-
-						$("#controller").val(controller);
-						$("#service").val(service);
-						$("#entity").val(entity);
-						$("#moduleCode").val(array[0]);
-						$("#controllerUrl").val(controllerUrl);
-						$("#listUrl").val(controllerUrl + "?method=list");
-						$("#listJsp").val(jsp + "-list.jsp");
-						$("#addUrl").val(controllerUrl + "?method=add");
-						$("#addJsp").val(jsp + "-add.jsp");
-						$("#updUrl").val(controllerUrl + "?method=upd");
-						$("#updJsp").val(jsp + "-upd.jsp");
-					} else {
-						$("#controller").val("");
-						$("#service").val("");
-						$("#entity").val("");
-						$("#moduleCode").val("");
-						$("#controllerUrl").val("");
-						$("#listUrl").val("");
-						$("#listJsp").val("");
-						$("#addUrl").val("");
-						$("#addJsp").val("");
-						$("#updUrl").val("");
-						$("#updJsp").val("");
 					}
-				});
+					entityName += array[i].firstUpperCase();
+				}
+
+				var controllerUrl = "/" + moduleCode + "/" + subModule + ".do";
+				var jsp = "/" + moduleCode + "/" + subModule + "/" + entityName;
+				var entity = "/" + moduleCode + "/" + subModule + "/entity/" + entityName + ".java";
+				var controller = "/" + moduleCode + "/" + subModule + "/action/" + entityName + "Controller.java";
+				var service = "/" + moduleCode + "/" + subModule + "/service/" + entityName + "Service.java";
+
+				$("#controller").val(controller);
+				$("#service").val(service);
+				$("#entity").val(entity);
+				$("#moduleCode").val(moduleCode);
+				$("#controllerUrl").val(controllerUrl);
+				$("#listUrl").val(controllerUrl + "?method=list");
+				$("#listJsp").val(jsp + "-list.jsp");
+				$("#addUrl").val(controllerUrl + "?method=add");
+				$("#addJsp").val(jsp + "-add.jsp");
+				$("#updUrl").val(controllerUrl + "?method=upd");
+				$("#updJsp").val(jsp + "-upd.jsp");
+			} else {
+				$("#controller").val("");
+				$("#service").val("");
+				$("#entity").val("");
+				$("#moduleCode").val("");
+				$("#controllerUrl").val("");
+				$("#listUrl").val("");
+				$("#listJsp").val("");
+				$("#addUrl").val("");
+				$("#addJsp").val("");
+				$("#updUrl").val("");
+				$("#updJsp").val("");
+			}
+		});
 	});
 </script>
 </head>
@@ -90,19 +93,19 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-xs-2 control-label">数据库表<span class="form-must">*</span></label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" placeholder="如Sys_user，其中sys为模块码" type="text" id="tableName" name="tableName">
+						<input class="form-control" placeholder="如sys_user，其中sys为模块码" type="text" id="tableName" name="tableName">
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;&nbsp;&nbsp;菜单名<span class="form-must">*</span></label>
+					<label class="col-sm-2 col-xs-2 control-label">菜单名称<span class="form-must">*</span></label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" placeholder="请输入菜单名" type="text" id="menuName" name="menuName">
+						<input class="form-control" placeholder="请输入菜单名称" type="text" id="menuName" name="menuName">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;&nbsp;&nbsp;模块名<span class="form-must">*</span></label>
+					<label class="col-sm-2 col-xs-2 control-label">模块名称<span class="form-must">*</span></label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" placeholder="请输入模块名" type="text" id="moduleName" name="moduleName">
+						<input class="form-control" placeholder="请输入模块名称" type="text" id="moduleName" name="moduleName">
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;&nbsp;&nbsp;模块码<span class="form-must">*</span></label>
+					<label class="col-sm-2 col-xs-2 control-label">模块代码<span class="form-must">*</span></label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="moduleCode" name="moduleCode" readonly>
 					</div>
@@ -120,12 +123,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;&nbsp;&nbsp;控制器<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">控制器类<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="controller" name="controller" readonly>
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;&nbsp;&nbsp;服务层<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">服务层类<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="service" name="service" readonly>
@@ -137,7 +140,7 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="listUrl" name="listUrl" readonly>
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;列表JSP<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">列表&nbsp;JSP<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="listJsp" name="listJsp" readonly>
@@ -149,7 +152,7 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="addUrl" name="addUrl" readonly>
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;新增JSP<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">新增&nbsp;JSP<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="addJsp" name="addJsp" readonly>
@@ -161,14 +164,14 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="updUrl" name="updUrl" readonly>
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">&nbsp;修改JSP<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">修改&nbsp;JSP<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="updJsp" name="updJsp" readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-3 col-xs-offset-3">
+					<div class="text-center">
 						<button class="btn btn-primary" type="submit">
 							<i class="glyphicon glyphicon-ok"></i>&nbsp;确定
 						</button>

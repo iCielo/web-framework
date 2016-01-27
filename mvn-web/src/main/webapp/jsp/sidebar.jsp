@@ -10,7 +10,12 @@
 			<li class="sub-menu"><a href="javascript:;"> <i class="fa fa-laptop"></i> <span>系统管理</span></a>
 				<ul class="sub">
 					<li><a href="javascript:;" real-href="${CP }/sys/sysUser.do?method=listPage">用户管理</a></li>
-					<li><a href="javascript:;" real-href="${CP }/crud/crudTable.do?method=listPage">代码工厂</a></li>
+				</ul>
+			</li>
+			<li class="sub-menu"><a href="javascript:;"> <i class="fa fa-laptop"></i> <span>代码工厂</span></a>
+				<ul class="sub">
+					<li><a href="javascript:;" real-href="${CP }/crud/table.do?method=list">数据库表</a></li>
+					<li><a href="javascript:;" real-href="${CP }/crud/column.do?method=list">表字段</a></li>
 				</ul>
 			</li>
 

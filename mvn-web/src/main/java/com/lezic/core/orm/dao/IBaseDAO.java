@@ -111,5 +111,13 @@ public interface IBaseDAO {
 	 * @author cielo
 	 */
 	public Object findOneH(String hql,boolean ignoreErr, Object... values);
+	
+	/**
+	 * 判断数据库表是否存在
+	 * @param tableName
+	 * @return
+	 * @author cielo
+	 */
+	public boolean isTableExist(String tableName);
 
 }

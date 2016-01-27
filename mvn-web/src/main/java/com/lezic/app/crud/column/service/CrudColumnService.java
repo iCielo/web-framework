@@ -1,13 +1,13 @@
 /**
  * <p>Author		:	cielo</p>
- * <p>Date 			: 	2016 下午3:57:39</p>
+ * <p>Date 			: 	2016 上午10:10:18</p>
  */
-package com.lezic.app.sys.user.service;
+package com.lezic.app.crud.column.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lezic.app.sys.user.entity.SysUser;
+import com.lezic.app.crud.column.entity.CrudColumn;
 import com.lezic.core.orm.service.BaseService;
 
 /**
@@ -16,5 +16,6 @@ import com.lezic.core.orm.service.BaseService;
  */
 @Service
 @Transactional
-public class SysUserService extends BaseService<SysUser> {
+public class CrudColumnService extends BaseService<CrudColumn> {
+
 }

@@ -33,7 +33,7 @@
 				field : 'controllerUrl',
 				align : 'center'
 			} ],
-			url : "${CP}/crud/crudTable.do?method=loadData",
+			url : "${CP}/crud/table.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
@@ -43,7 +43,7 @@
 		Common.showDialog({
 			title : "新增代码",
 			data : {
-				url : "${CP}/crud/crudTable.do?method=addPage",
+				url : "${CP}/crud/table.do?method=add",
 				height : "463px"
 			}
 		});
@@ -59,7 +59,7 @@
 		Common.showDialog({
 			title : "修改代码",
 			data : {
-				url : "${CP}/crud/crudTable.do?method=updPage&id=" + rows[0].id,
+				url : "${CP}/crud/table.do?method=upd&id=" + rows[0].id,
 				height : "463px"
 			}
 		});
@@ -78,7 +78,7 @@
 		}
 		Common.confirm("是否删除", "确认是否删除？", function() {
 			Common.ajax({
-				url : "${CP}/crud/crudTable.do?method=delEntity",
+				url : "${CP}/crud/table.do?method=delEntity",
 				data : {
 					ids : ids.join(",")
 				},

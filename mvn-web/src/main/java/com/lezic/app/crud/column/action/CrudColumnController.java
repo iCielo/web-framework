@@ -1,8 +1,8 @@
 /**
  * <p>Author		:	cielo</p>
- * <p>Date 			: 	2016 下午3:53:45</p>
+ * <p>Date 			: 	2016 上午10:11:55</p>
  */
-package com.lezic.app.crud.table.action;
+package com.lezic.app.crud.column.action;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lezic.app.crud.column.entity.CrudColumn;
 import com.lezic.app.crud.column.service.CrudColumnService;
-import com.lezic.app.crud.table.entity.CrudTable;
-import com.lezic.app.crud.table.service.CrudTableService;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.util.UtilData;
@@ -32,14 +31,14 @@ import com.lezic.core.web.constant.Status;
  *
  */
 @Controller
-@RequestMapping("/crud/table.do")
-public class CrudTableController  extends BaseController {
+@RequestMapping("/crud/column.do")
+public class CrudColumnController   extends BaseController {
 
 	private Logger logger = LogManager.getLogger();
 
 	@Autowired
-	private CrudTableService crudTableService;
-	
+	private CrudColumnService crudColumnService;
+
 	/**
 	 * 列表页面
 	 * 
@@ -49,8 +48,7 @@ public class CrudTableController  extends BaseController {
 	 */
 	@RequestMapping(params = "method=list", method = RequestMethod.GET)
 	public String listPage(Model model) {
-		crudTableService.isTableExist("SYS_USER1");
-		return "/crud/table/table-list";
+		return "/crud/column/column-list";
 	}
 
 	/**
@@ -59,7 +57,7 @@ public class CrudTableController  extends BaseController {
 	@RequestMapping(params = "method=add", method = RequestMethod.GET)
 	public String addPage(Model model) {
 		model.addAttribute("test", "test");
-		return "/crud/table/table-add";
+		return "/crud/column/column-add";
 	}
 
 	/**
@@ -69,9 +67,9 @@ public class CrudTableController  extends BaseController {
 	public String updPage(Model model) {
 		String id = this.getParam("id");
 		if (UtilData.isNotNull(id)) {
-			model.addAttribute("entity", crudTableService.getH(id));
+			model.addAttribute("entity", crudColumnService.getH(id));
 		}
-		return "/crud/table/table-upd";
+		return "/crud/column/column-upd";
 	}
 
 	/**
@@ -84,12 +82,12 @@ public class CrudTableController  extends BaseController {
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
 	public void loadData() throws IOException {
-		Page<CrudTable> page = new Page<CrudTable>();
+		Page<CrudColumn> page = new Page<CrudColumn>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from CrudTable";
+		String hql = "from CrudColumn";
 		ParamMap params = new ParamMap();
-		crudTableService.pageH(page, hql, params);
+		crudColumnService.pageH(page, hql, params);
 		this.outBootstrapTable(page);
 	}
 
@@ -99,8 +97,11 @@ public class CrudTableController  extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=addEntity")
-	public void addEntity(@ModelAttribute CrudTable entity) throws IOException {
-		crudTableService.addEntity(entity);
+	public void addEntity(@ModelAttribute CrudColumn entity) throws IOException {
+		if (entity != null) {
+			entity.setId(UUID.randomUUID().toString());
+		}
+		crudColumnService.saveH(entity);
 		this.outMsg(Status.SUCCESS, null);
 	}
 
@@ -110,16 +111,16 @@ public class CrudTableController  extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute CrudTable entity) throws IOException {
+	public void updEntity(@ModelAttribute CrudColumn entity) throws IOException {
 		if (entity != null) {
 
-			// CrudTable item = crudTableService.getH(entity.getId());
+			// CrudColumn item = CrudColumnService.getH(entity.getId());
 			// item.setAccount(entity.getAccount());
 			// item.setName(entity.getName());
 			// item.setSex(entity.getSex());
 			// item
 
-			crudTableService.updH(entity);
+			crudColumnService.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);
 	}
@@ -132,7 +133,7 @@ public class CrudTableController  extends BaseController {
 	@RequestMapping(params = "method=delEntity")
 	public void delEntity() throws IOException {
 		String[] ids = UtilData.split(this.getParam("ids"), ",");
-		crudTableService.batchDelH(CrudTable.class, ids);
+		crudColumnService.batchDelH(CrudColumn.class, ids);
 		this.outMsg(Status.SUCCESS, null);
 	}
 
@@ -146,8 +147,8 @@ public class CrudTableController  extends BaseController {
 	public void isRepeat() throws IOException {
 		String id = this.getParam("id");
 		String account = this.getParam("account");
-		String hql = "from CrudTable where  (id != ? or ? is null) and account = ?";
-		boolean isRepeat = crudTableService.isRepeat(hql, id, id, account);
+		String hql = "from CrudColumn where  (id != ? or ? is null) and account = ?";
+		boolean isRepeat = crudColumnService.isRepeat(hql, id, id, account);
 
 		Map<String, String> ret = new HashMap<String, String>();
 		if (isRepeat) {

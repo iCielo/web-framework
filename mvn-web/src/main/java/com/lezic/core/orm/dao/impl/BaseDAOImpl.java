@@ -10,11 +10,13 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,19 +45,43 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 	 */
 	private Logger logger = LogManager.getLogger();
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
+	/**
+	 * 数据源
+	 */
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+	 * hibernate会话工厂
+	 */
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	/**
+	 * hibernate模板引擎
+	 */
 	private HibernateTemplate hibernateTemplate;
 
+	/**
+	 * mybatis会话工厂
+	 */
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+
+	/**
+	 * mybatis模板引擎
+	 */
+	private SqlSessionTemplate sqlSessionTemplate;
+
+	/**
+	 * jdbc模板引擎
+	 */
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+		this.sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
@@ -183,6 +209,17 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 			return query.uniqueResult();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isTableExist(String tableName) {
+		Query query = getSession().createSQLQuery("select 1 from " + tableName + " where 1!=1");
+		try {
+			query.list();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }
