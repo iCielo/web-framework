@@ -29,7 +29,7 @@
 <!-- flatlab -->
 <link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/style.css" />
 <link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/style-responsive.css" />
-<link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/bootstrap-reset.css" />
+<%-- <link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/bootstrap-reset.css" /> --%>
 <!-- 自定义css -->
 <link rel="stylesheet" type="text/css" href="${CP}/static/css/base.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/css/style.css" />
@@ -37,6 +37,10 @@
 <!--基础js-->
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/jquery/jquery.form.js"></script>
+
+<!-- layer -->
+<script type="text/javascript" src="${CP}/static/js/lib/layer/layer.js"></script>
+<script type="text/javascript" src="${CP}/static/js/lib/layer/myLayer.js"></script>
 
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap3-dialog/js/bootstrap-dialog.js"></script>

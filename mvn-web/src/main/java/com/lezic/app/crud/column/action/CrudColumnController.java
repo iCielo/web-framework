@@ -50,6 +50,18 @@ public class CrudColumnController   extends BaseController {
 	public String listPage(Model model) {
 		return "/crud/column/column-list";
 	}
+	
+	/**
+	 * 列表页面-修改列表
+	 * 
+	 * @param model
+	 * @return
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=editList", method = RequestMethod.GET)
+	public String editList() {
+		return "/crud/column/CrudColumn-editList";
+	}
 
 	/**
 	 * 新增页面

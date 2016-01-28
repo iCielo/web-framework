@@ -36,13 +36,24 @@
 				title : '操作',
 				align:'center',
 				formatter : function(value, row, index) {
-					return '<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>';
+					var html = [];
+					html.push('<a href="javascript:;" onclick="editColumns(\''+row.tableName+'\')" title="编辑字段"><i class="fa fa-pencil-square-o fa-lg"></i> ');
+					html.push('<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>');
+					return html.join("");
 				}
 			} ],
 			url : "${CP}/crud/table.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
+	
+	//修改表字段
+	function editColumns(tableName){
+		MyLayer.open({
+			title : "修改表 "+tableName+" 的字段",
+			content : "${CP}/crud/column.do?method=editList",
+		});
+	}
 	
 	//运行
 	function processCode(tableName){
@@ -56,12 +67,9 @@
 
 	//新增
 	function addEntity() {
-		Common.showDialog({
+		MyLayer.open({
 			title : "新增代码",
-			data : {
-				url : "${CP}/crud/table.do?method=add",
-				height : "463px"
-			}
+			content : "${CP}/crud/table.do?method=add"
 		});
 	}
 
@@ -69,15 +77,12 @@
 	function updEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length != 1) {
-			Common.alert("只能选择一条记录修改！");
+			MyLayer.msg("请选择要修改的单条记录！");
 			return;
 		}
-		Common.showDialog({
+		MyLayer.open({
 			title : "修改代码",
-			data : {
-				url : "${CP}/crud/table.do?method=upd&id=" + rows[0].id,
-				height : "463px"
-			}
+			content : "${CP}/crud/table.do?method=upd&id=" + rows[0].id
 		});
 	}
 
@@ -85,14 +90,14 @@
 	function delEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length == 0) {
-			Common.alert("请选择要删除的记录！");
+			MyLayer.msg("请选择要删除的记录！");
 			return;
 		}
 		var ids = [];
 		for (var i = 0; i < rows.length; i++) {
 			ids.push(rows[i].id);
 		}
-		Common.confirm("是否删除", "确认是否删除？", function() {
+		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
 				url : "${CP}/crud/table.do?method=delEntity",
 				data : {

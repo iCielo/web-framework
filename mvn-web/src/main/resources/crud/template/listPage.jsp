@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../../common/list.jsp"%>
-<title>${title}</title>
+<title>${table.menuName}</title>
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
@@ -31,12 +31,9 @@
 
 	//新增
 	function addEntity() {
-		Common.showDialog({
-			title : "新增用户",
-			data : {
-				url : "${CP}${table.addUrl}",
-				height : "464px"
-			}
+		MyLayer.open({
+			title : "新增${table.menuName}",
+			content : "${CP}${table.addUrl}"
 		});
 	}
 
@@ -44,15 +41,12 @@
 	function updEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length != 1) {
-			Common.alert("只能选择一条记录修改！");
+			MyLayer.msg("请选择要修改的单条记录！");
 			return;
 		}
-		Common.showDialog({
-			title : "修改用户",
-			data : {
-				url : "${CP}${table.updUrl}&id=" + rows[0].id,
-				height : "407px"
-			}
+		MyLayer.open({
+			title : "修改${table.menuName}",
+			content : "${CP}${table.updUrl}&id=" + rows[0].id
 		});
 	}
 
@@ -60,14 +54,14 @@
 	function delEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length == 0) {
-			Common.alert("请选择要删除的记录！");
+			MyLayer.msg("请选择要删除的记录！");
 			return;
 		}
 		var ids = [];
 		for (var i = 0; i < rows.length; i++) {
 			ids.push(rows[i].id);
 		}
-		Common.confirm("是否删除", "确认是否删除？", function() {
+		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
 				url : "${CP}${table.controllerUrl}?method=delEntity",
 				data : {

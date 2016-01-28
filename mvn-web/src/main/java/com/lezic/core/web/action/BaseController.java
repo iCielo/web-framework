@@ -5,6 +5,7 @@
 package com.lezic.core.web.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,7 +120,12 @@ public abstract class BaseController {
 	 */
 	public void outBootstrapTable(Page<?> page){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("rows", page.getRows());
+		if(UtilData.isEmpty(page.getRows())){
+			map.put("rows", new ArrayList<Object>());	
+		}else{
+			map.put("rows", page.getRows());
+		}
+		
 		map.put("total", page.getTotal());
 		this.write(map);
 	}

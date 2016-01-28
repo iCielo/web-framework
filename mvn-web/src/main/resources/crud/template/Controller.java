@@ -141,7 +141,6 @@ public class ${table.controller} extends BaseController {
 		String account = this.getParam("account");
 		String hql = "from ${table.entity} where  (id != ? or ? is null) and account = ?";
 		boolean isRepeat = ${table.serviceBean}.isExist(hql, id, id, account);
-
 		Map<String, String> ret = new HashMap<String, String>();
 		if (isRepeat) {
 			ret.put("error", "对不起，已存在该账号！");

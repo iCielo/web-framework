@@ -51,12 +51,9 @@
 
 	//新增
 	function addEntity() {
-		Common.showDialog({
+		MyLayer.open({
 			title : "新增用户",
-			data : {
-				url : "${CP}/sys/sysUser.do?method=addPage",
-				height : "464px"
-			}
+			content : '${CP}/sys/sysUser.do?method=addPage'
 		});
 	}
 
@@ -64,15 +61,12 @@
 	function updEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length != 1) {
-			Common.alert("只能选择一条记录修改！");
+			MyLayer.msg("请选择要修改的单条记录！");
 			return;
 		}
-		Common.showDialog({
+		MyLayer.open({
 			title : "修改用户",
-			data : {
-				url : "${CP}/sys/sysUser.do?method=updPage&id=" + rows[0].id,
-				height : "407px"
-			}
+			content : "${CP}/sys/sysUser.do?method=updPage&id=" + rows[0].id
 		});
 	}
 
@@ -80,14 +74,14 @@
 	function delEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length == 0) {
-			Common.alert("请选择要删除的记录！");
+			MyLayer.msg("请选择要删除的记录！");
 			return;
 		}
 		var ids = [];
 		for (var i = 0; i < rows.length; i++) {
 			ids.push(rows[i].id);
 		}
-		Common.confirm("是否删除", "确认是否删除？", function() {
+		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
 				url : "${CP}/sys/sysUser.do?method=delEntity",
 				data : {
