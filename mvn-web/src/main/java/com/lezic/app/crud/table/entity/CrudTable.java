@@ -44,13 +44,13 @@ public class CrudTable implements java.io.Serializable {
 	@Column(name = "ENTITY", length = 255, nullable = false)
 	@WebField(label = "实体类名", placeholder = "请输入实体类名", rules = "required;length(~255);", length = 255, nullable = false)
 	private String entity;
+	
+	@Column(name = "ENTITY_PACKAGE", length = 255, nullable = false)
+	private String entityPackage;
 
 	@Column(name = "ENTITY_BEAN", length = 255, nullable = false)
 	@WebField(label = "实体类名", placeholder = "请输入实体类名", rules = "required;length(~255);", length = 255, nullable = false)
 	private String entityBean;
-
-	@Column(name = "ENTITY_PACKAGE", length = 255, nullable = false)
-	private String entityPackage;
 
 	@Column(name = "CONTROLLER_URL", length = 255, nullable = false)
 	@WebField(label = "控制器映射路径", placeholder = "请输入控制器映射路径", rules = "required;length(~255);", length = 255, nullable = false)
@@ -58,12 +58,12 @@ public class CrudTable implements java.io.Serializable {
 
 	@Column(name = "CONTROLLER", length = 255, nullable = false)
 	private String controller;
+	
+	@Column(name = "CONTROLLER_PACKAGE", length = 255, nullable = false)
+	private String controllerPackage;
 
 	@Column(name = "CONTROLLER_BEAN", length = 255, nullable = false)
 	private String controllerBean;
-
-	@Column(name = "CONTROLLER_PACKAGE", length = 255, nullable = false)
-	private String controllerPackage;
 
 	@Column(name = "SERVICE", length = 255, nullable = false)
 	private String service;

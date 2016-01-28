@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../../common/form.jsp"%>
-<title>数据库表-修改</title>
+<title>数据库表-新增</title>
 <script type="text/javascript">
 	$(function() {
 		$("#form").validator({
