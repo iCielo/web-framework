@@ -3,7 +3,7 @@
 <configuration>
 	<!-- load sqlMap files -->
 	<mappers>
-		<mapper resource="mybatis/common-sqlmap.xml" />
+		<mapper resource="mybatis/framework-sqlmap.xml" />
 		<mapper resource="mybatis/sys/user-sqlmap.xml" />
 	</mappers>
 </configuration>

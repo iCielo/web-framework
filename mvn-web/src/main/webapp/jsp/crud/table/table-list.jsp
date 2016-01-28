@@ -32,11 +32,27 @@
 				title : '控制器映射路径',
 				field : 'controllerUrl',
 				align : 'center'
+			},{
+				title : '操作',
+				align:'center',
+				formatter : function(value, row, index) {
+					return '<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>';
+				}
 			} ],
 			url : "${CP}/crud/table.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
+	
+	//运行
+	function processCode(tableName){
+		Common.ajax({
+			url : "${CP}/crud/table.do?method=processCode",
+			data : {
+				tableName : tableName
+			}
+		})
+	}
 
 	//新增
 	function addEntity() {

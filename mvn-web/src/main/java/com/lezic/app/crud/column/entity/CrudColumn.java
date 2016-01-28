@@ -37,6 +37,16 @@ public class CrudColumn implements java.io.Serializable {
 	@WebField(label = "数据类型", placeholder = "请输入数据类型", rules = "required;length(~50);", length = 50, nullable = false)
 	private String columnType;
 
+	@Column(name = "JAVA_NAME", length = 50, nullable = false)
+	private String javaName;
+
+	@Column(name = "JAVA_METHOD_NAME", length = 50, nullable = false)
+	private String javaMethodName;
+
+	@Column(name = "JAVA_TYPE", length = 50, nullable = false)
+	@WebField(label = "数据类型", placeholder = "请输入数据类型", rules = "required;length(~50);", length = 50, nullable = false)
+	private String javaType;
+
 	@Column(name = "LABEL", length = 50, nullable = false)
 	@WebField(label = "显示名", placeholder = "请输入显示名", rules = "required;length(~50);", length = 50, nullable = false)
 	private String label;
@@ -56,10 +66,6 @@ public class CrudColumn implements java.io.Serializable {
 	@Column(name = "DICT_LIST", length = 255)
 	@WebField(label = "自定义数据字典", placeholder = "请输入自定义数据字典", rules = "length(~255);", length = 255)
 	private String dictList;
-
-	@Column(name = "UNIQUE", length = 0)
-	@WebField(label = "是否唯一", placeholder = "请输入是否唯一", rules = "", length = 0)
-	private Integer unique;
 
 	@Column(name = "NULLABLE", length = 0)
 	@WebField(label = "是否可空", placeholder = "请输入是否可空", rules = "", length = 0)
@@ -208,20 +214,6 @@ public class CrudColumn implements java.io.Serializable {
 	}
 
 	/**
-	 * 设置 是否唯一
-	 */
-	public void setUnique(Integer unique) {
-		this.unique = unique;
-	}
-
-	/**
-	 * 获取 是否唯一
-	 */
-	public Integer getUnique() {
-		return this.unique;
-	}
-
-	/**
 	 * 设置 是否可空
 	 */
 	public void setNullable(Integer nullable) {
@@ -289,6 +281,38 @@ public class CrudColumn implements java.io.Serializable {
 	 */
 	public Date getOpTime() {
 		return this.opTime;
+	}
+
+	public String getJavaType() {
+		return javaType;
+	}
+
+	public void setJavaType(String javaType) {
+		this.javaType = javaType;
+	}
+
+	@Override
+	public String toString() {
+		return "CrudColumn [id=" + id + ", tableName=" + tableName + ", columnName=" + columnName + ", columnType="
+				+ columnType + ", label=" + label + ", placeholder=" + placeholder + ", inputType=" + inputType
+				+ ", dictType=" + dictType + ", dictList=" + dictList + ", nullable=" + nullable + ", length=" + length
+				+ ", rules=" + rules + ", opUserId=" + opUserId + ", opTime=" + opTime + "]";
+	}
+
+	public String getJavaName() {
+		return javaName;
+	}
+
+	public void setJavaName(String javaName) {
+		this.javaName = javaName;
+	}
+
+	public String getJavaMethodName() {
+		return javaMethodName;
+	}
+
+	public void setJavaMethodName(String javaMethodName) {
+		this.javaMethodName = javaMethodName;
 	}
 
 }

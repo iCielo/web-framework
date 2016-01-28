@@ -3,12 +3,12 @@
 <html>
 <head>
 <%@ include file="../../common/form.jsp"%>
-<title>${title}-新增</title>
+<title>数据库表-修改</title>
 <script type="text/javascript">
 	$(function() {
 		$("#form").validator({
 			fields : {
-				tableName : "required;length(~20);",
+				tableName : "required;length(~20);remote(${CP}/crud/table.do?method=isRepeat&id=${entity.id})",
 				menuName : "required;length(~50);",
 				moduleName : "required;length(~50);",
 				moduleCode : "required;length(~20);",
@@ -50,16 +50,20 @@
 					}
 					entityName += array[i].firstUpperCase();
 				}
-
+				var basePackage = "com.lezic.app." +moduleCode + "." + subModule;
 				var controllerUrl = "/" + moduleCode + "/" + subModule + ".do";
 				var jsp = "/" + moduleCode + "/" + subModule + "/" + entityName;
-				var entity = "/" + moduleCode + "/" + subModule + "/entity/" + entityName + ".java";
-				var controller = "/" + moduleCode + "/" + subModule + "/action/" + entityName + "Controller.java";
-				var service = "/" + moduleCode + "/" + subModule + "/service/" + entityName + "Service.java";
+				var entity = entityName;
+				var controller = entityName + "Controller";
+				var service = entityName + "Service";
 
-				$("#controller").val(controller);
-				$("#service").val(service);
 				$("#entity").val(entity);
+				$("#entityPackage").val(basePackage+".entity");
+				$("#controller").val(controller);
+				$("#controllerPackage").val(basePackage+".action");
+				$("#service").val(service);
+				$("#servicePackage").val(basePackage+".service");
+				
 				$("#moduleCode").val(moduleCode);
 				$("#controllerUrl").val(controllerUrl);
 				$("#listUrl").val(controllerUrl + "?method=list");
@@ -69,9 +73,12 @@
 				$("#updUrl").val(controllerUrl + "?method=upd");
 				$("#updJsp").val(jsp + "-upd.jsp");
 			} else {
+				$("#entity").val("");
 				$("#controller").val("");
 				$("#service").val("");
-				$("#entity").val("");
+				$("#entityPackage").val("");
+				$("#controllerPackage").val("");
+				$("#servicePackage").val("");
 				$("#moduleCode").val("");
 				$("#controllerUrl").val("");
 				$("#listUrl").val("");
@@ -119,11 +126,11 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="entity" name="entity" readonly value="${entity.entity }">
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">映射路径<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" type="text" id="controllerUrl" name="controllerUrl" readonly
-							value="${entity.controllerUrl }">
+						<input class="form-control" type="text" id="entityPackage" name="entityPackage" readonly
+							value="${entity.entity }">
 					</div>
 				</div>
 				<div class="form-group">
@@ -132,10 +139,32 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="controller" name="controller" readonly value="${entity.controller }">
 					</div>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="controllerPackage" name="controllerPackage" readonly
+							value="${entity.controllerPackage}">
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 col-xs-2 control-label">服务层类<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="service" name="service" readonly value="${entity.service }">
+					</div>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="servicePackage" name="servicePackage" readonly
+							value="${entity.servicePackage}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 col-xs-2 control-label">映射路径<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="controllerUrl" name="controllerUrl" readonly
+							value="${entity.controllerUrl }">
 					</div>
 				</div>
 				<div class="form-group">

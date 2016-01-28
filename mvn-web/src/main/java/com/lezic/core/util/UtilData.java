@@ -307,6 +307,46 @@ public class UtilData {
 	public static boolean notContains(Object[] arr, Object item) {
 		return !UtilData.contains(arr, item);
 	}
+	
+	/**
+	 * 首字母大写
+	 * 
+	 * @param name
+	 * @return
+	 * @author cielo
+	 */
+	public static String firstUpperCase(String name) {
+		if (UtilData.isNull(name)) {
+			return null;
+		}
+		return name.substring(0,1).toUpperCase()+name.substring(1);
+	}
+
+	/**
+	 * 名称转Java驼峰名称
+	 * 
+	 * @param name
+	 * @return
+	 * @author cielo
+	 */
+	public static String toCamel(String name) {
+		if (UtilData.isNull(name)) {
+			return null;
+		}
+		name = name.toLowerCase();
+		String[] arr = UtilData.split(name, "_");
+		if (arr.length > 1) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(arr[0]);
+			for (int i = 1; i < arr.length; i++) {
+				sb.append(UtilData.firstUpperCase(arr[i]));
+			}
+			return sb.toString();
+		} else {
+			return name;
+		}
+
+	}
 
 	public static void main(String[] args) {
 		System.out.println(UtilData.trim(",,,,,厦门,福建,泉州,斯蒂芬,,,,", ","));

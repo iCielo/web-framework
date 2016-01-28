@@ -5,11 +5,13 @@
 package com.lezic.core.orm.service;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.orm.dao.IBaseDAO;
 import com.lezic.core.util.UtilReflection;
@@ -40,6 +42,16 @@ public class BaseService<T> implements InitializingBean {
 	
 	public Serializable saveH(T entity) {
 		return baseDAO.saveH(entity);
+	}
+	
+	/**
+	 * 批量保存对象
+	 * @param list
+	 * @return
+	 * @author cielo
+	 */
+	public Serializable[] batchSaveH(List<?> list){
+		return baseDAO.batchSaveH(list);
 	}
 
 	
@@ -74,8 +86,8 @@ public class BaseService<T> implements InitializingBean {
 	}
 
 	
-	public boolean isRepeat(String hql, Object... values) {
-		return baseDAO.isRepeat(hql, values);
+	public boolean isExist(String hql, Object... values) {
+		return baseDAO.isExist(hql, values);
 	}
 
 	
@@ -91,6 +103,29 @@ public class BaseService<T> implements InitializingBean {
 	 */
 	public boolean isTableExist(String tableName){
 		return baseDAO.isTableExist(tableName);
+	}
+	
+	/**
+	 * 查询获取集合
+	 * 
+	 * @param hql
+	 * @param values
+	 * @return
+	 * @author cielo
+	 */
+	public List<?> findH(String hql, Object... values){
+		return baseDAO.findH(hql, values);
+	}
+	
+	/**
+	 * 查询获取集合
+	 * @param statement
+	 * @param params
+	 * @return
+	 * @author cielo
+	 */
+	public List<Object> findM(String statement, ParamMap params){
+		return baseDAO.findM(statement, params);
 	}
 
 }
