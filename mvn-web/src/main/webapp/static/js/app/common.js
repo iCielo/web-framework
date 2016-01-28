@@ -279,6 +279,8 @@
 					if (data.status == "SUCCESS") {
 						if (typeof (callback) == "function") {
 							callback(data);
+						} else if (data.msg) {
+							alert(data.msg);
 						}
 					} else if (data.status == "TIMEOUT") {
 						alert("登录超时！");

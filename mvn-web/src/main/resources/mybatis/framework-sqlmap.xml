@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 框架的sql定义 -->
+<mapper namespace="framework">
+	<!-- 查询单条数据 -->
+	<select id="findTableColumns" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+		COLUMN_NAME columnName,
+		IS_NULLABLE isNullable,
+		COLUMN_KEY columnKey,
+		COLUMN_COMMENT columnComment,
+		DATA_TYPE dataType,
+		CHARACTER_MAXIMUM_LENGTH length
+		from information_schema.`COLUMNS`
+		where table_name = #{tableName} and table_schema = #{tableSchema}
+	</select>
+</mapper>    

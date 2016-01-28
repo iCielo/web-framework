@@ -3,12 +3,12 @@
 <html>
 <head>
 <%@ include file="../../common/form.jsp"%>
-<title>${title}-新增</title>
+<title>数据库表-修改</title>
 <script type="text/javascript">
 	$(function() {
 		$("#form").validator({
 			fields : {
-				tableName : "required;length(~20);",
+				tableName : "required;length(~20);remote(${CP}/crud/table.do?method=isRepeat&id=${entity.id})",
 				menuName : "required;length(~50);",
 				moduleName : "required;length(~50);",
 				moduleCode : "required;length(~20);",
@@ -50,28 +50,41 @@
 					}
 					entityName += array[i].firstUpperCase();
 				}
-
+				var basePackage = "com.lezic.app." +moduleCode + "." + subModule;
 				var controllerUrl = "/" + moduleCode + "/" + subModule + ".do";
 				var jsp = "/" + moduleCode + "/" + subModule + "/" + entityName;
-				var entity = "/" + moduleCode + "/" + subModule + "/entity/" + entityName + ".java";
-				var controller = "/" + moduleCode + "/" + subModule + "/action/" + entityName + "Controller.java";
-				var service = "/" + moduleCode + "/" + subModule + "/service/" + entityName + "Service.java";
+				var entity = entityName;
+				var controller = entityName + "Controller";
+				var service = entityName + "Service";
 
-				$("#controller").val(controller);
-				$("#service").val(service);
 				$("#entity").val(entity);
+				$("#entityBean").val(entity.firstLowerCase());
+				$("#entityPackage").val(basePackage+".entity");
+				$("#controller").val(controller);
+				$("#controllerBean").val(controller.firstLowerCase());
+				$("#controllerPackage").val(basePackage+".action");
+				$("#service").val(service);
+				$("#serviceBean").val(service.firstLowerCase());
+				$("#servicePackage").val(basePackage+".service");
+				
 				$("#moduleCode").val(moduleCode);
 				$("#controllerUrl").val(controllerUrl);
 				$("#listUrl").val(controllerUrl + "?method=list");
-				$("#listJsp").val(jsp + "-list.jsp");
+				$("#listJsp").val(jsp + "-list");
 				$("#addUrl").val(controllerUrl + "?method=add");
-				$("#addJsp").val(jsp + "-add.jsp");
+				$("#addJsp").val(jsp + "-add");
 				$("#updUrl").val(controllerUrl + "?method=upd");
-				$("#updJsp").val(jsp + "-upd.jsp");
+				$("#updJsp").val(jsp + "-upd");
 			} else {
+				$("#entity").val("");
 				$("#controller").val("");
 				$("#service").val("");
-				$("#entity").val("");
+				$("#entityBean").val("");
+				$("#controllerBean").val("");
+				$("#serviceBean").val("");
+				$("#entityPackage").val("");
+				$("#controllerPackage").val("");
+				$("#servicePackage").val("");
 				$("#moduleCode").val("");
 				$("#controllerUrl").val("");
 				$("#listUrl").val("");
@@ -90,6 +103,9 @@
 		<div class="panel-body">
 			<form class="form-horizontal tasi-form" method="post" id="form">
 				<input type="hidden" id="id" name="id" value="${entity.id }">
+				<input type="hidden" id="entityBean" name="entityBean" value="${entity.entityBean }">
+				<input type="hidden" id="controllerBean" name="controllerBean" value="${entity.controllerBean }">
+				<input type="hidden" id="serviceBean" name="serviceBean" value="${entity.serviceBean }">
 				<div class="form-group">
 					<label class="col-sm-2 col-xs-2 control-label">数据库表<span class="form-must">*</span></label>
 					<div class="col-sm-4 col-xs-4">
@@ -119,11 +135,11 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="entity" name="entity" readonly value="${entity.entity }">
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">映射路径<span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" type="text" id="controllerUrl" name="controllerUrl" readonly
-							value="${entity.controllerUrl }">
+						<input class="form-control" type="text" id="entityPackage" name="entityPackage" readonly
+							value="${entity.entityPackage }">
 					</div>
 				</div>
 				<div class="form-group">
@@ -132,10 +148,32 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="controller" name="controller" readonly value="${entity.controller }">
 					</div>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="controllerPackage" name="controllerPackage" readonly
+							value="${entity.controllerPackage}">
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 col-xs-2 control-label">服务层类<span class="form-must">*</span>
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="service" name="service" readonly value="${entity.service }">
+					</div>
+					<label class="col-sm-2 col-xs-2 control-label">包路径名<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="servicePackage" name="servicePackage" readonly
+							value="${entity.servicePackage}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 col-xs-2 control-label">映射路径<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="controllerUrl" name="controllerUrl" readonly
+							value="${entity.controllerUrl }">
 					</div>
 				</div>
 				<div class="form-group">

@@ -85,7 +85,7 @@ public class CrudColumnController   extends BaseController {
 		Page<CrudColumn> page = new Page<CrudColumn>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from CrudColumn";
+		String hql = "from CrudColumn order by tableName,opTime desc";
 		ParamMap params = new ParamMap();
 		crudColumnService.pageH(page, hql, params);
 		this.outBootstrapTable(page);
@@ -148,7 +148,7 @@ public class CrudColumnController   extends BaseController {
 		String id = this.getParam("id");
 		String account = this.getParam("account");
 		String hql = "from CrudColumn where  (id != ? or ? is null) and account = ?";
-		boolean isRepeat = crudColumnService.isRepeat(hql, id, id, account);
+		boolean isRepeat = crudColumnService.isExist(hql, id, id, account);
 
 		Map<String, String> ret = new HashMap<String, String>();
 		if (isRepeat) {

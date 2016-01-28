@@ -148,7 +148,7 @@ public class SysUserController extends BaseController {
 		String id = this.getParam("id");
 		String account = this.getParam("account");
 		String hql = "from SysUser where  (id != ? or ? is null) and account = ?";
-		boolean isRepeat = sysUserService.isRepeat(hql, id, id, account);
+		boolean isRepeat = sysUserService.isExist(hql, id, id, account);
 
 		Map<String, String> ret = new HashMap<String, String>();
 		if (isRepeat) {

@@ -5,8 +5,10 @@
 package com.lezic.core.orm.dao;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
+import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 
 /**
@@ -40,6 +42,15 @@ public interface IBaseDAO {
 	public Serializable saveH(Object entity);
 
 	/**
+	 * 批量保存对象
+	 * 
+	 * @param list
+	 * @return
+	 * @author cielo
+	 */
+	public Serializable[] batchSaveH(List<?> list);
+
+	/**
 	 * Hibernate：修改对象
 	 * 
 	 * @param entity
@@ -61,7 +72,7 @@ public interface IBaseDAO {
 	 * @param cl
 	 * @param ids
 	 * @author cielo
-	 * @return 
+	 * @return
 	 */
 	public int batchDelH(Class<?> cl, Serializable[] ids);
 
@@ -92,32 +103,58 @@ public interface IBaseDAO {
 	 * @param values
 	 */
 	public void pageH(Page<?> page, String hql, Map<String, Object> params);
-	
+
 	/**
-	 * 判断是否重复
-	 * @param hql = "from ClassName where (id != ? or ? is null) and name = ? and opUserid = ?";
-	 * @param values 共需输入4个参数，即4个？对应的参数
+	 * 判断是否存在或者是否重复
+	 * 
+	 * @param hql
+	 *            判断是否重复的HQL例子： "from ClassName where (id != ? or ? is null) and name = ? and opUserid = ?";
+	 * @param values
+	 *            共需输入4个参数，即4个？对应的参数
 	 * @return
 	 * @author cielo
 	 */
-	public boolean isRepeat(String hql, Object... values);
-	
+	public boolean isExist(String hql, Object... values);
+
 	/**
 	 * 查询获取一个对象
+	 * 
 	 * @param hql
-	 * @param ignoreErr 是否忽略错误。如存在多个的时候，false会报错，true不会保存
+	 * @param ignoreErr
+	 *            是否忽略错误。如存在多个的时候，false会报错，true不会保存
 	 * @param values
 	 * @return
 	 * @author cielo
 	 */
-	public Object findOneH(String hql,boolean ignoreErr, Object... values);
-	
+	public Object findOneH(String hql, boolean ignoreErr, Object... values);
+
 	/**
 	 * 判断数据库表是否存在
+	 * 
 	 * @param tableName
 	 * @return
 	 * @author cielo
 	 */
 	public boolean isTableExist(String tableName);
+
+	/**
+	 * 查询获取集合
+	 * 
+	 * @param hql
+	 * @param values
+	 * @return
+	 * @author cielo
+	 */
+	public List<?> findH(String hql, Object... values);
+
+	/**
+	 * 查询获取集合
+	 * 
+	 * @param statement
+	 * @param params
+	 * @return
+	 * @author cielo
+	 */
+	public List<Object> findM(String statement, ParamMap params);
 
 }

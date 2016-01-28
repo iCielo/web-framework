@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../../common/list.jsp"%>
-<title>代码工厂</title>
+<title>${title}</title>
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
@@ -13,54 +13,34 @@
 				align : 'center',
 				valign : 'middle'
 			}, {
-				title : '表名',
-				field : 'tableName',
+				title : '操作用户ID',
+				field : 'opUserId',
 				align : 'center'
 			}, {
-				title : '菜单名',
-				field : 'menuName',
+				title : '角色名',
+				field : 'name',
 				align : 'center'
 			}, {
-				title : '模块名',
-				field : 'moduleName',
+				title : 'uuid主键标志',
+				field : 'id',
 				align : 'center'
 			}, {
-				title : '模块代码',
-				field : 'moduleCode',
+				title : '备注',
+				field : 'remark',
 				align : 'center'
-			}, {
-				title : '控制器映射路径',
-				field : 'controllerUrl',
-				align : 'center'
-			},{
-				title : '操作',
-				align:'center',
-				formatter : function(value, row, index) {
-					return '<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>';
-				}
 			} ],
-			url : "${CP}/crud/table.do?method=loadData",
+			url : "${CP}/sys/role.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
-	
-	//运行
-	function processCode(tableName){
-		Common.ajax({
-			url : "${CP}/crud/table.do?method=processCode",
-			data : {
-				tableName : tableName
-			}
-		})
-	}
 
 	//新增
 	function addEntity() {
 		Common.showDialog({
-			title : "新增代码",
+			title : "新增用户",
 			data : {
-				url : "${CP}/crud/table.do?method=add",
-				height : "463px"
+				url : "${CP}/sys/role.do?method=add",
+				height : "464px"
 			}
 		});
 	}
@@ -73,10 +53,10 @@
 			return;
 		}
 		Common.showDialog({
-			title : "修改代码",
+			title : "修改用户",
 			data : {
-				url : "${CP}/crud/table.do?method=upd&id=" + rows[0].id,
-				height : "463px"
+				url : "${CP}/sys/role.do?method=upd&id=" + rows[0].id,
+				height : "407px"
 			}
 		});
 	}
@@ -94,7 +74,7 @@
 		}
 		Common.confirm("是否删除", "确认是否删除？", function() {
 			Common.ajax({
-				url : "${CP}/crud/table.do?method=delEntity",
+				url : "${CP}/sys/role.do?method=delEntity",
 				data : {
 					ids : ids.join(",")
 				},
@@ -121,7 +101,7 @@
 </head>
 <body>
 	<section class="panel">
-		<header class="panel-heading"> 代码工厂</header>
+		<header class="panel-heading"> 用户角色 </header>
 		<div class="panel-body">
 			<div id="toolbar">
 				<button class="btn btn-primary " onclick="addEntity()">

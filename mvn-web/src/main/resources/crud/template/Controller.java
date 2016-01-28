@@ -1,12 +1,11 @@
 /**
  * <p>Author		:	cielo</p>
- * <p>Date 			: 	2016 下午3:53:45</p>
+ * <p>Date 			: 	${now}</p>
  */
-package com.lezic.app.crud.table.action;
+package ${table.controllerPackage};
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,9 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.lezic.app.crud.column.service.CrudColumnService;
-import com.lezic.app.crud.table.entity.CrudTable;
-import com.lezic.app.crud.table.service.CrudTableService;
+import ${table.entityPackage}.${table.entity};
+import ${table.servicePackage}.${table.service};
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.util.UtilData;
@@ -33,13 +31,13 @@ import com.lezic.core.web.constant.Status;
  *
  */
 @Controller
-@RequestMapping("/crud/table.do")
-public class CrudTableController extends BaseController {
+@RequestMapping("${table.controllerUrl}")
+public class ${table.controller} extends BaseController {
 
 	private Logger logger = LogManager.getLogger();
 
 	@Autowired
-	private CrudTableService crudTableService;
+	private ${table.service} ${table.serviceBean};
 
 	/**
 	 * 列表页面
@@ -49,17 +47,16 @@ public class CrudTableController extends BaseController {
 	 * @author cielo
 	 */
 	@RequestMapping(params = "method=list", method = RequestMethod.GET)
-	public String listPage(Model model) {
-		return "/crud/table/table-list";
+	public String listPage() {
+		return "${table.listJsp}";
 	}
 
 	/**
 	 * 新增页面
 	 */
 	@RequestMapping(params = "method=add", method = RequestMethod.GET)
-	public String addPage(Model model) {
-		model.addAttribute("test", "test");
-		return "/crud/table/table-add";
+	public String addPage() {
+		return "${table.addJsp}";
 	}
 
 	/**
@@ -69,9 +66,9 @@ public class CrudTableController extends BaseController {
 	public String updPage(Model model) {
 		String id = this.getParam("id");
 		if (UtilData.isNotNull(id)) {
-			model.addAttribute("entity", crudTableService.getH(id));
+			model.addAttribute("entity", ${table.serviceBean}.getH(id));
 		}
-		return "/crud/table/table-upd";
+		return "${table.updJsp}";
 	}
 
 	/**
@@ -83,13 +80,13 @@ public class CrudTableController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
-	public void loadData() {
-		Page<CrudTable> page = new Page<CrudTable>();
+	public void loadData() throws IOException {
+		Page<${table.entity}> page = new Page<${table.entity}>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from CrudTable";
+		String hql = "from ${table.entity}";
 		ParamMap params = new ParamMap();
-		crudTableService.pageH(page, hql, params);
+		${table.serviceBean}.pageH(page, hql, params);
 		this.outBootstrapTable(page);
 	}
 
@@ -99,8 +96,11 @@ public class CrudTableController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=addEntity")
-	public void addEntity(@ModelAttribute CrudTable entity) {
-		crudTableService.addEntity(entity);
+	public void addEntity(@ModelAttribute ${table.entity} entity) throws IOException {
+		if (entity != null) {
+			entity.setId(UUID.randomUUID().toString());
+		}
+		${table.serviceBean}.saveH(entity);
 		this.outMsg(Status.SUCCESS, null);
 	}
 
@@ -110,9 +110,9 @@ public class CrudTableController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute CrudTable entity) {
+	public void updEntity(@ModelAttribute ${table.entity} entity) throws IOException {
 		if (entity != null) {
-			crudTableService.updEntity(entity);
+			${table.serviceBean}.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);
 	}
@@ -123,9 +123,9 @@ public class CrudTableController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=delEntity")
-	public void delEntity() {
+	public void delEntity() throws IOException {
 		String[] ids = UtilData.split(this.getParam("ids"), ",");
-		crudTableService.batchDelH(CrudTable.class, ids);
+		${table.serviceBean}.batchDelH(${table.entity}.class, ids);
 		this.outMsg(Status.SUCCESS, null);
 	}
 
@@ -136,38 +136,19 @@ public class CrudTableController extends BaseController {
 	 * @author cielo
 	 */
 	@RequestMapping(params = "method=isRepeat")
-	public void isRepeat() {
+	public void isRepeat() throws IOException {
 		String id = this.getParam("id");
-		String tableName = this.getParam("tableName");
+		String account = this.getParam("account");
+		String hql = "from ${table.entity} where  (id != ? or ? is null) and account = ?";
+		boolean isRepeat = ${table.serviceBean}.isExist(hql, id, id, account);
+
 		Map<String, String> ret = new HashMap<String, String>();
-		boolean isExist = crudTableService.isTableExist(tableName);
-		if (!isExist) {
-			ret.put("error", "对不起，表不存在！");
+		if (isRepeat) {
+			ret.put("error", "对不起，已存在该账号！");
 		} else {
-			String hql = "from CrudTable where  (id != ? or ? is null) and tableName = ?";
-			boolean isRepeat = crudTableService.isExist(hql, id, id, tableName);
-			if (isRepeat) {
-				ret.put("error", "对不起，该表已生成代码！");
-			} else {
-				ret.put("ok", "验证通过！");
-			}
+			ret.put("ok", "该账号可用！");
 		}
 		this.write(ret);
-	}
-
-	@RequestMapping(params = "method=processCode")
-	public void processCode() {
-		try {
-			String tableName = this.getParam("tableName");
-			if (UtilData.isNull(tableName)) {
-				this.outMsg(Status.FAIL, "表名为空！");
-				return;
-			}
-			crudTableService.processCode(tableName);
-			this.outMsg(Status.SUCCESS, "生成成功！");
-		} catch (Exception e) {
-			this.outMsg(Status.ERROR, "运行出现错误！");
-		}
 	}
 
 }

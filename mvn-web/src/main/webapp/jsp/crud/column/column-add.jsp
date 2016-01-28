@@ -100,12 +100,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">是否唯一 </label>
-					<div class="col-sm-6 col-xs-6">
-						<input class="form-control" placeholder="请输入是否唯一" type="text" id="unique" name="unique">
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-sm-3 col-xs-3 control-label">是否可空 </label>
 					<div class="col-sm-6 col-xs-6">
 						<input class="form-control" placeholder="请输入是否可空" type="text" id="nullable" name="nullable">

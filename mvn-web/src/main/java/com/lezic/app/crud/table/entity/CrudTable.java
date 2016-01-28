@@ -45,17 +45,34 @@ public class CrudTable implements java.io.Serializable {
 	@WebField(label = "实体类名", placeholder = "请输入实体类名", rules = "required;length(~255);", length = 255, nullable = false)
 	private String entity;
 
+	@Column(name = "ENTITY_BEAN", length = 255, nullable = false)
+	@WebField(label = "实体类名", placeholder = "请输入实体类名", rules = "required;length(~255);", length = 255, nullable = false)
+	private String entityBean;
+
+	@Column(name = "ENTITY_PACKAGE", length = 255, nullable = false)
+	private String entityPackage;
+
 	@Column(name = "CONTROLLER_URL", length = 255, nullable = false)
 	@WebField(label = "控制器映射路径", placeholder = "请输入控制器映射路径", rules = "required;length(~255);", length = 255, nullable = false)
 	private String controllerUrl;
 
 	@Column(name = "CONTROLLER", length = 255, nullable = false)
-	@WebField(label = "控制器", placeholder = "请输入控制器", rules = "required;length(~255);", length = 255, nullable = false)
 	private String controller;
 
+	@Column(name = "CONTROLLER_BEAN", length = 255, nullable = false)
+	private String controllerBean;
+
+	@Column(name = "CONTROLLER_PACKAGE", length = 255, nullable = false)
+	private String controllerPackage;
+
 	@Column(name = "SERVICE", length = 255, nullable = false)
-	@WebField(label = "服务层", placeholder = "请输入服务层", rules = "required;length(~255);", length = 255, nullable = false)
 	private String service;
+
+	@Column(name = "SERVICE_BEAN", length = 255, nullable = false)
+	private String serviceBean;
+
+	@Column(name = "SERVICE_PACKAGE", length = 255, nullable = false)
+	private String servicePackage;
 
 	@Column(name = "LIST_URL", length = 255, nullable = false)
 	@WebField(label = "列表映射", placeholder = "请输入列表映射", rules = "required;length(~255);", length = 255, nullable = false)
@@ -325,6 +342,54 @@ public class CrudTable implements java.io.Serializable {
 	 */
 	public Date getOpTime() {
 		return this.opTime;
+	}
+
+	public String getEntityPackage() {
+		return entityPackage;
+	}
+
+	public void setEntityPackage(String entityPackage) {
+		this.entityPackage = entityPackage;
+	}
+
+	public String getControllerPackage() {
+		return controllerPackage;
+	}
+
+	public void setControllerPackage(String controllerPackage) {
+		this.controllerPackage = controllerPackage;
+	}
+
+	public String getServicePackage() {
+		return servicePackage;
+	}
+
+	public void setServicePackage(String servicePackage) {
+		this.servicePackage = servicePackage;
+	}
+
+	public String getEntityBean() {
+		return entityBean;
+	}
+
+	public void setEntityBean(String entityBean) {
+		this.entityBean = entityBean;
+	}
+
+	public String getControllerBean() {
+		return controllerBean;
+	}
+
+	public void setControllerBean(String controllerBean) {
+		this.controllerBean = controllerBean;
+	}
+
+	public String getServiceBean() {
+		return serviceBean;
+	}
+
+	public void setServiceBean(String serviceBean) {
+		this.serviceBean = serviceBean;
 	}
 
 }

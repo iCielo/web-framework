@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.orm.dao.IBaseDAO;
 import com.lezic.core.orm.util.UtilQuery;
@@ -102,6 +103,26 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 		Serializable result = hibernateTemplate.save(entity);
 		flushHiberate();
 		return result;
+	}
+
+	@Override
+	public Serializable[] batchSaveH(List<?> list) {
+		if (UtilData.isNotEmpty(list)) {
+			Serializable[] result = new Serializable[list.size()];
+			Object entity = null;
+			for (int i = 0; i < list.size(); i++) {
+				entity = list.get(i);
+				if (entity != null) {
+					result[i] = this.hibernateTemplate.save(entity);
+				}
+				if ((i + 1) % 20 == 0) {
+					flushHiberate();
+				}
+			}
+			flushHiberate();
+			return result;
+		}
+		return null;
 	}
 
 	@Override
@@ -190,7 +211,7 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 	}
 
 	@Override
-	public boolean isRepeat(String hql, Object... values) {
+	public boolean isExist(String hql, Object... values) {
 		return this.findOneH(hql, true, values) != null;
 	}
 
@@ -221,5 +242,19 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 			return false;
 		}
 	}
+	
+	@Override
+	public List<?> findH(String hql, Object... values) {
+		Query query = getSession().createQuery(hql);
+		UtilQuery.setValues(query, values);
+		return query.list();
+	}
+
+	@Override
+	public List<Object> findM(String statement, ParamMap params) {
+		return sqlSessionTemplate.selectList(statement, params);
+	}
+
+
 
 }
