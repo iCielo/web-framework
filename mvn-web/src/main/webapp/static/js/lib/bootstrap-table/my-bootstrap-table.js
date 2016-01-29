@@ -17,6 +17,7 @@
 			idField : "id",
 			sidePagination : "server",
 			showRefresh : true,
+			cache : false,
 			pageList : [ 10, 25, 50, 100 ],
 			/**
 			 * 修改默认的行单击事件，单击行为单选，单击复选框为多选。需将clickToSelect设置为false，若设置为true则启用默认的行单击事件
@@ -39,7 +40,7 @@
 	$.fn.myBootstrapTable = function(option) {
 		myBootstrapTable.bootstrapTable = $(this);
 		option = $.extend(true, {}, myBootstrapTable.option, option);
-		return $(this).bootstrapTable(option)
+		return $(this).bootstrapTable(option);
 	}
 
 })(jQuery);
