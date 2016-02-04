@@ -156,5 +156,14 @@ public interface IBaseDAO {
 	 * @author cielo
 	 */
 	public List<Object> findM(String statement, ParamMap params);
+	
+	/**
+	 * 查询分页
+	 * @param page
+	 * @param statement
+	 * @param params
+	 * @author cielo
+	 */
+	public void pageM(Page<?> page, String statement, ParamMap params);
 
 }

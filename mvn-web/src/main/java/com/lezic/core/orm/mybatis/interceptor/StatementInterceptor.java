@@ -12,6 +12,7 @@ import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,17 +39,17 @@ public class StatementInterceptor implements Interceptor {
 		String sql = boundSql.getSql();
 		if (showSql) {
 			if (format) {
-				logger.debug(sql.replaceAll("\\s+", " "));
+				logger.debug("MyBatis: " + sql.replaceAll("\\s+", " "));
 			} else {
-				logger.debug(sql);
+				logger.debug("MyBatis: " + sql);
 			}
 		}
 		return invocation.proceed();
 	}
 
 	@Override
-	public Object plugin(Object arg0) {
-		return null;
+	public Object plugin(Object object) {
+		return Plugin.wrap(object, this);
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -253,6 +255,12 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 	@Override
 	public List<Object> findM(String statement, ParamMap params) {
 		return sqlSessionTemplate.selectList(statement, params);
+	}
+
+	@Override
+	public void pageM(Page<?> page, String statement, ParamMap params) {
+		//怎么获取总数？？？？.日志,有看到打count的sql
+		List<?> result = sqlSessionTemplate.selectList(statement,params,new RowBounds(page.getOffset(), page.getPageSize()));
 	}
 
 

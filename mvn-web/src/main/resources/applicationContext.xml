@@ -70,10 +70,23 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="plugins">
 			<list>
-				<!-- <ref bean="statementInterceptor" /> -->
+				<ref bean="pageHelper" />
+				<ref bean="statementInterceptor" />
 			</list>
 		</property>
 		<property name="configLocation" value="classpath:/mybatis/mybatis-sqlmap.xml" />
+	</bean>
+
+	<!-- MyBatis分页插件 -->
+	<bean id="pageHelper" class="com.github.pagehelper.PageHelper">
+		<property name="properties">
+          <value>
+            dialect=hsqldb
+            rowBoundsWithCount=true
+            pageSizeZero=true
+            reasonable=false
+          </value>
+        </property>
 	</bean>
 
 	<!-- 开启HibernateTemplate，并且为其注入SessionFactory 使用HibernateTemplate不太方便的就是要获取session得通过getSessionFactory()方法获取 -->
