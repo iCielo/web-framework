@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../../common/list.jsp"%>
-<title>用户角色</title>
+<title>${title}</title>
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
@@ -13,34 +13,55 @@
 				align : 'center',
 				valign : 'middle'
 			}, {
-				title : 'uuid主键标志',
-				field : 'id',
+				title : '表名',
+				field : 'tableName',
 				align : 'center'
 			}, {
-				title : '操作用户ID',
-				field : 'opUserId',
+				title : '列名',
+				field : 'columnName',
 				align : 'center'
 			}, {
-				title : '角色名',
-				field : 'name',
+				title : '数据类型',
+				field : 'columnType',
 				align : 'center'
 			}, {
-				title : '备注',
-				field : 'remark',
+				title : '显示名',
+				field : 'label',
+				align : 'center'
+			}, {
+				title : '输入提示',
+				field : 'placeholder',
+				align : 'center'
+			}, {
+				title : '录入类型',
+				field : 'inputType',
+				align : 'center'
+			}, {
+				title : '数据字典',
+				field : 'dictType',
+				align : 'center'
+			}, {
+				title : '自定义数据字典',
+				field : 'dictList',
+				align : 'center'
+			}, {
+				title : '校验规则',
+				field : 'rules',
 				align : 'center'
 			} ],
-			url : "${CP}/sys/role.do?method=loadData",
+			url : "${CP}/crud/column.do?method=loadData",
 			queryParams : getQueryParams
 		});
-	});
-
-	//新增
-	function addEntity() {
-		MyLayer.open({
-			title : "新增用户角色",
-			content : "${CP}/sys/role.do?method=add"
+		//选择表时，自动隐藏表名列
+		if("${param.tableName }"!=""){
+			$("#dataTable").bootstrapTable('hideColumn','tableName');
+		}
+		$("#tableName").change(function(){
+			if($("#tableName").val()!=""){
+				$("#dataTable").bootstrapTable('hideColumn','tableName');
+			}
 		});
-	}
+	});
 
 	//修改
 	function updEntity() {
@@ -50,8 +71,8 @@
 			return;
 		}
 		MyLayer.open({
-			title : "修改用户角色",
-			content : "${CP}/sys/role.do?method=upd&id=" + rows[0].id
+			title : "修改字段",
+			content : "${CP}/crud/column.do?method=upd&id=" + rows[0].id,
 		});
 	}
 
@@ -68,7 +89,7 @@
 		}
 		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
-				url : "${CP}/sys/role.do?method=delEntity",
+				url : "${CP}/crud/column.do?method=delEntity",
 				data : {
 					ids : ids.join(",")
 				},
@@ -78,47 +99,31 @@
 			})
 		});
 	}
+	
 </script>
 </head>
 <body>
 	<section class="panel">
-		<header class="panel-heading"> 用户角色 </header>
+		<header class="panel-heading"> 表字段 </header>
 		<div class="panel-body">
 			<div id="searchForm">
 				<form class="form-horizontal" onsubmit="return false;">
 					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">表名：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
-						<div class="col-lg-2 col-sm-2">
-							<select class="form-control input-sm" id="sex" name="sex">
+							<select class="form-control input-sm" id="tableName" name="tableName" data-option-value="${param.tableName }">
 								<option value="">--请选择--</option>
-								<option value="男">男</option>
-								<option value="女">女</option>
+								<c:forEach var="item"   items="${tableNameList }" >
+								<option value="${item }">${item }</option>
+								</c:forEach>
 							</select>
 						</div>
+						<label class="col-sm-1 col-xs-1 control-label">列名：</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="columnName" name="columnName" placeholder="">
+						</div>
 						<div class="col-sm-1 col-xs-1">
-							<button type="button" class="btn btn-primary">
+							<button type="button" class="btn btn-primary" onclick="query()">
 								<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
 							</button>
 						</div>
@@ -130,10 +135,7 @@
 					</div>
 				</form>
 			</div>
-			<div id="toolbar">
-				<button class="btn btn-primary " onclick="addEntity()">
-					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
-				</button>
+			<div id="toolbar">				
 				<button class="btn btn-primary" onclick="updEntity()">
 					<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
 				</button>

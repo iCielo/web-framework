@@ -3,7 +3,7 @@
 <html>
 <head>
 <%@ include file="../../common/list.jsp"%>
-<title>${title}</title>
+<title>代码工厂</title>
 <script type="text/javascript">
 	$(function() {
 		$('#dataTable').myBootstrapTable({
@@ -13,49 +13,59 @@
 				align : 'center',
 				valign : 'middle'
 			}, {
-				title : '列名',
-				field : 'columnName',
+				title : '模块代码',
+				field : 'moduleCode',
 				align : 'center'
 			}, {
-				title : '数据类型',
-				field : 'columnType',
+				title : '模块名',
+				field : 'moduleName',
 				align : 'center'
 			}, {
-				title : '显示名',
-				field : 'label',
+				title : '菜单名',
+				field : 'menuName',
 				align : 'center'
 			}, {
-				title : '输入提示',
-				field : 'placeholder',
-				align : 'center'
+				title : '表名',
+				field : 'tableName',
+				align : 'center',
+				formatter : function(value, row, index) {
+					var html = [];
+					html.push('<a href="${CP}/crud/column.do?method=list&tableName='+value+'">'+value+'</a>');
+					return html.join("");
+				}
 			}, {
-				title : '录入类型',
-				field : 'inputType',
+				title : '控制器映射路径',
+				field : 'controllerUrl',
 				align : 'center'
-			}, {
-				title : '数据字典',
-				field : 'dictType',
-				align : 'center'
-			}, {
-				title : '自定义数据字典',
-				field : 'dictList',
-				align : 'center'
-			}, {
-				title : '校验规则',
-				field : 'rules',
-				align : 'center'
+			},{
+				title : '操作',
+				align:'center',
+				formatter : function(value, row, index) {
+					var html = [];
+					html.push('<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>');
+					return html.join("");
+				}
 			} ],
-			url : "${CP}/crud/column.do?method=loadData",
-			pagination : false,
+			url : "${CP}/crud/table.do?method=loadData",
 			queryParams : getQueryParams
 		});
 	});
+	
+	//运行
+	function processCode(tableName){
+		Common.ajax({
+			url : "${CP}/crud/table.do?method=processCode",
+			data : {
+				tableName : tableName
+			}
+		})
+	}
 
 	//新增
 	function addEntity() {
 		MyLayer.open({
-			title : "新增用户",
-			content : "${CP}/crud/column.do?method=add",
+			title : "新增代码",
+			content : "${CP}/crud/table.do?method=add"
 		});
 	}
 
@@ -67,8 +77,8 @@
 			return;
 		}
 		MyLayer.open({
-			title : "修改用户",
-			content : "${CP}/crud/column.do?method=upd&id=" + rows[0].id,
+			title : "修改代码",
+			content : "${CP}/crud/table.do?method=upd&id=" + rows[0].id
 		});
 	}
 
@@ -85,7 +95,7 @@
 		}
 		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
-				url : "${CP}/crud/column.do?method=delEntity",
+				url : "${CP}/crud/table.do?method=delEntity",
 				data : {
 					ids : ids.join(",")
 				},
@@ -95,24 +105,12 @@
 			})
 		});
 	}
-
-	/* 查询 */
-	function query() {
-		$("#dataTable").bootstrapTable('refresh');
-	}
-
-	/* 查询参数 */
-	function getQueryParams(params) {
-		$(".search-are input,.search-are select").each(function(i, obj) {
-			params[$(obj).prop("name")] = $(obj).val();
-		});
-		return params;
-	}
+	
 </script>
 </head>
 <body>
 	<section class="panel">
-		<header class="panel-heading"> ${title} </header>
+		<header class="panel-heading"> 代码工厂</header>
 		<div class="panel-body">
 			<div id="toolbar">
 				<button class="btn btn-primary " onclick="addEntity()">

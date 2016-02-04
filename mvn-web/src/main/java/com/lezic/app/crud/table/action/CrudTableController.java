@@ -4,11 +4,8 @@
  */
 package com.lezic.app.crud.table.action;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.lezic.app.crud.column.service.CrudColumnService;
 import com.lezic.app.crud.table.entity.CrudTable;
 import com.lezic.app.crud.table.service.CrudTableService;
 import com.lezic.core.lang.ParamMap;
@@ -50,16 +46,15 @@ public class CrudTableController extends BaseController {
 	 */
 	@RequestMapping(params = "method=list", method = RequestMethod.GET)
 	public String listPage(Model model) {
-		return "/crud/table/table-list";
+		return "/crud/table/CrudTable-list";
 	}
 
 	/**
 	 * 新增页面
 	 */
 	@RequestMapping(params = "method=add", method = RequestMethod.GET)
-	public String addPage(Model model) {
-		model.addAttribute("test", "test");
-		return "/crud/table/table-add";
+	public String addPage() {
+		return "/crud/table/CrudTable-add";
 	}
 
 	/**
@@ -71,7 +66,7 @@ public class CrudTableController extends BaseController {
 		if (UtilData.isNotNull(id)) {
 			model.addAttribute("entity", crudTableService.getH(id));
 		}
-		return "/crud/table/table-upd";
+		return "/crud/table/CrudTable-upd";
 	}
 
 	/**
@@ -80,14 +75,13 @@ public class CrudTableController extends BaseController {
 	 * @param model
 	 * @return
 	 * @author cielo
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
 	public void loadData() {
 		Page<CrudTable> page = new Page<CrudTable>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from CrudTable";
+		String hql = "from CrudTable order by moduleName";
 		ParamMap params = new ParamMap();
 		crudTableService.pageH(page, hql, params);
 		this.outBootstrapTable(page);
@@ -96,7 +90,6 @@ public class CrudTableController extends BaseController {
 	/**
 	 * 新增
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=addEntity")
 	public void addEntity(@ModelAttribute CrudTable entity) {
@@ -107,7 +100,6 @@ public class CrudTableController extends BaseController {
 	/**
 	 * 修改
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
 	public void updEntity(@ModelAttribute CrudTable entity) {
@@ -120,7 +112,6 @@ public class CrudTableController extends BaseController {
 	/**
 	 * 删除
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=delEntity")
 	public void delEntity() {
@@ -132,7 +123,6 @@ public class CrudTableController extends BaseController {
 	/**
 	 * 判断名称是否重复
 	 * 
-	 * @throws IOException
 	 * @author cielo
 	 */
 	@RequestMapping(params = "method=isRepeat")
@@ -155,6 +145,11 @@ public class CrudTableController extends BaseController {
 		this.write(ret);
 	}
 
+	/**
+	 * 生成代码
+	 * 
+	 * @author cielo
+	 */
 	@RequestMapping(params = "method=processCode")
 	public void processCode() {
 		try {

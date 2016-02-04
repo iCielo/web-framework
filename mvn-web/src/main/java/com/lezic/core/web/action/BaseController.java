@@ -56,7 +56,11 @@ public abstract class BaseController {
 	 * @author cielo
 	 */
 	public String getParam(String name) {
-		return UtilData.trim(this.request.getParameter(name));
+		String str = UtilData.trim(this.request.getParameter(name));
+		if(UtilData.isNull(str)){
+			return null;
+		}
+		return str;
 	}
 
 	/**

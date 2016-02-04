@@ -11,11 +11,9 @@
 			<PatternLayout pattern="%d{HH:mm:ss.SSS}  %-5level %logger{36} - %msg%n" />
 		</Console>
 
-		<RollingRandomAccessFile name="running-log"
-			fileName="${LOG_HOME}/${FILE_NAME}.log"
+		<RollingRandomAccessFile name="running-log" fileName="${LOG_HOME}/${FILE_NAME}.log"
 			filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
-			<PatternLayout
-				pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+			<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 				<SizeBasedTriggeringPolicy size="10 MB" />
@@ -25,9 +23,11 @@
 	</Appenders>
 
 	<Loggers>
-		<Logger name="com.lezic" level="trace"
-			additivity="true">
+		<Logger name="com.lezic" level="trace" additivity="true">
 			<AppenderRef ref="running-log" />
+		</Logger>
+		<Logger name="org.mybatis" level="debug" additivity="true">
+			<AppenderRef ref="Console" />
 		</Logger>
 		<Root level="debug">
 			<AppenderRef ref="Console" />

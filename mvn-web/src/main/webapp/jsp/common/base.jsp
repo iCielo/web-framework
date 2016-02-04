@@ -24,7 +24,6 @@
 <!-- 基础css -->
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-3.3.5-dist/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap-table/bootstrap-table.css"/>
-<link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/bootstrap3-dialog/css/bootstrap-dialog.css"/>
 <link rel="stylesheet" type="text/css" href="${CP}/static/js/lib/font-awesome-4.5.0/css/font-awesome.min.css" />
 <!-- flatlab -->
 <link rel="stylesheet" type="text/css" href="${CP }/static/js/lib/flatlab/css/style.css" />
@@ -43,7 +42,6 @@
 <script type="text/javascript" src="${CP}/static/js/lib/layer/myLayer.js"></script>
 
 <script type="text/javascript" src="${CP}/static/js/lib/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${CP}/static/js/lib/bootstrap3-dialog/js/bootstrap-dialog.js"></script>
 <script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.scrollTo.min.js"></script>
 <script type="text/javascript" src="${CP }/static/js/lib/flatlab/js/jquery.nicescroll.js"></script>
 <script type="text/javascript" src="${CP}/static/js/core/lang/string.js"></script>

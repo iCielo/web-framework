@@ -73,25 +73,59 @@
 			})
 		});
 	}
-
-	/* 查询 */
-	function query() {
-		$("#dataTable").bootstrapTable('refresh');
-	}
-
-	/* 查询参数 */
-	function getQueryParams(params) {
-		$(".search-are input,.search-are select").each(function(i, obj) {
-			params[$(obj).prop("name")] = $(obj).val();
-		});
-		return params;
-	}
+	
 </script>
 </head>
 <body>
 	<section class="panel">
 		<header class="panel-heading"> ${table.menuName} </header>
 		<div class="panel-body">
+			<div id="searchForm">
+				<form class="form-horizontal" onsubmit="return false;">
+					<div class="form-group">
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<div class="col-lg-2 col-sm-2">
+							<select class="form-control input-sm" id="sex" name="sex">
+								<option value="">--请选择--</option>
+								<option value="男">男</option>
+								<option value="女">女</option>
+							</select>
+						</div>
+						<div class="col-sm-1 col-xs-1">
+							<button type="button" class="btn btn-primary">
+								<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
+							</button>
+						</div>
+						<div class="col-sm-1 col-xs-1">
+							<button type="reset" class="btn btn-primary form-label">
+								<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
 			<div id="toolbar">
 				<button class="btn btn-primary " onclick="addEntity()">
 					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增

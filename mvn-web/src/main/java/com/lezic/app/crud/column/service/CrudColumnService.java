@@ -64,7 +64,7 @@ public class CrudColumnService extends BaseService<CrudColumn> {
 
 			crudColumn.setTableName(tableName);
 			crudColumn.setId(UUID.randomUUID().toString());
-			crudColumn.setInputType("INPUT");
+			crudColumn.setInputType("input");
 			crudColumn.setOpTime(now);
 			crudColumn.setJavaName(UtilData.toCamel(columnName));
 			crudColumn.setJavaMethodName(UtilData.firstUpperCase(crudColumn.getJavaName()));
@@ -79,6 +79,9 @@ public class CrudColumnService extends BaseService<CrudColumn> {
 			StringBuffer rules = new StringBuffer();
 			if (crudColumn.getNullable() == 0) {
 				rules.append("required;");
+			}
+			if ("int".equals(crudColumn.getColumnType())) {
+				rules.append("integer;");
 			}
 			if (crudColumn.getLength() != null) {
 				rules.append("length(~" + crudColumn.getLength() + ");");

@@ -13,9 +13,5 @@
 	$(function() {
 		$("[data-toggle='switch']").wrap('<div class="switch" data-on-label="启用"  data-off-label="禁用"/>').parent()
 				.bootstrapSwitch();
-		//下拉列表值初始化
-		$("select[data-option-value]").each(function(){
-			$(this).val($(this).attr("data-option-value"));
-		});
 	});
 </script>

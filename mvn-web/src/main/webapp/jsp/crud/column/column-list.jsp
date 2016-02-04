@@ -50,16 +50,18 @@
 				align : 'center'
 			} ],
 			url : "${CP}/crud/column.do?method=loadData",
-			showColumns:true,
 			queryParams : getQueryParams
 		});
 	});
 
 	//新增
 	function addEntity() {
-		MyLayer.open({
+		Common.showDialog({
 			title : "新增用户",
-			content : "${CP}/crud/column.do?method=add",
+			data : {
+				url : "${CP}/crud/column.do?method=add",
+				height : "464px"
+			}
 		});
 	}
 
@@ -67,12 +69,15 @@
 	function updEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length != 1) {
-			MyLayer.msg("请选择要修改的单条记录！");
+			Common.alert("只能选择一条记录修改！");
 			return;
 		}
-		MyLayer.open({
-			title : "修改字段",
-			content : "${CP}/crud/column.do?method=upd&id=" + rows[0].id,
+		Common.showDialog({
+			title : "修改用户",
+			data : {
+				url : "${CP}/crud/column.do?method=upd&id=" + rows[0].id,
+				height : "407px"
+			}
 		});
 	}
 
@@ -80,14 +85,14 @@
 	function delEntity() {
 		var rows = $("#dataTable").bootstrapTable('getSelections');
 		if (rows.length == 0) {
-			MyLayer.msg("请选择要删除的记录！");
+			Common.alert("请选择要删除的记录！");
 			return;
 		}
 		var ids = [];
 		for (var i = 0; i < rows.length; i++) {
 			ids.push(rows[i].id);
 		}
-		MyLayer.confirm("是否真的删除？", function(index) {
+		Common.confirm("是否删除", "确认是否删除？", function() {
 			Common.ajax({
 				url : "${CP}/crud/column.do?method=delEntity",
 				data : {

@@ -14,7 +14,11 @@
 
 <script type="text/javascript">
 	$(function() {
-
+		$(window).resize(function() {
+			$("#div_main").height($(window).height() - $(".header").height() - $("footer").height() - 51);
+		});
+		$("#div_main").height($(window).height() - $(".header").height() - $("footer").height() - 51);
+		
 		$('#nav-accordion').dcAccordion({
 			eventType : 'click',
 			autoClose : true,
@@ -28,8 +32,7 @@
 		});
 
 		$.slidebars();
-
-		$("#div_main").height($(window).height() - $(".header").height() - $("footer").height() - 51);
+		
 		$("[real-href]").click(function() {
 			$("li,a").removeClass("active");
 			$(this).parent().parent().siblings("a").addClass("active");

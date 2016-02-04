@@ -3,12 +3,12 @@
 <html>
 <head>
 <%@ include file="../../common/form.jsp"%>
-<title>数据库表-修改</title>
+<title>数据库表-新增</title>
 <script type="text/javascript">
 	$(function() {
 		$("#form").validator({
 			fields : {
-				tableName : "required;length(~20);remote(${CP}/crud/table.do?method=isRepeat&id=${entity.id})",
+				tableName : "required;length(~20);remote(${CP}/crud/table.do?method=isRepeat)",
 				menuName : "required;length(~50);",
 				moduleName : "required;length(~50);",
 				moduleCode : "required;length(~20);",
@@ -26,10 +26,15 @@
 		});
 		$('#form').on('valid.form', function(e) {
 			Common.ajax({
-				url : "${CP}/crud/table.do?method=updEntity",
+				url : "${CP}/crud/table.do?method=addEntity",
 				data : $(this).serialize(),
 				success : function(data) {
-					Common.closeDialog();
+					if(parent.ifr_main&&typeof(parent.ifr_main.query)=='function'){
+						parent.ifr_main.query();
+					}else if(typeof(parent.query)=='function'){
+						parent.query();
+					}
+					MyLayer.close();
 				}
 			})
 		});
@@ -58,7 +63,6 @@
 				var service = entityName + "Service";
 
 				$("#entity").val(entity);
-<<<<<<< HEAD
 				$("#entityBean").val(entity.firstLowerCase());
 				$("#entityPackage").val(basePackage+".entity");
 				$("#controller").val(controller);
@@ -66,12 +70,6 @@
 				$("#controllerPackage").val(basePackage+".action");
 				$("#service").val(service);
 				$("#serviceBean").val(service.firstLowerCase());
-=======
-				$("#entityPackage").val(basePackage+".entity");
-				$("#controller").val(controller);
-				$("#controllerPackage").val(basePackage+".action");
-				$("#service").val(service);
->>>>>>> branch 'master' of https://github.com/iCielo/mvn-web.git
 				$("#servicePackage").val(basePackage+".service");
 				
 				$("#moduleCode").val(moduleCode);
@@ -86,12 +84,9 @@
 				$("#entity").val("");
 				$("#controller").val("");
 				$("#service").val("");
-<<<<<<< HEAD
 				$("#entityBean").val("");
 				$("#controllerBean").val("");
 				$("#serviceBean").val("");
-=======
->>>>>>> branch 'master' of https://github.com/iCielo/mvn-web.git
 				$("#entityPackage").val("");
 				$("#controllerPackage").val("");
 				$("#servicePackage").val("");
@@ -149,11 +144,7 @@
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="entityPackage" name="entityPackage" readonly
-<<<<<<< HEAD
-							value="${entity.entityPackage }">
-=======
 							value="${entity.entity }">
->>>>>>> branch 'master' of https://github.com/iCielo/mvn-web.git
 					</div>
 				</div>
 				<div class="form-group">
@@ -231,7 +222,7 @@
 						<button class="btn btn-primary" type="submit">
 							<i class="glyphicon glyphicon-ok"></i>&nbsp;确定
 						</button>
-						<button class="btn btn-primary" type="button" onclick="Common.closeDialog();">
+						<button class="btn btn-primary" type="button" onclick="MyLayer.close();">
 							<i class="glyphicon glyphicon-remove"></i>&nbsp;关闭
 						</button>
 					</div>

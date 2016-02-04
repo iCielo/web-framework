@@ -1,7 +1,7 @@
 $(function() {
 
 	//滚动条优化
-	/*$("html").niceScroll({
+	$("html").niceScroll({
 		styler : "fb",
 		cursorcolor : "#e8403f",
 		cursorwidth : '6',
@@ -11,9 +11,12 @@ $(function() {
 		cursorborder : '',
 		autohidemode : false,
 		zindex : '1000'
-	});*/
-
+	});
 	
+	//下拉列表值初始化
+	$("select[data-option-value]").each(function(){
+		$(this).val($(this).attr("data-option-value"));
+	});
 
 });
 
@@ -80,7 +83,4 @@ $(function() {
 		cursorborder : ''
 	});
 
-	// $("html").niceScroll({styler:"fb",cursorcolor:"#e8403f", cursorwidth:
-	// '6', cursorborderradius: '10px', background: '#404040',
-	// spacebarenabled:false, cursorborder: '', zindex: '1000'});
 });

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
+import com.lezic.core.cache.ehcache.UtilEhcache;
 import com.lezic.core.util.UtilSpring;
 
 /**

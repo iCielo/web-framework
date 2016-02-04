@@ -6,6 +6,7 @@ package com.lezic.app.crud.column.action;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ import com.lezic.core.web.constant.Status;
  */
 @Controller
 @RequestMapping("/crud/column.do")
-public class CrudColumnController   extends BaseController {
+public class CrudColumnController extends BaseController {
 
 	private Logger logger = LogManager.getLogger();
 
@@ -46,11 +47,14 @@ public class CrudColumnController   extends BaseController {
 	 * @return
 	 * @author cielo
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "method=list", method = RequestMethod.GET)
-	public String listPage(Model model) {
-		return "/crud/column/column-list";
+	public String listPage() {
+		List<Object> tableNameList = (List<Object>) crudColumnService.findH("select tableName from CrudTable");
+		request.setAttribute("tableNameList", tableNameList);
+		return "/crud/column/CrudColumn-list";
 	}
-	
+
 	/**
 	 * 列表页面-修改列表
 	 * 
@@ -60,16 +64,15 @@ public class CrudColumnController   extends BaseController {
 	 */
 	@RequestMapping(params = "method=editList", method = RequestMethod.GET)
 	public String editList() {
-		return "/crud/column/CrudColumn-editList";
+		return "/crud/column/CrudCrudColumn-editList";
 	}
 
 	/**
 	 * 新增页面
 	 */
 	@RequestMapping(params = "method=add", method = RequestMethod.GET)
-	public String addPage(Model model) {
-		model.addAttribute("test", "test");
-		return "/crud/column/column-add";
+	public String addPage() {
+		return "/crud/column/CrudColumn-add";
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class CrudColumnController   extends BaseController {
 		if (UtilData.isNotNull(id)) {
 			model.addAttribute("entity", crudColumnService.getH(id));
 		}
-		return "/crud/column/column-upd";
+		return "/crud/column/CrudColumn-upd";
 	}
 
 	/**
@@ -90,15 +93,16 @@ public class CrudColumnController   extends BaseController {
 	 * @param model
 	 * @return
 	 * @author cielo
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
-	public void loadData() throws IOException {
+	public void loadData() {
 		Page<CrudColumn> page = new Page<CrudColumn>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from CrudColumn order by tableName,opTime desc";
+		String hql = "from CrudColumn where (tableName = :tableName or :tableName is null) and (columnName like :columnName or :columnName is null) order by tableName,opTime desc";
 		ParamMap params = new ParamMap();
+		params.put("tableName", this.getParam("tableName"));
+		params.put("columnName", this.getParam("columnName"));
 		crudColumnService.pageH(page, hql, params);
 		this.outBootstrapTable(page);
 	}
@@ -106,10 +110,9 @@ public class CrudColumnController   extends BaseController {
 	/**
 	 * 新增
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=addEntity")
-	public void addEntity(@ModelAttribute CrudColumn entity) throws IOException {
+	public void addEntity(@ModelAttribute CrudColumn entity) {
 		if (entity != null) {
 			entity.setId(UUID.randomUUID().toString());
 		}
@@ -120,18 +123,10 @@ public class CrudColumnController   extends BaseController {
 	/**
 	 * 修改
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute CrudColumn entity) throws IOException {
+	public void updEntity(@ModelAttribute CrudColumn entity) {
 		if (entity != null) {
-
-			// CrudColumn item = CrudColumnService.getH(entity.getId());
-			// item.setAccount(entity.getAccount());
-			// item.setName(entity.getName());
-			// item.setSex(entity.getSex());
-			// item
-
 			crudColumnService.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);
@@ -140,10 +135,9 @@ public class CrudColumnController   extends BaseController {
 	/**
 	 * 删除
 	 * 
-	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=delEntity")
-	public void delEntity() throws IOException {
+	public void delEntity() {
 		String[] ids = UtilData.split(this.getParam("ids"), ",");
 		crudColumnService.batchDelH(CrudColumn.class, ids);
 		this.outMsg(Status.SUCCESS, null);
