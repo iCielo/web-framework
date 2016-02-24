@@ -51,8 +51,11 @@ public class UtilQuery {
 		if (params != null) {
 			String[] nameParams = query.getNamedParameters();
 			for (String nameParam : nameParams) {
-				if (params.get(nameParam) instanceof Collection) {// 参数是个集合
+				Object param = params.get(nameParam); 
+				if (param instanceof Collection) {// 参数是个集合
 					query.setParameterList(nameParam, (Collection<?>) params.get(nameParam));
+				}else if(param instanceof Object[]){
+					query.setParameterList(nameParam, (Object[])params.get(nameParam));
 				} else {
 					query.setParameter(nameParam, params.get(nameParam));
 				}

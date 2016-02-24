@@ -13,12 +13,14 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.lezic.app.crud.column.entity.CrudColumn;
 import com.lezic.app.crud.column.service.CrudColumnService;
 import com.lezic.app.crud.table.entity.CrudTable;
 import com.lezic.core.crud.CodeFactory;
 import com.lezic.core.orm.service.BaseService;
+import com.lezic.core.util.UtilData;
 
 /**
  * @author cielo
@@ -38,12 +40,10 @@ public class CrudTableService extends BaseService<CrudTable> {
 	 * @author cielo
 	 */
 	public void addEntity(CrudTable entity) {
-		String tableName = entity.getTableName();
 		if (entity != null) {
 			entity.setId(UUID.randomUUID().toString());
 		}
 		super.saveH(entity);
-		crudColumnService.batchNewColumn(tableName);
 	}
 
 	/**
@@ -54,7 +54,16 @@ public class CrudTableService extends BaseService<CrudTable> {
 	 */
 	public void updEntity(CrudTable entity) {
 		super.updH(entity);
-		crudColumnService.batchNewColumn(entity.getTableName());
+	}
+	
+	/**
+	 * 更新表字段
+	 * @param tableName
+	 * @author cielo
+	 */
+	public void updateColumns(String tableName){
+		Assert.isTrue(UtilData.isNotNull(tableName));
+		crudColumnService.batchNewColumn(tableName);
 	}
 
 	/**

@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -163,7 +162,6 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 		hibernateTemplate.clear();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void pageH(Page<?> page, String hql, Object... values) {
 		Assert.notNull(page);
@@ -188,7 +186,6 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void pageH(Page<?> page, String hql, Map<String, Object> params) {
 		Assert.notNull(page);
@@ -213,7 +210,7 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 	}
 
 	@Override
-	public boolean isExist(String hql, Object... values) {
+	public boolean isExistH(String hql, Object... values) {
 		return this.findOneH(hql, true, values) != null;
 	}
 
@@ -244,12 +241,24 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public List<?> findH(String hql, Object... values) {
 		Query query = getSession().createQuery(hql);
 		UtilQuery.setValues(query, values);
 		return query.list();
+	}
+	
+	/**
+	 * 执行hql语句
+	 * @param hql
+	 * @param params
+	 * @author cielo
+	 */
+	public int executeH(String hql, ParamMap params){
+		Query query = getSession().createQuery(hql);
+		UtilQuery.setValues(query, params);
+		return query.executeUpdate();
 	}
 
 	@Override
@@ -259,10 +268,13 @@ public class BaseDAOImpl implements IBaseDAO, InitializingBean {
 
 	@Override
 	public void pageM(Page<?> page, String statement, ParamMap params) {
-		//怎么获取总数？？？？.日志,有看到打count的sql
-		List<?> result = sqlSessionTemplate.selectList(statement,params,new RowBounds(page.getOffset(), page.getPageSize()));
+		// 使用pagehelper分页插件
+		com.github.pagehelper.Page<?> result = (com.github.pagehelper.Page<?>) sqlSessionTemplate.selectList(statement,
+				params, new RowBounds(page.getOffset(), page.getPageSize()));
+		// 将结果转为自己的page对象
+		page.setTotal(result.getTotal());
+		page.setRows(result.getResult());
+		logger.debug("总记录数：" + page.getTotal() + "，当前页：" + page.getPageNumber() + "，本页条数：" + page.getRows().size());
 	}
-
-
 
 }

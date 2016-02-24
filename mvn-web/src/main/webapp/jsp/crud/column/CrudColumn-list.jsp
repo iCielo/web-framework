@@ -122,20 +122,16 @@
 						<div class="col-lg-2 col-sm-2">
 							<input type="text" class="form-control" id="columnName" name="columnName" placeholder="">
 						</div>
-						<div class="col-sm-1 col-xs-1">
-							<button type="button" class="btn btn-primary" onclick="query()">
-								<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
-							</button>
-						</div>
-						<div class="col-sm-1 col-xs-1">
-							<button type="reset" class="btn btn-primary form-label">
-								<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
-							</button>
-						</div>
 					</div>
 				</form>
 			</div>
-			<div id="toolbar">				
+			<div id="toolbar">
+				<button type="button" class="btn btn-primary" onclick="query()">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
+				</button>
+				<button type="reset" class="btn btn-primary form-label">
+					<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
+				</button>
 				<button class="btn btn-primary" onclick="updEntity()">
 					<i class="glyphicon glyphicon-edit"></i>&nbsp;修&nbsp;改
 				</button>

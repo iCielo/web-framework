@@ -20,3 +20,7 @@
 .modal-dialog {
 	width: 800px;
 }
+
+.control-label {
+	text-align: right;
+}

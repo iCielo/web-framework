@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lezic.app.cache.SystemCache;
 import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.app.sys.user.service.SysUserService;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
+import com.lezic.core.orm.util.UtilHibernate;
 import com.lezic.core.util.UtilData;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
@@ -31,7 +33,7 @@ import com.lezic.core.web.constant.Status;
  *
  */
 @Controller
-@RequestMapping("/sys/sysUser.do")
+@RequestMapping("/sys/user.do")
 public class SysUserController extends BaseController {
 
 	private Logger logger = LogManager.getLogger();
@@ -48,7 +50,7 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(params = "method=listPage", method = RequestMethod.GET)
 	public String listPage(Model model) {
-		return "/sys/user/listPage";
+		return "/sys/user/SysUser-listPage";
 	}
 
 	/**
@@ -56,8 +58,7 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(params = "method=addPage", method = RequestMethod.GET)
 	public String addPage(Model model) {
-		model.addAttribute("test", "test");
-		return "/sys/user/addPage";
+		return "/sys/user/SysUser-addPage";
 	}
 
 	/**
@@ -69,7 +70,7 @@ public class SysUserController extends BaseController {
 		if (UtilData.isNotNull(id)) {
 			model.addAttribute("entity", sysUserService.getH(id));
 		}
-		return "/sys/user/updPage";
+		return "/sys/user/SysUser-updPage";
 	}
 
 	/**
@@ -111,15 +112,10 @@ public class SysUserController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute SysUser entity) throws IOException {
-		if (entity != null) {
-
-			// SysUser item = sysUserService.getH(entity.getId());
-			// item.setAccount(entity.getAccount());
-			// item.setName(entity.getName());
-			// item.setSex(entity.getSex());
-			// item
-
+	public void updEntity(@ModelAttribute SysUser item) throws IOException {
+		if (item != null) {
+			SysUser entity = sysUserService.getH(item.getId());
+			UtilHibernate.copyExcludeNull(entity, item);
 			sysUserService.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);
@@ -157,6 +153,31 @@ public class SysUserController extends BaseController {
 			ret.put("ok", "该账号可用！");
 		}
 		this.write(ret);
+	}
+
+	/**
+	 * 启用、禁用
+	 * 
+	 * @throws IOException
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=opStatus")
+	public void opStatus() throws IOException {
+		String[] ids = UtilData.split(this.getParam("ids"), ",");
+		String status = this.getParam("status");
+		if (UtilData.isEmpty(ids)) {
+			this.outMsg(Status.FAIL, "要操作记录ID为空！");
+		} else if (UtilData.isNull(status)) {
+			this.outMsg(Status.FAIL, "操作类型为空！");
+		} else {
+			ParamMap params = new ParamMap();
+			String hql = "update SysUser set status = :status where id in (:ids)";
+			params.put("status", status);
+			params.put("ids", ids);
+			sysUserService.executeH(hql, params);
+			String msg = SystemCache.getSysDictionaryLabel("STATUS", status) + "成功！";
+			this.outMsg(Status.SUCCESS, msg);
+		}
 	}
 
 }

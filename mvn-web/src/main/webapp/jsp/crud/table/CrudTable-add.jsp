@@ -58,6 +58,7 @@
 				var basePackage = "com.lezic.app." +moduleCode + "." + subModule;
 				var controllerUrl = "/" + moduleCode + "/" + subModule + ".do";
 				var jsp = "/" + moduleCode + "/" + subModule + "/" + entityName;
+				var mybatisXml = "/" + moduleCode + "/" + subModule + "/" + entityName + "-sql";
 				var entity = entityName;
 				var controller = entityName + "Controller";
 				var service = entityName + "Service";
@@ -80,6 +81,7 @@
 				$("#addJsp").val(jsp + "-add");
 				$("#updUrl").val(controllerUrl + "?method=upd");
 				$("#updJsp").val(jsp + "-upd");
+				$("#mybatisXml").val(mybatisXml);
 			} else {
 				$("#entity").val("");
 				$("#controller").val("");
@@ -98,6 +100,7 @@
 				$("#addJsp").val("");
 				$("#updUrl").val("");
 				$("#updJsp").val("");
+				$("#mybatisXml").val("");
 			}
 		});
 	});
@@ -179,6 +182,12 @@
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="controllerUrl" name="controllerUrl" readonly
 							value="${entity.controllerUrl }">
+					</div>
+					<label class="col-sm-2 col-xs-2 control-label">mybatis配置<span class="form-must">*</span>
+					</label>
+					<div class="col-sm-4 col-xs-4">
+						<input class="form-control" type="text" id="mybatisXml" name="mybatisXml" readonly
+							value="${entity.mybatisXml }">
 					</div>
 				</div>
 				<div class="form-group">

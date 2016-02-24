@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.lezic.app.cache.SystemCache;
 import com.lezic.app.sys.role.entity.SysRole;
 import com.lezic.app.sys.role.service.SysRoleService;
+import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
+import com.lezic.core.orm.util.UtilHibernate;
 import com.lezic.core.util.UtilData;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
@@ -110,8 +113,10 @@ public class SysRoleController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute SysRole entity) throws IOException {
-		if (entity != null) {
+	public void updEntity(@ModelAttribute SysRole item) throws IOException {
+		if (item != null) {
+			SysRole entity = sysRoleService.getH(item.getId());
+			UtilHibernate.copyExcludeNull(entity, item);
 			sysRoleService.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);
@@ -138,17 +143,42 @@ public class SysRoleController extends BaseController {
 	@RequestMapping(params = "method=isRepeat")
 	public void isRepeat() throws IOException {
 		String id = this.getParam("id");
-		String account = this.getParam("account");
-		String hql = "from SysRole where  (id != ? or ? is null) and account = ?";
-		boolean isRepeat = sysRoleService.isExist(hql, id, id, account);
+		String name = this.getParam("name");
+		String hql = "from SysRole where  (id != ? or ? is null) and name = ?";
+		boolean isRepeat = sysRoleService.isExist(hql, id, id, name);
 
 		Map<String, String> ret = new HashMap<String, String>();
 		if (isRepeat) {
-			ret.put("error", "对不起，已存在该账号！");
+			ret.put("error", "对不起，已存在该名称！");
 		} else {
-			ret.put("ok", "该账号可用！");
+			ret.put("ok", "该名称可用！");
 		}
 		this.write(ret);
+	}
+
+	/**
+	 * 启用、禁用
+	 * 
+	 * @throws IOException
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=opStatus")
+	public void opStatus() throws IOException {
+		String[] ids = UtilData.split(this.getParam("ids"), ",");
+		String status = this.getParam("status");
+		if (UtilData.isEmpty(ids)) {
+			this.outMsg(Status.FAIL, "要操作记录ID为空！");
+		} else if (UtilData.isNull(status)) {
+			this.outMsg(Status.FAIL, "操作类型为空！");
+		} else {
+			ParamMap params = new ParamMap();
+			String hql = "update SysRole set status = :status where id in (:ids)";
+			params.put("status", status);
+			params.put("ids", ids);
+			sysRoleService.executeH(hql, params);
+			String msg = SystemCache.getSysDictionaryLabel("STATUS", status) + "成功！";
+			this.outMsg(Status.SUCCESS, msg);
+		}
 	}
 
 }

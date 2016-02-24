@@ -9,8 +9,9 @@
 
 			<li class="sub-menu"><a href="javascript:;"> <i class="fa fa-laptop"></i> <span>系统管理</span></a>
 				<ul class="sub">
-					<li><a href="javascript:;" real-href="${CP }/sys/sysUser.do?method=listPage">用户管理</a></li>
+					<li><a href="javascript:;" real-href="${CP }/sys/user.do?method=listPage">用户管理</a></li>
 					<li><a href="javascript:;" real-href="${CP }/sys/role.do?method=list">角色管理</a></li>
+					<li><a href="javascript:;" real-href="${CP }/sys/dictionary.do?method=list">字典管理</a></li>
 				</ul>
 			</li>
 			<li class="sub-menu"><a href="javascript:;"> <i class="fa fa-laptop"></i> <span>代码工厂</span></a>

@@ -144,6 +144,26 @@ public class CrudTableController extends BaseController {
 		}
 		this.write(ret);
 	}
+	
+	/**
+	 * 更新表字段
+	 * 
+	 * @author cielo
+	 */
+	@RequestMapping(params = "method=updateColumns")
+	public void updateColumns() {
+		try {
+			String tableName = this.getParam("tableName");
+			if (UtilData.isNull(tableName)) {
+				this.outMsg(Status.FAIL, "表名为空！");
+				return;
+			}
+			crudTableService.updateColumns(tableName);
+			this.outMsg(Status.SUCCESS, "更新表字段成功！");
+		} catch (Exception e) {
+			this.outMsg(Status.ERROR, "运行出现错误！");
+		}
+	}
 
 	/**
 	 * 生成代码

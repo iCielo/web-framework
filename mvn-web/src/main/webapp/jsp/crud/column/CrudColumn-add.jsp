@@ -17,7 +17,6 @@
 				inputType : "required;length(~50);",
 				dictType : "length(~50);",
 				dictList : "length(~255);",
-				rules : "required;length(~255);",
 				opUserId : "length(~36);",
 			}
 		});
@@ -117,7 +116,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 col-xs-3 control-label">校验规则 <span class="form-must">*</span>
+					<label class="col-sm-3 col-xs-3 control-label">校验规则 
 					</label>
 					<div class="col-sm-6 col-xs-6">
 						<input class="form-control" placeholder="请输入校验规则" type="text" id="rules" name="rules">

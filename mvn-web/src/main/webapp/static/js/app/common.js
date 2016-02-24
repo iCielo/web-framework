@@ -51,6 +51,17 @@
 						MyLayer.alert("出现错误！");
 					}
 				}
+			},
+			error : function(data) {
+				if (data.responseJSON) {
+					var status = data.responseJSON.status;
+					var msg = data.responseJSON.msg;
+					if (msg) {
+						MyLayer.alert(msg);
+					}
+				} else {
+					MyLayer.alert("系统错误！");
+				}
 			}
 		};
 		option = $.extend(true, {}, defaultOption, option);

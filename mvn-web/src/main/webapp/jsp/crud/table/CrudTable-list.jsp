@@ -42,7 +42,8 @@
 				align:'center',
 				formatter : function(value, row, index) {
 					var html = [];
-					html.push('<a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="运行"><i class="fa fa-play-circle-o fa-lg"></i>');
+					html.push('<a href="javascript:;" onclick="updateColumns(\''+row.tableName+'\')" title="更新表字段"><i class="fa fa-refresh fa-lg"></i>');
+					html.push('  <a href="javascript:;" onclick="processCode(\''+row.tableName+'\')" title="生成代码"><i class="fa fa-play-circle-o fa-lg"></i>');
 					return html.join("");
 				}
 			} ],
@@ -51,6 +52,16 @@
 		});
 	});
 	
+	//更新表字段
+	function updateColumns(tableName){
+		Common.ajax({
+			url : "${CP}/crud/table.do?method=updateColumns",
+			data : {
+				tableName : tableName
+			}
+		});
+	}
+	
 	//运行
 	function processCode(tableName){
 		Common.ajax({
@@ -58,7 +69,7 @@
 			data : {
 				tableName : tableName
 			}
-		})
+		});
 	}
 
 	//新增
@@ -113,6 +124,12 @@
 		<header class="panel-heading"> 代码工厂</header>
 		<div class="panel-body">
 			<div id="toolbar">
+				<button type="button" class="btn btn-primary" onclick="query()">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
+				</button>
+				<button type="reset" class="btn btn-primary form-label">
+					<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
+				</button>
 				<button class="btn btn-primary " onclick="addEntity()">
 					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
 				</button>

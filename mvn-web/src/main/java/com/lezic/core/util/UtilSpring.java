@@ -28,8 +28,24 @@ public class UtilSpring {
 		webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(servletContext);
 	}
 
+	/**
+	 * 根据beanId获取bean
+	 * @param beanId
+	 * @return
+	 * @author cielo
+	 */
 	public static Object getBean(String beanId) {
 		return webApplicationContext.getBean(beanId);
+	}
+	
+	/**
+	 * 根据bean类型获取bean
+	 * @param cl
+	 * @return
+	 * @author cielo
+	 */
+	public static Object getBean(Class<?> cl){
+		return webApplicationContext.getBean(cl);
 	}
 
 	/**

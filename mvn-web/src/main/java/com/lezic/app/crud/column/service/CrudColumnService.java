@@ -64,7 +64,7 @@ public class CrudColumnService extends BaseService<CrudColumn> {
 
 			crudColumn.setTableName(tableName);
 			crudColumn.setId(UUID.randomUUID().toString());
-			crudColumn.setInputType("input");
+			crudColumn.setInputType("text");
 			crudColumn.setOpTime(now);
 			crudColumn.setJavaName(UtilData.toCamel(columnName));
 			crudColumn.setJavaMethodName(UtilData.firstUpperCase(crudColumn.getJavaName()));

@@ -10,6 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.context.ContextLoaderListener;
 
+import com.lezic.app.sys.dictionary.entity.SysDictionary;
+import com.lezic.app.sys.dictionary.service.SysDictionaryService;
 import com.lezic.core.cache.ehcache.UtilEhcache;
 import com.lezic.core.util.UtilSpring;
 
@@ -21,12 +23,18 @@ import com.lezic.core.util.UtilSpring;
  */
 public class CustomContextLoaderListener extends ContextLoaderListener {
 
-	Logger logger = LogManager.getLogger();
+	private Logger logger = LogManager.getLogger();
 
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 		UtilSpring.init(event);
+
+		logger.info("开始系统全局参数初始化");
+		int i = 1;
+
+		SysDictionaryService sysDictionaryService = (SysDictionaryService) UtilSpring.getBean(SysDictionaryService.class);
+		sysDictionaryService.initCache();
 	}
 
 }

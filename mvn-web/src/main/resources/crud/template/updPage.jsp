@@ -42,15 +42,31 @@
 					<input type="hidden" id="${item.javaName}" name="${item.javaName}" value="${mark}${entity}.$item.javaName}">
 				#end
 				#end
-				#foreach( $item in $columns )				
-				#if( ${item.primaryKey} != '1' &&  ${item.javaName} != 'opUserId' &&  ${item.javaName} != 'opTime')
+				#foreach( $item in $columns )
+				#if( ${item.primaryKey} != '1' &&  ${item.javaName} != 'opUserId' &&  ${item.javaName} != 'opTime' && ${item.inputType} != 'hidden')
 					<div class="form-group">
-						<label class="col-sm-2 col-xs-2 control-label">${item.label}：#if( ${item.nullable} != 1 )<span class="form-must">*</span> #end</label>
-						<div class="col-sm-4 col-xs-4">
-							<input class="form-control"#if( ${item.placeholder} ) placeholder=" ${item.placeholder}" #end type="text" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
+						<label class="col-sm-3 col-xs-3 control-label">#if( ${item.nullable} != 1 )<span class="form-must">*</span>#end ${item.label}：</label>
+						<div class="col-sm-8 col-xs-8">
+							#if( ${item.inputType} == 'text' )
+								<input class="form-control"#if( ${item.placeholder} ) placeholder=" ${item.placeholder}" #end type="text" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
+							#end
+							#if( ${item.inputType} == 'textarea' )
+								<textarea class="form-control"#if( ${item.placeholder} ) placeholder=" ${item.placeholder}" #end id="${item.javaName}" name="${item.javaName}">${mark}${entity}.$item.javaName}</textarea>
+							#end
+							#if( ${item.inputType} == 'select' )
+								<select class="form-control input-sm" id="${item.javaName}" name="${item.javaName}" data-option-value="${mark}${entity}.$item.javaName}">
+									<option value="">--请选择--</option>
+								</select>
+							#end
+							#if( ${item.inputType} == 'radio' )
+								<input type="radio"  id="${item.javaName}" name="${item.javaName}"/>${item.label}
+							#end
+							#if( ${item.inputType} == 'check' )
+								<input type="checkbox"  id="${item.javaName}" name="${item.javaName}"/>${item.label}
+							#end
 						</div>
-					</div>
-				#end 
+					</div> 
+				#end
 				#end
 				<div class="form-group">
 					<div class="text-center">

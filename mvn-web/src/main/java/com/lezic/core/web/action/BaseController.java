@@ -57,10 +57,23 @@ public abstract class BaseController {
 	 */
 	public String getParam(String name) {
 		String str = UtilData.trim(this.request.getParameter(name));
-		if(UtilData.isNull(str)){
+		if (UtilData.isNull(str)) {
 			return null;
 		}
 		return str;
+	}
+
+	/**
+	 * 获取表单参数
+	 * 
+	 * @param name
+	 * @param defaultStr
+	 * @return
+	 * @author cielo
+	 */
+	public String getParam(String name, String defaultStr) {
+		String str = getParam(name);
+		return str == null ? defaultStr : str;
 	}
 
 	/**
@@ -69,7 +82,7 @@ public abstract class BaseController {
 	 * @param object
 	 * @throws IOException
 	 */
-	public void write(Object object){
+	public void write(Object object) {
 		response.setContentType("application/json;charset=UTF-8");
 		// response.setContentType("text/xml;charset=UTF-8");
 		try {
@@ -93,7 +106,7 @@ public abstract class BaseController {
 	 * @throws IOException
 	 * @author cielo
 	 */
-	public void outMsg(Status status, String msg){
+	public void outMsg(Status status, String msg) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", status);
 		map.put("msg", msg);
@@ -108,7 +121,7 @@ public abstract class BaseController {
 	 * @throws IOException
 	 * @author cielo
 	 */
-	public void outData(Status status, Object data){
+	public void outData(Status status, Object data) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("status", status);
 		map.put("data", data);
@@ -122,14 +135,14 @@ public abstract class BaseController {
 	 * @throws IOException
 	 * @author cielo
 	 */
-	public void outBootstrapTable(Page<?> page){
+	public void outBootstrapTable(Page<?> page) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(UtilData.isEmpty(page.getRows())){
-			map.put("rows", new ArrayList<Object>());	
-		}else{
+		if (UtilData.isEmpty(page.getRows())) {
+			map.put("rows", new ArrayList<Object>());
+		} else {
 			map.put("rows", page.getRows());
 		}
-		
+
 		map.put("total", page.getTotal());
 		this.write(map);
 	}

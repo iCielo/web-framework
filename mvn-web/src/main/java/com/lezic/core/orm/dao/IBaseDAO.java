@@ -114,7 +114,7 @@ public interface IBaseDAO {
 	 * @return
 	 * @author cielo
 	 */
-	public boolean isExist(String hql, Object... values);
+	public boolean isExistH(String hql, Object... values);
 
 	/**
 	 * 查询获取一个对象
@@ -146,6 +146,15 @@ public interface IBaseDAO {
 	 * @author cielo
 	 */
 	public List<?> findH(String hql, Object... values);
+	
+	/**
+	 * 执行hql语句
+	 * @param hql
+	 * @param params
+	 * @return
+	 * @author cielo
+	 */
+	public int executeH(String hql, ParamMap params);
 
 	/**
 	 * 查询获取集合

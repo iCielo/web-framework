@@ -9,7 +9,6 @@
 		$("#form").validator({
 			fields : {
 				javaMethodName : "length(~255);",
-				rules : "required;length(~255);",
 				dictType : "length(~50);",
 				placeholder : "length(~100);",
 				tableName : "required;length(~50);",
@@ -110,7 +109,7 @@
 							<option value="hidden">隐藏域</option>							
 						</select>
 					</div>
-					<label class="col-sm-2 col-xs-2 control-label">校验规则 <span class="form-must">*</span>
+					<label class="col-sm-2 col-xs-2 control-label">校验规则 
 					</label>
 					<div class="col-sm-4 col-xs-4">
 						<input class="form-control" type="text" id="rules" name="rules" value="<c:out value="${entity.rules}"/>">

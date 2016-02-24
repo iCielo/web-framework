@@ -42,5 +42,14 @@ public class ${table.entity} implements java.io.Serializable {
 			return this.${column.javaName};
 		}
 	#end
+	
+	@Override
+	public String toString() {
+		return "${table.entity} ["
+				#foreach( $column in $columns )
+				+ "${column.javaName}=" + ${column.javaName} #if( $foreach.last==false )+", "#end
+				#end
+				+ "]";
+	}
 
 }

@@ -23,7 +23,7 @@
 			title : '标题',
 			shadeClose : true,
 			shade : 0.8,
-			area : [ '60%', '60%' ],
+			area : [ '50%', '50%' ],
 			content : ''// 可以是iframe的url
 		};
 		options = $.extend(true, {}, defaultOption, options);

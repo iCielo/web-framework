@@ -42,7 +42,7 @@ public class Page<T> {
 	/**
 	 * 结果集
 	 */
-	private List<T> rows = null;
+	private List<?> rows = null;
 
 	/**
 	 * 从第几条记录开始
@@ -143,11 +143,11 @@ public class Page<T> {
 		this.pageSize = pageSize;
 	}
 
-	public List<T> getRows() {
+	public List<?> getRows() {
 		return rows;
 	}
 
-	public void setRows(List<T> rows) {
+	public void setRows(List<?> rows) {
 		this.rows = rows;
 	}
 

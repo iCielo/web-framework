@@ -97,6 +97,14 @@ public class CodeFactory {
 		destPath = outputPath + File.separator + "jsp" + File.separator + table.getUpdJsp() + ".jsp";
 		UtilFile.write(destPath, content);
 		logger.debug("生成成功！路径：" + destPath);
+		
+		// mybatis.xml
+		logger.debug("自动生成 mybatis配置......");
+		templateContent = UtilFile.getContent(templatePath + "mybatis.xml");
+		content = UtilVelocity.process(templateContent, params);
+		destPath = outputPath + File.separator + "mybatis" + File.separator + table.getMybatisXml() + ".xml";
+		UtilFile.write(destPath, content);
+		logger.debug("生成成功！路径：" + destPath);
 
 	}
 

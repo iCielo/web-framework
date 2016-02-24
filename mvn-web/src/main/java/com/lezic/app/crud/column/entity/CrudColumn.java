@@ -27,7 +27,7 @@ public class CrudColumn implements java.io.Serializable {
 	/**
 	 * 校验规则
 	 */
-	@Column(name = "RULES", length = 255, nullable = false)
+	@Column(name = "RULES", length = 255)
 	private String rules;
 
 	/**

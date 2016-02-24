@@ -53,7 +53,7 @@
 			<section class="wrapper">
 				<div id="div_main">
 					<iframe id="ifr_main" name="ifr_main" style="width: 100%; height: 100%; border: none;"
-						src="${CP}/sys/sysUser.do?method=listPage"></iframe>
+						src="${CP}/sys/user.do?method=listPage"></iframe>
 				</div>
 			</section>
 		</section>

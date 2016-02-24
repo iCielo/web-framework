@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ${table.entityPackage}.${table.entity};
 import ${table.servicePackage}.${table.service};
+
+import com.lezic.app.sys.user.entity.SysUser;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
+import com.lezic.core.orm.util.UtilHibernate;
 import com.lezic.core.util.UtilData;
 import com.lezic.core.web.action.BaseController;
 import com.lezic.core.web.constant.Status;
@@ -110,8 +113,10 @@ public class ${table.controller} extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=updEntity")
-	public void updEntity(@ModelAttribute ${table.entity} entity) throws IOException {
-		if (entity != null) {
+	public void updEntity(@ModelAttribute ${table.entity} item) throws IOException {
+		if (item != null) {
+			${table.entity} entity = ${table.serviceBean}.getH(item.getId());
+			UtilHibernate.copyExcludeNull(entity, item);
 			${table.serviceBean}.updH(entity);
 		}
 		this.outMsg(Status.SUCCESS, null);

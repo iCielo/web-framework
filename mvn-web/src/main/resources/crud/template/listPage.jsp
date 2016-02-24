@@ -83,29 +83,33 @@
 			<div id="searchForm">
 				<form class="form-horizontal" onsubmit="return false;">
 					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name</label>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
 						<div class="col-lg-2 col-sm-2">
 							<select class="form-control input-sm" id="sex" name="sex">
 								<option value="">--请选择--</option>
@@ -113,20 +117,20 @@
 								<option value="女">女</option>
 							</select>
 						</div>
-						<div class="col-sm-1 col-xs-1">
-							<button type="button" class="btn btn-primary">
-								<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
-							</button>
-						</div>
-						<div class="col-sm-1 col-xs-1">
-							<button type="reset" class="btn btn-primary form-label">
-								<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
-							</button>
+						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
 						</div>
 					</div>
 				</form>
 			</div>
 			<div id="toolbar">
+				<button type="button" class="btn btn-primary" onclick="query()">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;
+				</button>
+				<button type="reset" class="btn btn-primary form-label">
+					<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空&nbsp;
+				</button>
 				<button class="btn btn-primary " onclick="addEntity()">
 					<i class="glyphicon glyphicon-plus-sign"></i>&nbsp;新&nbsp;增
 				</button>
