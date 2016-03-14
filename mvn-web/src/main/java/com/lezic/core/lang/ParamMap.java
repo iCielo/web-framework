@@ -6,6 +6,8 @@ package com.lezic.core.lang;
 
 import java.util.HashMap;
 
+import com.lezic.core.util.UtilData;
+
 /**
  * 参数键值对
  * 
@@ -28,4 +30,21 @@ public class ParamMap extends HashMap<String, Object> {
 		}
 		return super.put(key, value);
 	}
+
+	/**
+	 * 模糊查询字段
+	 * 
+	 * @param str
+	 * @return
+	 * @author cielo
+	 */
+	public Object putLike(String key, Object value) {
+		String str = UtilData.getString(value);
+		if (UtilData.isNotNull(str)) {
+			str = "%" + str + "%";
+		}
+		return this.put(key, str);
+
+	}
+
 }
