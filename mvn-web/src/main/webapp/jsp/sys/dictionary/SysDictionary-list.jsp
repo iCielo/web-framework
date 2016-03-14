@@ -55,27 +55,23 @@
 
 	//修改
 	function updEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length != 1) {
+		var ids = getSelections();
+		if (ids.length != 1) {
 			MyLayer.msg("请选择要修改的单条记录！");
 			return;
 		}
 		MyLayer.open({
 			title : "修改数据字典",
-			content : "${CP}/sys/dictionary.do?method=upd&id=" + rows[0].id
+			content : "${CP}/sys/dictionary.do?method=upd&id=" + ids[0]
 		});
 	}
 
 	//删除
 	function delEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length == 0) {
+		var ids = getSelections();
+		if (ids.length == 0) {
 			MyLayer.msg("请选择要删除的记录！");
 			return;
-		}
-		var ids = [];
-		for (var i = 0; i < rows.length; i++) {
-			ids.push(rows[i].id);
 		}
 		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({
@@ -92,18 +88,14 @@
 	
 	//启用、禁用
 	function opStatus(status){
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length == 0) {
+		var ids = getSelections();
+		if (ids.length == 0) {
 			if(status=="ON"){
 				MyLayer.msg("请选择要启用的记录！");	
 			}else{
 				MyLayer.msg("请选择要禁用的记录！");
 			}
 			return;
-		}
-		var ids = [];
-		for (var i = 0; i < rows.length; i++) {
-			ids.push(rows[i].id);
 		}
 		Common.ajax({
 			url : "${CP}/sys/dictionary.do?method=opStatus",
@@ -128,45 +120,19 @@
 			<div id="searchForm">
 				<form class="form-horizontal" onsubmit="return false;">
 					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
+						<label class="col-sm-1 col-xs-1 control-label">分类：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="sort" name="sort" placeholder="">
 						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
+						<label class="col-sm-1 col-xs-1 control-label">字典键：</label>
 						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
-						<div class="col-lg-2 col-sm-2">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Jane Doe">
-						</div>
-						<label class="col-sm-1 col-xs-1 control-label">Name：</label>
-						<div class="col-lg-2 col-sm-2">
-							<select class="form-control input-sm" id="sex" name="sex">
-								<option value="">--请选择--</option>
-								<option value="男">男</option>
-								<option value="女">女</option>
-							</select>
-						</div>
-						<div class="col-sm-1 col-xs-1">
-							
-						</div>
-						<div class="col-sm-1 col-xs-1">
-							
+							<input type="text" class="form-control" id="dictKey" name="dictKey" placeholder="">
 						</div>
 					</div>
 				</form>
 			</div>
+			
+			<!-- 功能按钮 -->
 			<div id="toolbar">
 				<button type="button" class="btn btn-primary" onclick="query()">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;

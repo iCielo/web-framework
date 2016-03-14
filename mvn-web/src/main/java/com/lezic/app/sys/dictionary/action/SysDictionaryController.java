@@ -82,13 +82,14 @@ public class SysDictionaryController extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
-	public void loadData() throws IOException {
+	public void loadData(@ModelAttribute SysDictionary entityParams) throws IOException {
 		Page<SysDictionary> page = new Page<SysDictionary>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from SysDictionary order by sort,seq";
 		ParamMap params = new ParamMap();
-		sysDictionaryService.pageH(page, hql, params);
+		params.putLike("sort", entityParams.getSort());
+		params.putLike("dictKey", entityParams.getDictKey());
+		sysDictionaryService.pageM(page, "SysDictionary.getPageList", params);
 		this.outBootstrapTable(page);
 	}
 
@@ -154,7 +155,7 @@ public class SysDictionaryController extends BaseController {
 		}
 		this.write(ret);
 	}
-	
+
 	/**
 	 * 启用、禁用
 	 * 
@@ -175,6 +176,7 @@ public class SysDictionaryController extends BaseController {
 			params.put("status", status);
 			params.put("ids", ids);
 			sysDictionaryService.executeH(hql, params);
+			sysDictionaryService.initCache();
 			String msg = SystemCache.getSysDictionaryLabel("STATUS", status) + "成功！";
 			this.outMsg(Status.SUCCESS, msg);
 		}

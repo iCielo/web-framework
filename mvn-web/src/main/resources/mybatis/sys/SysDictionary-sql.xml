@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 系统管理-数据字典 -->
+<mapper namespace="SysDictionary">
+
+	<!-- 获取单条数据 -->
+	<select id="getOne" parameterType="java.util.Map" resultType="com.lezic.app.sys.dictionary.entity.SysDictionary">
+		select id id ,seq seq , status status , op_user_id
+		opUserId , op_time opTime , dict_key dictKey , sort sort , remark remark ,
+		dict_value dictValue from sys_dictionary t
+		where t.id = #{id}
+	</select>
+
+	<!-- 查询多条数据 -->
+	<select id="getPageList" parameterType="java.util.Map" resultType="com.lezic.app.sys.dictionary.entity.SysDictionary">
+		select id id , seq seq , status status , op_user_id opUserId , op_time opTime , dict_key dictKey , sort sort , remark
+		remark ,
+		dict_value dictValue from sys_dictionary t
+		where 1=1
+		<if test="seq != null and seq  != ''"> and t.seq = #{seq } </if>
+		<if test="status != null and status  != ''"> and t.status = #{status } </if>
+		<if test="opUserId != null and opUserId  != ''"> and t.op_user_id = #{opUserId } </if>
+		<if test="opTime != null and opTime  != ''"> and t.op_time = #{opTime } </if>
+		<if test="dictKey != null and dictKey  != ''"> and t.dict_key like #{dictKey } </if>
+		<if test="sort != null and sort  != ''"> and t.sort like #{sort } </if>
+		<if test="id != null and id  != ''"> and t.id = #{id } </if>
+		<if test="remark != null and remark  != ''"> and t.remark = #{remark } </if>
+		<if test="dictValue != null and dictValue  != ''"> and t.dict_value = #{dictValue } </if>
+		order by t.sort,t.seq
+	</select>
+
+	<!-- 更新记录 -->
+	<update id="updEntity" parameterType="com.lezic.app.sys.dictionary.entity.SysDictionary">
+		update sys_dictionary t
+		<set>
+			<if test="seq != null">t.seq=#{seq},</if>
+			<if test="status != null">t.status=#{status},</if>
+			<if test="opUserId != null">t.op_user_id=#{opUserId},</if>
+			<if test="opTime != null">t.op_time=#{opTime},</if>
+			<if test="dictKey != null">t.dict_key=#{dictKey},</if>
+			<if test="sort != null">t.sort=#{sort},</if>
+			<if test="id != null">t.id=#{id},</if>
+			<if test="remark != null">t.remark=#{remark},</if>
+			<if test="dictValue != null">t.dict_value=#{dictValue},</if>
+		</set>
+		where t.id = #{id}
+	</update>
+
+	<!-- 删除记录 -->
+	<delete id="delEntity" parameterType="java.util.Map">
+		delete from sys_dictionary t where
+		t.id = #{id} in
+		<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
