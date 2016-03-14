@@ -127,8 +127,22 @@
 </head>
 <body>
 	<section class="panel">
-		<header class="panel-heading"> Dynamic Table </header>
+		<header class="panel-heading"> 用户管理 </header>
 		<div class="panel-body">
+			<div id="searchForm">
+				<form class="form-horizontal" onsubmit="return false;">
+					<div class="form-group">
+						<label class="col-sm-1 col-xs-1 control-label">账号：</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="account" name="account" placeholder="">
+						</div>
+						<label class="col-sm-1 col-xs-1 control-label">姓名：</label>
+						<div class="col-lg-2 col-sm-2">
+							<input type="text" class="form-control" id="name" name="name" placeholder="">
+						</div>
+					</div>
+				</form>
+			</div>
 			<div id="toolbar">
 				<button type="button" class="btn btn-primary" onclick="query()">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;搜索&nbsp;

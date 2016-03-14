@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 系统管理-用户管理 -->
+<mapper namespace="com.lezic.app.sys.user.entity">
+	<!-- 获取单条数据 -->
+	<select id="getOne" parameterType="java.util.Map" resultType="com.lezic.app.sys.user.entity.SysUser">
+		select
+		id , op_user_id , remark , sex , account ,
+		op_time , status , phone , email , name , password from sys_user t
+	</select>
+	<!-- 查询多条数据 -->
+	<select id="getPageList" parameterType="java.util.Map" resultType="com.lezic.app.sys.user.entity.SysUser">
+		select
+		id , op_user_id , remark , sex , account , op_time , status , phone , email , name , password from sys_user t
+		where 1=1
+		<if test="id != null and id  != ''"> and t.id = #{id } </if>
+		<if test="opUserId != null and opUserId  != ''"> and t.op_user_id = #{opUserId } </if>
+		<if test="remark != null and remark  != ''"> and t.remark = #{remark } </if>
+		<if test="sex != null and sex  != ''"> and t.sex = #{sex } </if>
+		<if test="account != null and account  != ''"> and t.account = #{account } </if>
+		<if test="opTime != null and opTime  != ''"> and t.op_time = #{opTime } </if>
+		<if test="status != null and status  != ''"> and t.status = #{status } </if>
+		<if test="phone != null and phone  != ''"> and t.phone = #{phone } </if>
+		<if test="email != null and email  != ''"> and t.email = #{email } </if>
+		<if test="name != null and name  != ''"> and t.name = #{name } </if>
+		<if test="password != null and password  != ''"> and t.password = #{password } </if>
+	</select>
+	<!-- 更新记录 -->
+	<update id="updEntity" parameterType="com.lezic.app.sys.user.entity.SysUser">
+		update sys_user t
+		<set>
+			<if test="id != null">t.id=#{id},</if>
+			<if test="opUserId != null">t.opUserId=#{opUserId},</if>
+			<if test="remark != null">t.remark=#{remark},</if>
+			<if test="sex != null">t.sex=#{sex},</if>
+			<if test="account != null">t.account=#{account},</if>
+			<if test="opTime != null">t.opTime=#{opTime},</if>
+			<if test="status != null">t.status=#{status},</if>
+			<if test="phone != null">t.phone=#{phone},</if>
+			<if test="email != null">t.email=#{email},</if>
+			<if test="name != null">t.name=#{name},</if>
+			<if test="password != null">t.password=#{password},</if>
+		</set>
+	</update>
+	<!-- 删除记录 -->
+	<delete id="delEntity" parameterType="java.util.Map">
+		delete from sys_user t where
+		in
+		<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -86,8 +86,10 @@ public class SysUserController extends BaseController {
 		Page<SysUser> page = new Page<SysUser>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from SysUser";
+		String hql = "from SysUser where (:account is null or account like :account) and (:name is null or name like :name)";
 		ParamMap params = new ParamMap();
+		params.put("account", this.getParam("account"));
+		params.put("name", this.getParam("name"));
 		sysUserService.pageH(page, hql, params);
 		this.outBootstrapTable(page);
 	}
