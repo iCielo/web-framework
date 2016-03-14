@@ -4,6 +4,7 @@
 	<!-- load sqlMap files -->
 	<mappers>
 		<mapper resource="mybatis/framework-sqlmap.xml" />
-		<mapper resource="mybatis/sys/user-sqlmap.xml" />
+		<mapper resource="mybatis/sys/SysUser-sql.xml" />
+		<mapper resource="mybatis/sys/SysDictionary-sql.xml" />
 	</mappers>
 </configuration>
