@@ -39,27 +39,23 @@
 
 	//修改
 	function updEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length != 1) {
+		var ids = getSelections();
+		if (ids.length != 1) {
 			MyLayer.msg("请选择要修改的单条记录！");
 			return;
 		}
 		MyLayer.open({
 			title : "修改${table.menuName}",
-			content : "${CP}${table.updUrl}&id=" + rows[0].id
+			content : "${CP}${table.updUrl}&id=" + ids[0]
 		});
 	}
 
 	//删除
 	function delEntity() {
-		var rows = $("#dataTable").bootstrapTable('getSelections');
-		if (rows.length == 0) {
+		var ids = getSelections();
+		if (ids.length == 0) {
 			MyLayer.msg("请选择要删除的记录！");
 			return;
-		}
-		var ids = [];
-		for (var i = 0; i < rows.length; i++) {
-			ids.push(rows[i].id);
 		}
 		MyLayer.confirm("是否真的删除？", function(index) {
 			Common.ajax({

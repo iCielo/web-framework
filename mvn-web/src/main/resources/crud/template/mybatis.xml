@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- ${table.moduleName}-${table.menuName}  -->
-<mapper namespace="${table.entityPackage}">
+<mapper namespace="${table.entity}">
+
 	<!-- 获取单条数据 -->
 	<select id="getOne" parameterType="java.util.Map" resultType="${table.entityPackage}.${table.entity}">
 		select
 		#foreach( $column in $columns )
-			#if( ${column.primaryKey} != 1 ) ${column.columnName} #end #if( $foreach.last==false ),#end
+			${column.columnName} ${column.javaName} #if( !$foreach.last ),#end 
 		#end
 		from ${table.tableName} t
 		#foreach( $column in $columns )
 			#if( ${column.primaryKey} == 1 ) where t.${column.columnName} = #{${column.javaName}}  #end
 		#end
 	</select>
+	
 	<!-- 查询多条数据 -->
 	<select id="getPageList" parameterType="java.util.Map" resultType="${table.entityPackage}.${table.entity}">
 		select
 		#foreach( $column in $columns )
-			#if( ${column.primaryKey} != 1 ) ${column.columnName} #end #if( $foreach.last==false ),#end
+			${column.columnName} ${column.javaName}  #if( !$foreach.last ),#end
 		#end
 		from ${table.tableName} t
 		where 1=1
@@ -25,18 +27,20 @@
 			<if test="${column.javaName} != null and ${column.javaName}  != ''"> and t.${column.columnName}  = #{${column.javaName} } </if>
 		#end
 	</select>
+	
 	<!-- 更新记录 -->
 	<update id="updEntity" parameterType="${table.entityPackage}.${table.entity}">
 		update ${table.tableName} t
 		<set>
 			#foreach( $column in $columns )
-				<if test="${column.javaName} != null">t.${column.javaName}=#{${column.javaName}},</if>
+				<if test="${column.javaName} != null">t.${column.columnName}=#{${column.javaName}},</if>
 			#end
 		</set>
 		#foreach( $column in $columns )
 			#if( ${column.primaryKey} == 1 ) where t.${column.columnName} = #{${column.javaName}}  #end
 		#end
 	</update>
+	
 	<!-- 删除记录 -->
 	<delete id="delEntity" parameterType="java.util.Map">
 		delete from ${table.tableName} t where
@@ -46,4 +50,5 @@
 				#{id}
 			</foreach>
 	</delete>
+	
 </mapper>
