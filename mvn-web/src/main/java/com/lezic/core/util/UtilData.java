@@ -101,6 +101,17 @@ public class UtilData {
 	}
 
 	/**
+	 * 获取字符串，为空时默认返回null
+	 * 
+	 * @param object
+	 * @param nullDefault
+	 * @return
+	 */
+	public static String getString(Object object) {
+		return UtilData.getString(object, null);
+	}
+
+	/**
 	 * 获取字符串
 	 * 
 	 * @param object
@@ -307,7 +318,7 @@ public class UtilData {
 	public static boolean notContains(Object[] arr, Object item) {
 		return !UtilData.contains(arr, item);
 	}
-	
+
 	/**
 	 * 首字母大写
 	 * 
@@ -319,7 +330,7 @@ public class UtilData {
 		if (UtilData.isNull(name)) {
 			return null;
 		}
-		return name.substring(0,1).toUpperCase()+name.substring(1);
+		return name.substring(0, 1).toUpperCase() + name.substring(1);
 	}
 
 	/**
