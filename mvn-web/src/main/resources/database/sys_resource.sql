@@ -1,4 +1,3 @@
-drop table `sys_resource`;
 CREATE TABLE `sys_resource` (
   `code` varchar(255) NOT NULL COMMENT '资源码',
   `name` varchar(255) DEFAULT NULL COMMENT '资源名称',
@@ -8,4 +7,4 @@ CREATE TABLE `sys_resource` (
   `op_user_id` varchar(36) DEFAULT NULL COMMENT '操作用户ID',
   `op_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`code`)
-) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
