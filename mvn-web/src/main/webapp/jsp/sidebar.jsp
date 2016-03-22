@@ -11,6 +11,7 @@
 				<ul class="sub">
 					<li><a href="javascript:;" real-href="${CP }/sys/user.do?method=listPage">用户管理</a></li>
 					<li><a href="javascript:;" real-href="${CP }/sys/role.do?method=list">角色管理</a></li>
+					<li><a href="javascript:;" real-href="${CP }/sys/resource.do?method=list">资源管理</a></li>
 					<li><a href="javascript:;" real-href="${CP }/sys/dictionary.do?method=list">字典管理</a></li>
 				</ul>
 			</li>
