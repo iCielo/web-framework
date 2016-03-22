@@ -84,6 +84,8 @@ public class CrudColumnController extends BaseController {
 		if (UtilData.isNotNull(id)) {
 			model.addAttribute("entity", crudColumnService.getH(id));
 		}
+		List<Object> sortList =  crudColumnService.findM("SysDictionary.getSortList", new ParamMap());
+		model.addAttribute("sortList", sortList);
 		return "/crud/column/CrudColumn-upd";
 	}
 
