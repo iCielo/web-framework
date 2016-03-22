@@ -9,6 +9,9 @@ mybatis分页控件 https://github.com/pagehelper/Mybatis-PageHelper <br/>
 进程级缓存ehcache <br/> 
 分布式缓存 基于alisoft-xplatform-asf-cache的memcached <br/>
 
+关系型数据库
+mysql
+
 非关系型数据库
 mongodb
 
