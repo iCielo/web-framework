@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.lezic.core.cache.memcached.MemcachedManager;
 import com.lezic.core.lang.ParamMap;
 import com.lezic.core.orm.Page;
 import com.lezic.core.orm.dao.IBaseDAO;
@@ -26,6 +27,9 @@ public class BaseService<T> implements InitializingBean {
 
 	@Autowired
 	IBaseDAO baseDAO;
+
+	@Autowired
+	MemcachedManager memcachedManager;
 
 	protected Class<T> entityClass;
 
@@ -108,18 +112,19 @@ public class BaseService<T> implements InitializingBean {
 	public List<?> findH(String hql, Object... values) {
 		return baseDAO.findH(hql, values);
 	}
-	
+
 	/**
 	 * 执行hql语句
+	 * 
 	 * @param hql
 	 * @param values
 	 * @return
 	 * @author cielo
 	 */
-	public int executeH(String hql, ParamMap params){
+	public int executeH(String hql, ParamMap params) {
 		return baseDAO.executeH(hql, params);
 	}
-	
+
 	/**
 	 * 查询获取集合
 	 * 
