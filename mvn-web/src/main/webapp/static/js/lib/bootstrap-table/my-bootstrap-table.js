@@ -12,7 +12,6 @@
 			toolbar : "#toolbar",
 			toolbarAlign : "left",
 			clickToSelect : false,
-			paginationVAlign:"top",
 			pagination : "true",
 			idField : "id",
 			sidePagination : "server",
