@@ -55,4 +55,9 @@
 		</foreach>
 	</delete>
 
+	<!-- 获取数据字典类型下拉选择 -->
+	<select id="getSortList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT DISTINCT t.sort from sys_dictionary t where t.`status` = 'ON'
+	</select>
+
 </mapper>
