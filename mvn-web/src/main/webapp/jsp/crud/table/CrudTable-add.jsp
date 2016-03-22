@@ -58,7 +58,7 @@
 				var basePackage = "com.lezic.app." +moduleCode + "." + subModule;
 				var controllerUrl = "/" + moduleCode + "/" + subModule + ".do";
 				var jsp = "/" + moduleCode + "/" + subModule + "/" + entityName;
-				var mybatisXml = "/" + moduleCode + "/" + subModule + "/" + entityName + "-sql";
+				var mybatisXml = "/" + moduleCode + "/" + entityName + "-sql";
 				var entity = entityName;
 				var controller = entityName + "Controller";
 				var service = entityName + "Service";

@@ -106,7 +106,8 @@
 							<option value="select">下拉框</option>
 							<option value="radio">单选框</option>
 							<option value="checkbox">复选框</option>
-							<option value="hidden">隐藏域</option>							
+							<option value="hidden">隐藏域</option>
+							<option value="not_show">不显示</option>							
 						</select>
 					</div>
 					<label class="col-sm-2 col-xs-2 control-label">校验规则 
@@ -118,7 +119,12 @@
 				<div class="form-group">
 					<label class="col-sm-2 col-xs-2 control-label">数据字典类型 </label>
 					<div class="col-sm-4 col-xs-4">
-						<input class="form-control" type="text" id="dictType" name="dictType" value="<c:out value="${entity.dictType}"/>">
+						<select class="form-control" id="dictType" name="dictType" data-option-value="${entity.dictType}">
+							<option value="">--请选择--</option>
+							<c:forEach items="${sortList }" var="item">
+								<option value="${item.sort }">${item.sort }</option>
+							</c:forEach>
+						</select>
 					</div>
 					<label class="col-sm-2 col-xs-2 control-label">自定义数据字典 </label>
 					<div class="col-sm-4 col-xs-4">
