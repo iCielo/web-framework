@@ -47,8 +47,8 @@
 					<div class="form-group">
 						<label class="col-sm-3 col-xs-3 control-label">#if( ${item.nullable} != 1 )<span class="form-must">*</span>#end ${item.label}：</label>
 						<div class="col-sm-8 col-xs-8">
-							#if( ${item.inputType} == 'text' )
-								<input class="form-control"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end type="text" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
+							#if( ${item.inputType} == 'input' )
+								<input class="form-control"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end type="input" id="${item.javaName}" name="${item.javaName}"  value="<c:out value="${mark}${entity}.$item.javaName}"/>"/>
 							#end
 							#if( ${item.inputType} == 'textarea' )
 								<textarea class="form-control"#if( ${item.placeholder} ) placeholder="${item.placeholder}" #end id="${item.javaName}" name="${item.javaName}">${mark}${entity}.$item.javaName}</textarea>

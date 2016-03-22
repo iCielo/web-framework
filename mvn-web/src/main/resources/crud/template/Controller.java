@@ -83,13 +83,12 @@ public class ${table.controller} extends BaseController {
 	 * @throws IOException
 	 */
 	@RequestMapping(params = "method=loadData", method = RequestMethod.GET)
-	public void loadData() throws IOException {
+	public void loadData(@ModelAttribute ${table.entity} entityParams) throws IOException {
 		Page<${table.entity}> page = new Page<${table.entity}>();
 		page.setOffset(UtilData.integerOfString(this.getParam("offset"), 0));
 		page.setPageSize(UtilData.integerOfString(this.getParam("limit"), 10));
-		String hql = "from ${table.entity}";
 		ParamMap params = new ParamMap();
-		${table.serviceBean}.pageH(page, hql, params);
+		${table.serviceBean}.pageM(page, "${table.entity}.getPageList", params);
 		this.outBootstrapTable(page);
 	}
 
