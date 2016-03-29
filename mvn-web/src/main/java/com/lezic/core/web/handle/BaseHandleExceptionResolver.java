@@ -21,6 +21,7 @@ import com.lezic.core.util.UtilJson;
 import com.lezic.core.web.constant.Status;
 
 /**
+ * Spring MVC 异常统一处理类
  * @author cielo
  *
  */
