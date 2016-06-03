@@ -120,4 +120,13 @@ public class UtilFile {
 			}
 		}
 	}
+	
+	public static void main(String[] args) {
+        try {
+            UtilFile.write("C://Users//tusm//Desktop//用户批量导入模板-1464588450685156410.xls", "12");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

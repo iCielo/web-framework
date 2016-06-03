@@ -21,7 +21,7 @@
 		} else if (href.startWith(CP)) {
 			return href.replace(CP, "");
 		}
-	}
+	};
 
 	/**
 	 * 是否回车事件
@@ -35,7 +35,7 @@
 			return true;
 		}
 		return false;
-	}
+	};
 
 	/**
 	 * 是否指定的keyCode
@@ -50,5 +50,5 @@
 			return true;
 		}
 		return false;
-	}
+	};
 }());

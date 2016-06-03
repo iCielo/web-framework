@@ -54,7 +54,7 @@
 			},
 			error : function(data) {
 				if (data.responseJSON) {
-					var status = data.responseJSON.status;
+					//var status = data.responseJSON.status;
 					var msg = data.responseJSON.msg;
 					if (msg) {
 						MyLayer.alert(msg);
@@ -66,5 +66,5 @@
 		};
 		option = $.extend(true, {}, defaultOption, option);
 		$.ajax(option);
-	}
+	};
 }(window));

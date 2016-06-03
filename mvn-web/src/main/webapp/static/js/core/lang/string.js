@@ -79,7 +79,7 @@ String.prototype.startWith = function(str) {
  */
 String.prototype.firstUpperCase = function() {
 	return this.substring(0, 1).toUpperCase() + this.substring(1);
-}
+};
 
 /**
  * 首字母小写
@@ -88,4 +88,4 @@ String.prototype.firstUpperCase = function() {
  */
 String.prototype.firstLowerCase = function() {
 	return this.substring(0, 1).toLowerCase() + this.substring(1);
-}
+};
